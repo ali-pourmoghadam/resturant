@@ -1,7 +1,14 @@
+
+:root{
+    --gray: #807f7f;
+}
+
+
 html , body{
     min-height: 100% !important;
     height: 100%;
     user-select: none !important;
+    scrollbar-width: thin !important;
 }
 
 .row , .container , .col-10 {
@@ -13,6 +20,41 @@ a{
     text-decoration: none !important;
 }
 
+.pointer{
+    cursor: pointer !important;
+}
+
 .w-80{
     width: 80% !important;
+}
+
+.right-10{
+    right: 10px;
+}
+
+.right-15{
+    right: 15px;
+}
+
+.right-20{
+    right: 20px;
+}
+
+.txt-gray{
+    color: var(--gray) !important;
+}
+
+.bg-purple{
+    background-color: rgb(155, 71, 235) ;
+}
+
+.bg-light-red{
+    background-color: rgb(230, 89, 89) ;
+}
+
+.bg-light-blue{
+    background-color: rgb(90, 157, 229) ;
+}
+.bg-light-green{
+    background-color: rgb(90, 229, 115) ;
 }

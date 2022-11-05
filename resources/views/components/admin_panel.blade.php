@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     @vite(['resources/js/app.js'])
+    @vite(['resources/../node_modules/chart.js/dist/chart.js'])
 
     <title>پنل ادمین</title>
     
@@ -25,7 +26,6 @@
 
             <div class="col-10 h-100 ">
 
-               
                 {{-- --SATRT-BODY-HEADER-- --}}
 
                     <div class="admin-header d-flex fle-row justify-content-start align-items-center">
@@ -33,12 +33,33 @@
                         <div class="flex-1 h-100 w-50 d-flex justify-content-start align-items-center px-3">
 
                             <span>
-                                <i class="fa-solid fs-4 fa-arrow-right-from-bracket"></i>
+                                <i class="fa-solid fs-4 fa-arrow-right-from-bracket" style="margin-top: 7px;"></i>
                             </span>
                             
                         </div>
 
-                        <div class="flex-1  h-100 w-50">
+                        <div class="flex-1  h-100 w-50 position-relative">
+
+                            <i class="fa-solid pointer fs-5  fa-ellipsis-vertical position-absolute" 
+
+                               style="right:17px; top:18px"></i>
+
+                            <div class="position-absolute" style="right:21px; top:16px">
+
+                                <i class="fa-regular fs-5 fa-bell  position-absolute"
+
+                                style="right:27px; top:3px"></i>
+
+                            </div>
+
+                            <div class="position-absolute" style="right:21px; top:16px">
+                              
+                                <i class="fa-regular fa-envelope fs-5  position-absolute"
+
+                                style="right:65px; top:3px"></i>
+
+                            </div>
+                            
 
                         </div>
                     </div>
@@ -92,11 +113,11 @@
                     
 
 
-                    {{-- START-ADMIN- --}}
+                    {{-- START-Dashboard- --}}
 
-                    <div>
+                    <div >
 
-                        <div class="position-relative mx-auto w-80 panel-item px-4 py-2 ">
+                        <div class="position-relative  mx-auto w-80 panel-item px-4 py-2 ">
 
 
                             <i class="position-absolute mt-1  text-light fs-6  fa-solid fa-chart-line"></i>
@@ -105,6 +126,8 @@
                         </div>
 
                     </div>
+
+                    {{-- END-Dashboard- --}}
 
 
                     {{-- START-CATEGORY --}}
