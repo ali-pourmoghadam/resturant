@@ -83,7 +83,7 @@
 
             {{-- --SATRT-SIDEBAR-- --}}
             
-            <div class="col-2 bg-dark h-100 d-flex flex-column">
+            <div class="col-2 bg-dark h-100 d-flex flex-column position-fixed right-0">
                 
 
 
@@ -121,7 +121,8 @@
 
 
                             <i class="position-absolute mt-1  text-light fs-6  fa-solid fa-chart-line"></i>
-                            <span class="text-light fs-6 d-block text-center  ">داشبورد</span>
+
+                            <a href="/admin/dashboard"  class="text-light fs-6 d-block text-center  ">داشبورد</a >
                             
                         </div>
 
@@ -169,18 +170,19 @@
                                     <div class="position-relative px-3 py-2 ">
 
                                     
-                                        <i class="position-absolute mt-1 fs-6 fa-solid fa-business-time"></i>
+                                        <i class="position-absolute mt-1 fs-6 fa-solid fa-utensils"></i>
 
-                                        <a href="" class="fs-6  d-block text-center text-dark">دسته بندی شغل ها</a>
+                                        <a href="/admin/job" class="fs-6  d-block text-center text-dark">دسته بندی  رستوران </a>
 
                                     </div>
 
                                     <div class="position-relative px-3 py-2 ">
 
                     
-                                        <i class="position-absolute mt-1 fs-6  fa-solid fa-utensils"></i>
+                                        <i class="position-absolute mt-1 fs-6 fa-solid fa-burger "></i>
 
                                         <a href="" class="fs-6  d-block text-center text-dark">دسته بندی  غذاها</a>
+                                   
 
                                     </div>
 

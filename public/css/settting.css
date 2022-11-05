@@ -28,6 +28,10 @@ a{
     width: 80% !important;
 }
 
+.right-0{
+    right: 0px;
+}
+
 .right-10{
     right: 10px;
 }
@@ -45,16 +49,25 @@ a{
 }
 
 .bg-purple{
-    background-color: rgb(155, 71, 235) ;
+    background-color: rgb(155, 71, 235) !important;
 }
 
 .bg-light-red{
-    background-color: rgb(230, 89, 89) ;
+    background-color: rgb(230, 89, 89) !important;
 }
 
 .bg-light-blue{
-    background-color: rgb(90, 157, 229) ;
+    background-color: rgb(90, 157, 229) !important ;
 }
 .bg-light-green{
-    background-color: rgb(90, 229, 115) ;
+    background-color: rgb(90, 229, 115) !important;
+}
+
+
+.btn-table{
+    width: 60px;
+    height: 23px;
+    font-size: 13px !important;
+    padding-top: 0px !important;
+    border-radius: 17px !important;
 }
