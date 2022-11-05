@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     @vite(['resources/js/app.js'])
-    @vite(['resources/../node_modules/chart.js/dist/chart.js'])
+
 
     <title>پنل ادمین</title>
     
@@ -146,7 +146,7 @@
 
                         <div id="collapse-1"  class="
 
-                                        
+                                        collapse        
 
                                         bg-light rounded-3 d-felx
 

@@ -32,13 +32,20 @@ Route::group([ 'prefix' => 'admin'], function(){
     Route::get('/resturant', function () {
 
         return view('admin.resturant');
-        
+
     });
 
 
     Route::get('/food', function () {
 
         return view('admin.food');
+    });
+
+
+
+    Route::get('/login', function () {
+
+        return view('admin.login');
     });
     
     

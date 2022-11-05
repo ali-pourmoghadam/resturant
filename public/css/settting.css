@@ -79,15 +79,23 @@ a{
     background-color: rgb(90, 229, 115) !important;
 }
 
-
-.btn-table{
-    width: 60px;
-    height: 23px;
-    font-size: 13px !important;
-    padding-top: 0px !important;
-    border-radius: 17px !important;
+.cover{
+    object-fit: cover;
 }
 
 .text-right{
     text-align: right !important;
 }
+
+
+.mt-100{
+    margin-top: 100px !important;
+}
+
+.btn-custom{
+    width: 120px !important;
+    background: rgb(65, 65, 126) !important;
+    border-radius: 38px !important;
+    color: #fff !important;
+}
+ 
