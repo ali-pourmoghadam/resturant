@@ -1,0 +1,101 @@
+
+:root{
+    --gray: #807f7f;
+}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 10px;
+    background: rgb(0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    -webkit-border-radius: 1ex;
+    -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+::-webkit-scrollbar-corner {
+    background: #000;
+}
+
+html , body{
+    min-height: 100% !important;
+    height: 100%;
+    user-select: none !important;
+    scrollbar-width: thin;
+}
+
+
+.row , .container , .col-10 {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.pointer{
+    cursor: pointer !important;
+}
+
+.w-80{
+    width: 80% !important;
+}
+
+.right-0{
+    right: 0px;
+}
+
+.right-10{
+    right: 10px;
+}
+
+.right-15{
+    right: 15px;
+}
+
+.right-20{
+    right: 20px;
+}
+
+.txt-gray{
+    color: var(--gray) !important;
+}
+
+.bg-purple{
+    background-color: rgb(155, 71, 235) !important;
+}
+
+.bg-light-red{
+    background-color: rgb(230, 89, 89) !important;
+}
+
+.bg-light-blue{
+    background-color: rgb(90, 157, 229) !important ;
+}
+.bg-light-green{
+    background-color: rgb(90, 229, 115) !important;
+}
+
+.cover{
+    object-fit: cover;
+}
+
+.text-right{
+    text-align: right !important;
+}
+
+
+.mt-100{
+    margin-top: 100px !important;
+}
+
+.btn-custom{
+    width: 120px !important;
+    background: rgb(65, 65, 126) !important;
+    border-radius: 38px !important;
+    color: #fff !important;
+}
+ 
