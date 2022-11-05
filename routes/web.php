@@ -28,9 +28,17 @@ Route::group([ 'prefix' => 'admin'], function(){
 
     });
 
-    Route::get('/job', function () {
 
-        return view('admin.job');
+    Route::get('/resturant', function () {
+
+        return view('admin.resturant');
+        
+    });
+
+
+    Route::get('/food', function () {
+
+        return view('admin.food');
     });
     
     

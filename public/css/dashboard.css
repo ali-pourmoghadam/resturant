@@ -93,3 +93,9 @@
     border-radius: 10px !important;
     object-fit: cover;
 }
+
+.add-item-heaeder{
+    position: absolute;
+    top: 16px;
+    right: 365px;
+}

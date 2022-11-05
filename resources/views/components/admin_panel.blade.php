@@ -20,9 +20,7 @@
     <div class="row h-100">
 
 
-
             {{-- --SATRT-BODY-- --}}
-
 
             <div class="col-10 h-100 ">
 
@@ -78,7 +76,6 @@
             </div>
 
             {{-- --END-SIDEBAR-- --}}
-
 
 
             {{-- --SATRT-SIDEBAR-- --}}
@@ -172,7 +169,7 @@
                                     
                                         <i class="position-absolute mt-1 fs-6 fa-solid fa-utensils"></i>
 
-                                        <a href="/admin/job" class="fs-6  d-block text-center text-dark">دسته بندی  رستوران </a>
+                                        <a href="/admin/resturant" class="fs-6  d-block text-center text-dark">دسته بندی  رستوران </a>
 
                                     </div>
 
@@ -181,7 +178,7 @@
                     
                                         <i class="position-absolute mt-1 fs-6 fa-solid fa-burger "></i>
 
-                                        <a href="" class="fs-6  d-block text-center text-dark">دسته بندی  غذاها</a>
+                                        <a href="/admin/food" class="fs-6  d-block text-center text-dark">دسته بندی  غذاها</a>
                                    
 
                                     </div>
@@ -259,11 +256,8 @@
             {{-- --END-SIDEBAR-- --}}
 
                
-
-
-
-            </div>
     </div>
+   
     
 </body>
 </html>
