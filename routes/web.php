@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FoodCategoryController;
+use App\Http\Controllers\ResturantCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,40 +17,55 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
 Route::get('/', function () {
+
     return view('welcome');
+
 });
+
+
 
 
 
 Route::group([ 'prefix' => 'admin'], function(){
 
 
-    Route::get('/dashboard', function () {
 
-        return view('admin.dashboard');
+           route::group( ["controller" => AdminController::class] , function(){
 
-    });
-
-
-    Route::get('/resturant', function () {
-
-        return view('admin.resturant');
-
-    });
+                Route::get('/dashboard', "dashboard");
+            
+                
+            });
 
 
-    Route::get('/food', function () {
-
-        return view('admin.food');
-    });
+            
+        Route::resource('/resturant', ResturantCategoryController::class);
 
 
+        Route::resource('/food',  FoodCategoryController::class);  
 
-    Route::get('/login', function () {
 
-        return view('admin.login');
-    });
-    
-    
+        route::group( ["controller" =>  AuthController::class ] , function(){
+
+
+            Route::get('/login', "adminlogin")->middleware("guest");
+
+
+            Route::post("/login" , "adminAuth");
+
+
+            Route::get("/logout/{gaurd}" ,  "logout");
+
+
+        });
+
+
+
 });
+
+
+
