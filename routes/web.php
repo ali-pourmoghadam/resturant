@@ -30,24 +30,47 @@ Route::get('/', function () {
 
 
 
+Route::group(['prefix' => 'manager'] , function(){
+
+
+
+    route::group( ["controller" =>  AuthController::class , "middleware" => "guest"  ] , function(){
+
+
+        Route::get("register" , "managerRegister");
+
+        Route::post("register" , "managerStore");
+
+        Route::get("login" ,     "managerLogin");
+
+        Route::post("login" ,    "managerAuth");
+
+
+    });
+
+
+});
+
+
 Route::group([ 'prefix' => 'admin'], function(){
 
 
 
-           route::group( ["controller" => AdminController::class] , function(){
+           route::group( ["middleware" => "admin"] , function(){
 
-                Route::get('/dashboard', "dashboard");
-            
+
+                Route::get('/dashboard', [AdminController::class ,  "dashboard"]);
                 
+                Route::resource('/resturant', ResturantCategoryController::class);
+        
+                Route::resource('/food',  FoodCategoryController::class);  
+
             });
 
 
             
-        Route::resource('/resturant', ResturantCategoryController::class);
 
-
-        Route::resource('/food',  FoodCategoryController::class);  
-
+        
 
         route::group( ["controller" =>  AuthController::class ] , function(){
 

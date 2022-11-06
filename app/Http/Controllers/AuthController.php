@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
 
+  /**  ADMIN SECTION AUTH **/
 
     
     public function adminlogin()
@@ -48,7 +49,39 @@ class AuthController extends Controller
         return redirect("/admin/dashboard");
     }
 
+
+
+
+    /**  MANAGER SECTION AUTH **/
+
+
+
+    public function managerRegister()
+    {
+        return "register";
+    }
     
+
+
+    public function managerStore()
+    {
+        // create manager
+    }
+
+
+    public function managerLogin()
+    {
+        return "login";
+    }
+
+    
+    public function managerAuth()
+    {
+        //manager auth
+    }
+    
+
+
 
 
     public function logout(String $guard)
