@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
+use App\Models\ResturantCategroy;
 use Illuminate\Http\Request;
 
 class ResturantCategoryController extends Controller
@@ -13,7 +15,9 @@ class ResturantCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = ResturantCategroy::paginate(10);
+
+        return view("admin.resturant" , compact("categories"));
     }
 
     /**
@@ -32,9 +36,13 @@ class ResturantCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $attributes = $request->validated();
+
+        ResturantCategroy::create($attributes);
+
+        return redirect("/admin/resturant");
     }
 
     /**
@@ -66,9 +74,13 @@ class ResturantCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $attributes = $request->validated();
+                
+        ResturantCategroy::where("id" , $id)->update($attributes);
+
+        return redirect("/admin/resturant");
     }
 
     /**
@@ -79,6 +91,9 @@ class ResturantCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        ResturantCategroy::where("id" , $id)->delete();
+
+        return redirect("/admin/resturant");
     }
 }

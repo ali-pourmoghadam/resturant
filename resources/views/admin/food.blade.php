@@ -29,8 +29,6 @@
 
                 <tbody>
 
-
-
                   @foreach ($categories as $category)
                       
                   

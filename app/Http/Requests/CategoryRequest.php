@@ -15,8 +15,6 @@ class CategoryRequest extends FormRequest
     public function authorize()
     {
 
-        // dd((Auth::guard("admin")->user()) ? true : false);
-
         return (Auth::guard("admin")->user()) ? true : false;
         
     }

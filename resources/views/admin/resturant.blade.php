@@ -7,6 +7,7 @@
         <div class="col-10 mx-auto mt-3">
 
 
+           
             <table class="table ">
                 <thead>
 
@@ -29,30 +30,33 @@
 
                 <tbody>
 
+                  @foreach ($categories as $category)
+                      
+                  
                   <tr class="text-center">
 
-                    <th scope="row">1</th>
 
-                    <td>کباب</td>
+                    <th scope="row">
+                        {{$loop->iteration}}
+                    </th>
 
-                    <td>
-                       <form action="">
-
-                        <div class="form-check form-switch mx-auto" style="width:10px">
-                            <input class="form-check-input" value="1" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                        </div>
-
-                       </form>
-                    </td>
+                    <td>{{$category->name}}</td>
 
                     <td>
-                        <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#editModal">
+                  
+                          <span>{{($category->status) ? "فعال" : "غیرفعال"}}</span>
+                          
+                    <td>
+                        <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#editModal-{{$category->id}}">
                             <i class="fa-regular fa-pen-to-square text-light"></i>
                         </button>
                     </td>
 
                     <td>
-                      <form>
+                      <form method="POST" action="/admin/resturant/{{$category->id}}">
+                        
+                        @csrf
+                        @method("DELETE")
 
                         <button class="btn btn-table bg-light-red ">
                             <i class="fa-solid fa-trash  text-light"></i>
@@ -61,46 +65,63 @@
                       </form>
                     </td>
 
-                  </tr>
 
-                  {{--START-MODAL-RESTURANT--}}
 
-                  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
+                  {{--START-MODAL-Resturant--}}
+
+                  <div class="modal fade" id="editModal-{{$category->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title w-100 text-center" id="exampleModalLabel">ویرایش اطلاعات</h5>
+                          <h5 class="modal-title w-100 text-center" id="exampleModalLabel"> ویرایش غذا</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
-                        <form>
 
+                        <form action="/admin/resturant/{{$category->id}}" method="POST">
+                            @csrf
+                            @method("PUT")
                             <div class="modal-body">
-                        
+                              
                                     <div class="mb-3">
                                       <label for="exampleInputEmail1" class="form-label w-100 text-right">نام دسته بندی</label>
             
-                                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                      <input name="name" value="{{$category->name}}"  placeholder="{{$category->name}}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                       
-                                    </div>                         
+                                    </div>          
+                                    
+                                    <div class="mb-3">
+
+                                      <label for="exampleInputEmail1" class="form-label w-100 text-right">وضعیت</label>
+
+                                      <select name="status" class="form-select" aria-label="Default select example">
+                                      
+                                          <option value="1">فعال</option>
+                                          <option value="0">غیرفعال</option>
+                              
+                                        </select>
+
+                                  </div>
                             </div>
+
                             <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                              <button type="button" class="btn btn-primary">به روز رسانی</button>
+                              <button type="submit" class="btn btn-primary">به روز رسانی</button>
                             </div>
-            
-            
                         </form>
-
-
-
                       </div>
                     </div>
                   </div>
 
                   
-                  {{-- END-MODAL-RESTURANT --}}
-               
+                  {{-- END-MODAL-Resturant --}}
+                  </tr>
+
+                  @endforeach
+
+
+
                 </tbody>
               </table>
 
@@ -229,22 +250,23 @@
 
       {{-- RESTURANT-MODAL --}}
        
-    <div class="modal fade" id="addResturantModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="addResturantModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="text-center w-100" id="exampleModalLabel">ایجاد رستوران</h5>
+              <h5 class="text-center w-100" id="exampleModalLabel">ایجاد غذا</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form>
+            <form method="POST" action="/admin/resturant" >
 
+              @csrf
                 <div class="modal-body">
             
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label w-100 text-right">نام دسته بندی</label>
 
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                           
                         </div>
 
@@ -252,10 +274,10 @@
 
                             <label for="exampleInputEmail1" class="form-label w-100 text-right">وضعیت</label>
 
-                            <select class="form-select" aria-label="Default select example">
+                            <select name="status" class="form-select" aria-label="Default select example">
                             
                                 <option value="1">فعال</option>
-                                <option value="2">غیرفعال</option>
+                                <option value="0">غیرفعال</option>
                      
                               </select>
 
@@ -266,7 +288,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                  <button type="button" class="btn btn-primary">اضفه کردن</button>
+                  <button type="submit" class="btn btn-primary">اضفه کردن</button>
                 </div>
 
 
@@ -275,7 +297,7 @@
 
           </div>
         </div>
-    </div>
+      </div>
 
     {{-- END-ADD-RESTURANT-MODAL --}}
 
