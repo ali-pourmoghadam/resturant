@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FoodCategoryController;
+use App\Http\Controllers\ResturantCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,21 +34,20 @@ Route::group([ 'prefix' => 'admin'], function(){
 
 
 
-        route::group( ["controller" => AdminController::class] , function(){
-
+           route::group( ["controller" => AdminController::class] , function(){
 
                 Route::get('/dashboard', "dashboard");
-                
-                
-                Route::get('/resturant', "resturant");
-        
-        
-                Route::get('/food',  "food");
-        
             
-    
-        });
-        
+                
+            });
+
+
+            
+        Route::resource('/resturant', ResturantCategoryController::class);
+
+
+        Route::resource('/food',  FoodCategoryController::class);  
+
 
         route::group( ["controller" =>  AuthController::class ] , function(){
 
