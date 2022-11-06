@@ -7,7 +7,9 @@
                 <div class="w-50  bg-white rounded-start">
                         <h3 class="d-block text-center mt-5 txt-gray">ورود مدیر سیستم</h3>
 
-                        <form class="mt-5 px-4">
+                        <form class="mt-5 px-4" method="POST" , action="/admin/login">
+
+                             @csrf
 
                             <div class="mb-3 mt-3">
 
@@ -17,7 +19,7 @@
                                     <i class="fa-solid fa-user mx-2"></i>
                                 </label>
 
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                 
                             </div>
 
@@ -27,7 +29,7 @@
                                 رمزعبور
                                 <i class="fa-solid fa-key mx-2"></i>
                               </label>
-                              <input type="password" class="form-control" id="exampleInputPassword1">
+                              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
 
                             </div>
 
@@ -40,7 +42,19 @@
 
                             <button type="submit" class="btn btn-custom mt-5 d-block mx-auto">ورود</button>
                         </form>
-                </div>
+
+
+                           @if ($errors->any())
+
+                            <div class="d-block text-center mt-5">
+
+                                {{$errors->all()[0]}}
+
+                            </div>
+                               
+                           @endif
+
+                    </div>
 
                 <div class="w-50">
                     <img src="{{asset("img/admin.webp")}}" alt="" class="w-100 h-100 rounded-end cover">

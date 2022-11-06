@@ -30,9 +30,9 @@
 
                         <div class="flex-1 h-100 w-50 d-flex justify-content-start align-items-center px-3">
 
-                            <span>
+                            <a href="/admin/logout/admin">
                                 <i class="fa-solid fs-4 fa-arrow-right-from-bracket" style="margin-top: 7px;"></i>
-                            </span>
+                            </a>
                             
                         </div>
 

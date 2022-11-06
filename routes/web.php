@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,44 +15,56 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
 Route::get('/', function () {
+
     return view('welcome');
+
 });
+
+
 
 
 
 Route::group([ 'prefix' => 'admin'], function(){
 
 
-    Route::middleware(['admin'])->group(function(){
 
-       
-        Route::get('/dashboard', function () {
+        route::group( ["controller" => AdminController::class] , function(){
 
-            return view('admin.dashboard');
+
+                Route::get('/dashboard', "dashboard");
+                
+                
+                Route::get('/resturant', "resturant");
+        
+        
+                Route::get('/food',  "food");
+        
+            
     
         });
-    
-    
-        Route::get('/resturant', function () {
-    
-            return view('admin.resturant');
-    
-        });
-    
-    
-        Route::get('/food', function () {
-    
-            return view('admin.food');
-        });
-    
-    });
+        
 
-   
-    Route::get('/login', function () {
+        route::group( ["controller" =>  AuthController::class ] , function(){
 
-        return view('admin.login');
-    });
-    
-    
+
+            Route::get('/login', "adminlogin")->middleware("guest");
+
+
+            Route::post("/login" , "adminAuth");
+
+
+            Route::get("/logout/{gaurd}" ,  "logout");
+
+
+        });
+
+
+
 });
+
+
+
