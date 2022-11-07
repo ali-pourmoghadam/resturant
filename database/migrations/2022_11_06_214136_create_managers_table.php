@@ -18,16 +18,18 @@ return new class extends Migration
             $table->id();
 
             $table->string("email")->unique();
-
-            $table->string("name" , 255);
             
-            $table->string("lastname" , 255);
+            $table->string('password');
 
-            $table->string('address' , 255);
+            $table->string("name" , 255)->nullable();
             
-            $table->unsignedInteger("national_id");
+            $table->string("lastname" , 255)->nullable();
 
-            $table->string('phoneNumber' , 20);
+            $table->string('address' , 255)->nullable();
+            
+            $table->unsignedInteger("national_id")->nullable();
+
+            $table->string('phoneNumber' , 20)->nullable();
 
             $table->string('image' , 255)->nullable();
 
@@ -37,9 +39,7 @@ return new class extends Migration
 
             $table->timestamp('email_verified_at')->nullable();
 
-            $table->string('password');
-
-            $table->rememberToken();
+            $table->rememberToken()->nullable();
 
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodCategoryController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ResturantCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,15 @@ Route::group(['prefix' => 'manager'] , function(){
 
 
     });
+
+    route::group( ["middleware" => "manager"] , function(){
+
+        Route::get("dashboard" , [ ManagerController::class , "dashboard"]);
+
+    });
+
+
+
 
 
 });

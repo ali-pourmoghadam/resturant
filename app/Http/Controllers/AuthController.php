@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ResturantCreateRequest;
 use App\Models\City;
+use App\Models\Manager;
+use App\Models\Resturant;
 use App\Models\ResturantCategroy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,8 +74,32 @@ class AuthController extends Controller
     public function managerStore(ResturantCreateRequest $request)
     {
         
-       $request->validated();
+       $attributes = $request->validated();
        
+
+
+       $manager = Manager::create([
+
+            "email" => $attributes['email'] ,
+
+            'password' => bcrypt($attributes['password'])
+
+       ]);
+
+       Resturant::create([
+
+            "manager_id" => $manager->id ,
+
+            "city_id" => $attributes['city'] ,
+
+            "rsturant_category" => $attributes['type']
+
+       ]);
+
+
+
+        Auth::guard("manager")->login($manager);
+        
 
         return response()->json(['success' => true]);
     }

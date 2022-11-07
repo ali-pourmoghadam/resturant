@@ -22,17 +22,17 @@ return new class extends Migration
 
             $table->unsignedBigInteger("rsturant_category");
 
-            $table->string('address' , 255);
+            $table->string('address' , 255)->nullable();
 
-            $table->string('phoneNumber' , 20);
+            $table->string('phoneNumber' , 20)->nullable();
 
             $table->string('image' , 255)->nullable();
 
             $table->boolean('is_active')->default(true);
 
-            $table->unsignedInteger("work_days");
+            $table->unsignedInteger("work_days")->nullable();
             
-            $table->string("open_close_time");
+            $table->string("open_close_time")->nullable();
 
             $table->timestamps();
         });

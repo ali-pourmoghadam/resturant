@@ -47,7 +47,7 @@
                                     
                                     @foreach ($categories as $category)
 
-                                    <option value="{{$category->name}}">{{$category->name}}</option>
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
 
                                     @endforeach
 
@@ -69,7 +69,7 @@
                                     
                                     @foreach ($cities as $city)
 
-                                    <option value="{{$city->name}}">{{$city->name}}</option>
+                                    <option value="{{$city->id}}">{{$city->name}}</option>
 
                                     @endforeach
 
