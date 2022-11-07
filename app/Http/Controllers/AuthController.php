@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResturantCreateRequest;
+use App\Models\City;
+use App\Models\ResturantCategroy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -53,14 +56,26 @@ class AuthController extends Controller
 
     public function managerRegister()
     {
-        return  view('manager.register');
+        
+        // !notice :  city and category will loads with ActiveScop
+
+        $cities = City::all();    
+
+        $categories = ResturantCategroy::all();    
+
+
+        return  view('manager.register', compact("cities" , "categories"));
     }
     
 
 
-    public function managerStore()
+    public function managerStore(ResturantCreateRequest $request)
     {
-        // create manager
+        
+       $request->validated();
+       
+
+        return response()->json(['success' => true]);
     }
 
 

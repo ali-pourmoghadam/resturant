@@ -7,7 +7,7 @@
                 <div class="w-50  bg-white rounded-start">
                         <h3 class="d-block text-center mt-5 txt-gray">ثبت نام فروشندگان</h3>
 
-                        <form class="mt-5 px-4" method="POST" >
+                        <form class="mt-5 px-4" >
 
                              @csrf
 
@@ -18,8 +18,9 @@
                                     <i class="fa-solid fa-user mx-2"></i>
                                 </label>
 
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
                                 
+                                <div id="error-email" class="text-center form-text text-danger"></div>
                             </div>
 
                             <div class="mb-1 ">
@@ -30,8 +31,9 @@
                                     <i class="fa-solid fa-utensils mx-2"></i>
                                 </label>
 
-                                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp">
                                 
+                                <div id="error-name" class="text-center form-text text-danger"></div>
                             </div>
                             <div class="mb-1 ">
 
@@ -41,7 +43,17 @@
                                     <i class="fa-solid fa-shop mx-2"></i>
                                 </label>
 
-                                <input type="text" name="type" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <select name="type" id="type" class="form-select text-center" aria-label="Default select example">
+                                    
+                                    @foreach ($categories as $category)
+
+                                    <option value="{{$category->name}}">{{$category->name}}</option>
+
+                                    @endforeach
+
+                                  </select>
+
+                                  <div id="error-type" class="text-center form-text text-danger"></div>
                                 
                             </div>
 
@@ -53,7 +65,17 @@
                                     <i class="fa-solid fa-tree-city mx-2"></i>
                                 </label>
 
-                                <input type="text" name="city" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                <select name="city" id="city" class="form-select text-center" aria-label="Default select example">
+                                    
+                                    @foreach ($cities as $city)
+
+                                    <option value="{{$city->name}}">{{$city->name}}</option>
+
+                                    @endforeach
+
+                                  </select>
+
+                                  <div id="error-city" class="text-center form-text text-danger"></div>
                                 
                             </div>
 
@@ -63,11 +85,14 @@
                                 رمزعبور
                                 <i class="fa-solid fa-key mx-2"></i>
                               </label>
-                              <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                              <input type="password" name="password" id="password" class="form-control" id="exampleInputPassword1">
 
+                              <div id="error-password" class="text-center form-text text-danger"></div>
                             </div>
 
-                            <button type="submit" class="btn btn-custom mt-5 d-block mx-auto">ثبت نام</button>
+                         
+
+                            <button onclick="createUser()" type="button" class="btn btn-custom mt-5 d-block mx-auto">ثبت نام</button>
                         </form>
 
 
@@ -91,5 +116,78 @@
         </div>
 
     </div>
+
+
+
+      <div class="show-errors">
+    
+      </div>
+
+
+
+    <script>
+
+
+        function createUser(){
+
+            var email = document.querySelector("#email").value
+
+            var name = document.querySelector("#name").value
+
+            var type = document.querySelector("#type").value
+
+            var city = document.querySelector("#city").value
+            
+            var password = document.querySelector("#password").value
+
+          
+
+            var xhr = new XMLHttpRequest();
+
+            var formData = new FormData()
+
+
+         
+            formData.append("email" , email)
+            formData.append("name" , name)
+            formData.append("type" , type)
+            formData.append("city" , city)
+            formData.append("password" , password)
+            formData.append("_token" , ' {{ csrf_token() }}')
+           
+            xhr.onreadystatechange = function() {
+
+                    if (this.readyState == 4 ) 
+                     {
+         
+                        message = JSON.parse(this.responseText)
+                        
+                        if(message.success)
+                        {
+                            window.location.replace("/");
+                        }
+                        
+                        for(var item in message.errors)
+                        {
+                            
+                            document.querySelector("#error-"+item).innerHTML =  message.errors[item]
+                        
+                        }
+                  
+                      }
+
+                }
+                
+
+             xhr.open('POST', '/manager/register', true);
+
+             xhr.setRequestHeader('Accept', 'application/json');
+                
+             xhr.send(formData);
+
+
+        }
+
+    </script>
 
 </x-guest_layout>
