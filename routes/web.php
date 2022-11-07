@@ -37,7 +37,7 @@ Route::group(['prefix' => 'manager'] , function(){
     route::group( ["controller" =>  AuthController::class , "middleware" => "guest"  ] , function(){
 
 
-        Route::get("register" , "managerRegister");
+        Route::get("register" ,  "managerRegister");
 
         Route::post("register" , "managerStore");
 
@@ -78,7 +78,7 @@ Route::group([ 'prefix' => 'admin'], function(){
             Route::get('/login', "adminlogin")->middleware("guest");
 
 
-            Route::post("/login" , "adminAuth");
+            Route::post("/login" , "adminAuth")->middleware("guest");
 
 
             Route::get("/logout/{gaurd}" ,  "logout");

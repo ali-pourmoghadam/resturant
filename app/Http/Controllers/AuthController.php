@@ -33,14 +33,9 @@ class AuthController extends Controller
         );
 
 
-
         if(!Auth::guard("admin")->attempt($creadential))
         {
-
-            throw  ValidationException::withMessages([
-                "error" => "نام کاربری یا رمز عبور اشتباه است"
-            ]);
-
+            throw  ValidationException::withMessages(["error" => "نام کاربری یا رمز عبور اشتباه است"]);
         }
 
         FacadesSession::put("id" ,  Auth::guard("admin")->user());
@@ -58,7 +53,7 @@ class AuthController extends Controller
 
     public function managerRegister()
     {
-        return "register";
+        return  view('manager.register');
     }
     
 
@@ -71,7 +66,7 @@ class AuthController extends Controller
 
     public function managerLogin()
     {
-        return "login";
+        return  view('manager.login');
     }
 
     

@@ -10,7 +10,10 @@
 <body>
 
 
-    <h1 class="text-center mt-2">Under Developing ...</h1>
+    <h1 class="text-center mt-5">Under Developing ...</h1>
+
+
+    {{dd( Route::getRoutes())}}
     
 </body>
 </html>
