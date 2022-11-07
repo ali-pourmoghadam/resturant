@@ -19,8 +19,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-
 Route::get('/', function () {
 
     return view('welcome');
@@ -28,14 +26,10 @@ Route::get('/', function () {
 });
 
 
-
-
-
 Route::group(['prefix' => 'manager'] , function(){
 
 
-
-    route::group( ["controller" =>  AuthController::class , "middleware" => "guest"  ] , function(){
+    route::group( ["controller" =>  AuthController::class , "middleware" => "guest:manager"  ] , function(){
 
 
         Route::get("register" ,  "managerRegister");
@@ -53,17 +47,15 @@ Route::group(['prefix' => 'manager'] , function(){
 
         Route::get("dashboard" , [ ManagerController::class , "dashboard"]);
 
+        Route::get("/logout/{gaurd}" ,  [ AuthController::class , "logout"]);
+
+
     });
-
-
-
-
 
 });
 
 
 Route::group([ 'prefix' => 'admin'], function(){
-
 
 
            route::group( ["middleware" => "admin"] , function(){
@@ -77,26 +69,21 @@ Route::group([ 'prefix' => 'admin'], function(){
 
             });
 
-
-            
-
         
 
         route::group( ["controller" =>  AuthController::class ] , function(){
 
 
-            Route::get('/login', "adminlogin")->middleware("guest");
+            Route::get('/login', "adminlogin")->middleware("guest:admin,manager");
 
 
-            Route::post("/login" , "adminAuth")->middleware("guest");
+            Route::post("/login" , "adminAuth")->middleware("guest:admin,manager");
 
 
             Route::get("/logout/{gaurd}" ,  "logout");
 
 
         });
-
-
 
 });
 

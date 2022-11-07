@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManagerLoginRequest;
 use App\Http\Requests\ResturantCreateRequest;
 use App\Models\City;
 use App\Models\Manager;
@@ -111,9 +112,23 @@ class AuthController extends Controller
     }
 
     
-    public function managerAuth()
+    public function managerAuth(ManagerLoginRequest $request)
     {
-        //manager auth
+        
+        $attributes = $request->validated();
+
+
+        $login = Auth::guard('manager')->attempt([ "email" =>  $attributes['email'] , "password" => $attributes['password']] ,  $attributes['remmember'] );
+
+        
+        if(!$login)
+         {
+            return response()->json(["errors" => ['wrong_credential' => "ایمیل یا پسسورد اشتباه است"]]);
+         }
+
+
+        return response()->json(["success" => true]);
+
     }
     
 
