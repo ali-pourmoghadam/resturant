@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ResturantCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,11 +44,13 @@ Route::group(['prefix' => 'manager'] , function(){
 
     });
 
-    route::group( ["middleware" => "manager"] , function(){
+    route::group( ["middleware" => "manager:admin"] , function(){
 
         Route::get("dashboard" , [ ManagerController::class , "dashboard"]);
 
         Route::get("/logout/{gaurd}" ,  [ AuthController::class , "logout"]);
+
+        Route::resource("/menu" ,  MenuController::class);
 
 
     });
@@ -58,7 +61,7 @@ Route::group(['prefix' => 'manager'] , function(){
 Route::group([ 'prefix' => 'admin'], function(){
 
 
-           route::group( ["middleware" => "admin"] , function(){
+           route::group( ["middleware" => "admin:manager"] , function(){
 
 
                 Route::get('/dashboard', [AdminController::class ,  "dashboard"]);

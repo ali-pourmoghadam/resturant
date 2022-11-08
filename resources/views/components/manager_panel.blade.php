@@ -169,7 +169,7 @@
                                     
                                         <i class="position-absolute mt-1 fs-6 fa-solid fa-utensils"></i>
 
-                                        <a href="/manager/menue" class="fs-6  d-block text-center text-dark">مدریت منو ها</a>
+                                        <a href="/manager/menu" class="fs-6  d-block text-center text-dark">مدریت منو ها</a>
 
                                     </div>
 

@@ -9,6 +9,13 @@ class Resturant extends Model
 {
     use HasFactory;
 
+    
+    protected $with = 
+    [
+        'menues' ,
+
+        'cities'
+    ];
 
     protected $fillable = 
     [
@@ -18,5 +25,25 @@ class Resturant extends Model
 
         "rsturant_category"
     ];
+
+
+
+    public function manager()
+    {
+       return $this->belongsTo(Manager::class);
+    }
+
+
+    public function menues()
+    {
+        return $this->hasMany(Menu::class);
+    }
+
+
+    public function cities()
+    {
+        return $this->belongsTo(City::class , "city_id");
+    }
+    
 
 }

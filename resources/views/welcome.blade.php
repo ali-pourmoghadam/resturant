@@ -10,10 +10,20 @@
 <body>
 
 
-    <h1 class="text-center mt-5">Under Developing ...</h1>
+    <h1 class="text-center mt-5 mb-3">Routes : </h1>
 
+    @php
+       $routes = Route::getRoutes();
+        
+        foreach ($routes as $key=>$value)
+        {
+            if($key>4)
+            {
+                echo "<p class = 'text-center'>".$value->uri()."</p>";
+            }
 
-    {{dd( Route::getRoutes())}}
-    
+        }
+    @endphp
+        
 </body>
 </html>

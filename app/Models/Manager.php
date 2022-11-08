@@ -14,13 +14,34 @@ class Manager  extends Authenticatable
     protected $guard = 'manager';
 
 
+    protected $with =
+     [
+
+         'resturants' ,
+
+         'menus'
+     ];
+
+
+
     protected $fillable = 
     [
         "email" , 
         "password"
     ];
     
+
+
+    public function resturants()
+    {
+        return $this->hasMany(Resturant::class);
+    }
     
+
+    public function menus()
+    {
+        return $this->hasManyThrough(Menu::class , Resturant::class);
+    }
 
 }
 

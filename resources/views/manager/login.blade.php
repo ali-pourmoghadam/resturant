@@ -106,7 +106,7 @@
 
                 if(message.success)
                 {
-                    window.location.replace("/dashboard");
+                    window.location.replace("/manager/dashboard");
                 }
                 
                 for(var item in message.errors)

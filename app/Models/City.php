@@ -21,4 +21,10 @@ class City extends Model
     {
         static::addGlobalScope(new ActiveScop);
     }
+
+
+    public function rsturants()
+    {
+        return $this->hasMany(Resturant::class);
+    }
 }
