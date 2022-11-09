@@ -64,8 +64,7 @@ class AuthController extends Controller
 
         $cities = City::all();    
 
-        $categories = ResturantCategroy::all();    
-
+        $categories = ResturantCategroy::where("status" , 1)->get();    
 
         return  view('manager.register', compact("cities" , "categories"));
     }

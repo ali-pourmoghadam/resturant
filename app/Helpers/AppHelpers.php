@@ -113,12 +113,6 @@ class AppHelpers{
     }
 
 
-    public static function inctance(){
-
-        return new self();
-
-    }
-
 
 
 }

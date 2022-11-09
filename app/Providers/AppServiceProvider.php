@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Helpers\AppHelpers;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
+        // Create Just One Inctance of Object
+        
+
+        $this->app->singleton( AppHelpers::class , function ($app) {
+
+            return new AppHelpers();
+
+        });
     }
 }

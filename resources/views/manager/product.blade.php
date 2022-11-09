@@ -1,7 +1,6 @@
-<x-admin_panel>
+<x-manager_panel>
 
-
-    <h4 class="d-block text-center mt-4"> جدول دسته بندی غذا ها</h4>
+    <h4 class="d-block text-center mt-4"> جدول دسته بندی محصولات</h4>
 
     <div class="row mt-4">
         <div class="col-10 mx-auto mt-3">
@@ -29,7 +28,7 @@
 
                 <tbody>
 
-                  @foreach ($categories as $category)
+                  @foreach ($products as $product)
                       
                   
                   <tr class="text-center">
@@ -39,20 +38,20 @@
                         {{$loop->iteration}}
                     </th>
 
-                    <td>{{$category->name}}</td>
+                    <td>{{$product->name}}</td>
 
                     <td>
                   
-                          <span>{{($category->status) ? "فعال" : "غیرفعال"}}</span>
+                       
                           
                     <td>
-                        <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#editModal-{{$category->id}}">
+                        <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#editModal-{{$product->id}}">
                             <i class="fa-regular fa-pen-to-square text-light"></i>
                         </button>
                     </td>
 
                     <td>
-                      <form method="POST" action="/admin/food/{{$category->id}}">
+                      <form method="POST" action="/manager/product/{{$product->id}}">
                         
                         @csrf
                         @method("DELETE")
@@ -64,12 +63,10 @@
                       </form>
                     </td>
 
-
-
                     
-                  {{--START-MODAL-FODD--}}
+                  {{--START-MODAL-PRODUCT--}}
 
-                  <div class="modal fade" id="editModal-{{$category->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="editModal-{{$product->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -78,31 +75,52 @@
                         </div>
 
 
-                        <form action="/admin/food/{{$category->id}}" method="POST">
+                        <form action="/manager/product/{{$product->id}}" method="POST">
                             @csrf
                             @method("PUT")
                             <div class="modal-body">
                               
-                                    <div class="mb-3">
-                                      <label for="exampleInputEmail1" class="form-label w-100 text-right">نام دسته بندی</label>
-            
-                                      <input name="name" value="{{$category->name}}"  placeholder="{{$category->name}}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                      
-                                    </div>          
+                                <div class="mb-3">
+
+                                    <label for="exampleInputEmail1" class="form-label w-100 text-right">نام محصول</label>
+          
+                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                     
-                                    <div class="mb-3">
-
-                                      <label for="exampleInputEmail1" class="form-label w-100 text-right">وضعیت</label>
-
-                                      <select name="status" class="form-select" aria-label="Default select example">
+                                  </div>
+          
+          
+                                  <div class="mb-3">
+          
                                       
+          
+                                  </div> 
+          
+                                  <div class="mb-3">
+          
+                                      <label for="exampleInputEmail1" class="form-label w-100 text-right">انخاب دسته بندی</label>
+          
+                                      <select name="status" class="form-select" aria-label="Default select example">
+                                                    
                                           <option value="1">فعال</option>
-                                          
                                           <option value="0">غیرفعال</option>
                               
-                                        </select>
-
-                                  </div>
+                                       </select>
+          
+                                  </div> 
+          
+                                  <div class="mb-3">
+          
+                                      <label for="exampleInputEmail1" class="form-label w-100 text-right">افزودن به منو</label>
+          
+                                      <select name="status" class="form-select" aria-label="Default select example">
+                                                    
+                                          <option value="1">فعال</option>
+                                          <option value="0">غیرفعال</option>
+                              
+                                       </select>
+          
+                                  </div> 
+                                  
                             </div>
 
                             <div class="modal-footer">
@@ -115,7 +133,7 @@
                   </div>
 
                   
-                  {{-- END-MODAL-FOOD --}}
+                  {{-- END-MODAL-PRODUCT --}}
                   </tr>
 
                   @endforeach
@@ -129,8 +147,8 @@
         </div>
     </div>
 
-
-    <h4 class="d-block text-center mt-4">آمار غذاها</h4>
+{{--     
+    <h4 class="d-block text-center mt-4">آمار منوها</h4>
 
 
     <div class="row mt-4 pt-4" style="padding: 20px !important">
@@ -144,7 +162,7 @@
         <div class="col-3 hpx-400 bg-white rounded mx-auto d-flex flex-column " style="hieght : 400px">
 
             <div class="w-100 h-25  rounded position-relative">
-                <span class="top-sale-txt"> پرفروش ترین غذاها</span>
+                <span class="top-sale-txt"> پرفروش ترین منوها</span>
 
                 <span class="btn top-sale-btn">ماه
                     <i class="fa-solid fa-caret-down ml-2" style="font-size: 9px"></i>
@@ -234,55 +252,97 @@
         </div>  
 
          
-    </div>
+    </div> --}}
 
 
     <div class="add-item-heaeder pointer" data-bs-toggle="modal" data-bs-target="#addfoodModal"> 
 
-        اضافه کردن غذا
+        اضافه کردن محصول
 
         <i class="fa-solid fa-plus"></i>
 
     </div>
 
-      {{-- ADD-FOOD-MODAL --}}
+
+
+      {{-- ADD-PRODUCt-MODAL --}}
        
       <div class="modal fade" id="addfoodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="text-center w-100" id="exampleModalLabel">ایجاد غذا</h5>
+              <h5 class="text-center w-100" id="exampleModalLabel">ایجاد محصول</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form method="POST" action="/admin/food" >
+            <form method="POST" action="/manager/product" >
 
               @csrf
+
                 <div class="modal-body">
             
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label w-100 text-right">نام دسته بندی</label>
+
+                          <label for="exampleInputEmail1" class="form-label w-100 text-right">نام محصول</label>
 
                           <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                           
                         </div>
+                        
 
                         <div class="mb-3">
 
-                            <label for="exampleInputEmail1" class="form-label w-100 text-right">وضعیت</label>
+                          <label for="exampleInputEmail1" class="form-label w-100 text-right">قیمت </label>
 
-                            <select name="status" class="form-select" aria-label="Default select example">
-                            
-                                <option value="1">فعال</option>
-                                <option value="0">غیرفعال</option>
-                     
-                              </select>
-
+                          <input type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          
                         </div>
-                      
-         
-                 
+
+
+                     
+
+                        <div class="mb-3">
+
+                            <label for="exampleInputEmail1" class="form-label w-100 text-right">افزودن به منو</label>
+                           
+
+                             <select name="menu" class="form-select" aria-label="Default select example">
+                                          
+                              @foreach ($menus as $menu)
+                                                 
+                                <option value="{{$menu->id}}">{{ $menu->name }}</option>
+
+                              @endforeach
+                    
+                             </select>
+
+                        </div> 
+
+
+
+                        <div class="mb-3">
+
+                            <label for="exampleInputEmail1" class="form-label w-100 text-right">انخاب دسته بندی</label>
+
+                              <select name="food_category_id" class="form-select" aria-label="Default select example">
+                                          
+                                @foreach ($foodCategories as $category)
+
+                                <option value="{{$category->id}}">{{ $category->name }}</option>
+
+                                @endforeach     
+                             </select>
+
+                        </div> 
+
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label w-100 text-right">توضیحات</label>
+                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
                 </div>
+
+
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
                   <button type="submit" class="btn btn-primary">اضفه کردن</button>
@@ -296,52 +356,53 @@
         </div>
       </div>
 
-      {{-- END-ADD-RESTURANT-MODAL --}}
+      {{-- END-PRODUCt-MODAL --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      {{-- END-ADD-FOOD-MODAL --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
 
     <script>
 
-    const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-    ];
+    // const labels = [
+    //     'January',
+    //     'February',
+    //     'March',
+    //     'April',
+    //     'May',
+    //     'June',
+    // ];
 
-    const data = {
-        labels: labels,
-        datasets: [{
-        label: 'My First dataset',
-        backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
-            ],
-        borderColor: 'rgb(255, 99, 132)',
-        data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-    };
-
-
-    const config = {
-        type: 'doughnut',
-        data: data,
-        options: {}
-    };
+    // const data = {
+    //     labels: labels,
+    //     datasets: [{
+    //     label: 'My First dataset',
+    //     backgroundColor: [
+    //         'rgb(255, 99, 132)',
+    //         'rgb(54, 162, 235)',
+    //         'rgb(255, 205, 86)'
+    //         ],
+    //     borderColor: 'rgb(255, 99, 132)',
+    //     data: [0, 10, 5, 2, 20, 30, 45],
+    //     }]
+    // };
 
 
-    const myChart = new Chart(
-        document.getElementById('myChart'),
-        config
-    );
+    // const config = {
+    //     type: 'doughnut',
+    //     data: data,
+    //     options: {}
+    // };
+
+
+    // const myChart = new Chart(
+    //     document.getElementById('myChart'),
+    //     config
+    // );
  
     </script> 
 
 
-</x-admin_panel>
+
+</x-manager_panel>

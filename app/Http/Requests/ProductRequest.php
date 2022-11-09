@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryRequest extends FormRequest
+class ProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,9 +14,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-
-        return (Auth::guard("admin")->user()) ? true : false;
-        
+        return (Auth::guard("manager")->user()) ? true : false;
     }
 
     /**
@@ -26,13 +24,16 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-  
         return [
+            "name" => "required" ,
             
-                "name" => "required|string" , 
-            
-                "status" => "required"
-             ];
-    
+            "price" => "required" ,
+
+            "menu" => "required" ,
+
+            "food_category_id" => "required" ,
+
+            "description" => "required"
+        ];
     }
 }

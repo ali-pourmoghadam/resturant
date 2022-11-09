@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\FoodCategory;
+use App\Models\Scopes\ActiveScop;
 use Illuminate\Http\Request;
 
 class FoodCategoryController extends Controller
@@ -53,7 +54,7 @@ class FoodCategoryController extends Controller
     {
 
         $attributes = $request->validated();
-                
+        
         FoodCategory::where("id" , $id)->update($attributes);
 
         return redirect("/admin/food");

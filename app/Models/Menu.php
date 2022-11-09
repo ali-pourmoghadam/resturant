@@ -34,11 +34,16 @@ class Menu extends Model
     {
         return Attribute::make(
 
-            get : fn($value) => AppHelpers::inctance()->persianDays($value)
+            get : fn($value) => app(AppHelpers::class)->persianDays($value)
             
         );
     }
 
+
+    public function product()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 
 
 }

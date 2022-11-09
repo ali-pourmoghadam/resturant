@@ -192,7 +192,7 @@
             </div>
         </div>
     
-    
+{{--     
         <h4 class="d-block text-center mt-4">آمار منوها</h4>
     
     
@@ -297,7 +297,7 @@
             </div>  
     
              
-        </div>
+        </div> --}}
     
     
         <div class="add-item-heaeder pointer" data-bs-toggle="modal" data-bs-target="#addfoodModal"> 

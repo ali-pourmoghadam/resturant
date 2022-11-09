@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResturantCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,8 @@ Route::group(['prefix' => 'manager'] , function(){
         Route::get("/logout/{gaurd}" ,  [ AuthController::class , "logout"]);
 
         Route::resource("/menu" ,  MenuController::class);
+
+        Route::resource("/product" ,  ProductController::class);
 
 
     });
