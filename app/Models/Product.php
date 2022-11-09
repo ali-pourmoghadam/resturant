@@ -18,13 +18,15 @@ class Product extends Model
 
         "price" ,
 
-        "description"
+        "description" ,
+
+        "img"
     ];
 
     protected $with = [
 
         "menu"
-        
+
     ];
 
 

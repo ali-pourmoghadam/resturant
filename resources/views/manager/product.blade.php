@@ -13,6 +13,8 @@
 
                     <th scope="col">شماره ردیف</th>
 
+                    <th scope="col">عکس  محصول</th>
+
                     <th scope="col">نام محصول</th>
 
                     <th scope="col">نمایش محصول</th>
@@ -34,13 +36,19 @@
                   <tr class="text-center">
 
 
-                     <th scope="row">
+                     <th class="pt-20" scope="row">
                         {{$loop->iteration}}
                     </th>
 
-                    <td>{{$product->name}}</td>
-
                     <td>
+
+                        <img src="{{asset("storage/{$product->img}")}}" 
+                             style="width:50px; height:50px; cover rounded" alt="">
+                    </td>
+
+                    <td class="pt-20">{{$product->name}}</td>
+
+                    <td class="pt-20">
                         <button class="btn btn-table bg-light-green "  data-bs-toggle="modal" data-bs-target="#showModal-{{$product->id}}">
                             <i class="fa-regular fa-eye  text-light"></i>
                         </button>
@@ -98,16 +106,17 @@
                   
                   {{-- END-MODAL-PRODUCT-SHOW --}}
 
-                    <td>
+                    <td class="pt-20">
                         <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#editModal-{{$product->id}}">
                             <i class="fa-regular fa-pen-to-square text-light"></i>
                         </button>
                     </td>
 
-                    <td>
-                      <form method="POST" action="/manager/product/{{$product->id}}">
+                    <td class="pt-20">
+                      <form method="POST" action="/manager/product/{{$product->id}}" enctype="multipart/form-data">
                         
                         @csrf
+
                         @method("DELETE")
 
                         <button class="btn btn-table bg-light-red ">
@@ -135,7 +144,7 @@
                             <div class="modal-body">
                                 
                                 
-                        <div class="mb-3">
+                          <div class="mb-3">
 
                             <label for="exampleInputEmail1" class="form-label w-100 text-right">نام محصول</label>
   
@@ -332,7 +341,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <form method="POST" action="/manager/product" >
+            <form method="POST" action="/manager/product" enctype="multipart/form-data">
 
               @csrf
 
@@ -353,6 +362,15 @@
 
                           <input type="number" name="price" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                           
+                        </div>
+
+                        
+                        <div class="mb-3">
+
+                               <label for="exampleInputEmail1" class="form-label w-100 text-right">انتخاب عکس</label>
+
+                                <x-file_upload>
+                                </x-file_upload>
                         </div>
 
 

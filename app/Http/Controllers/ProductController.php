@@ -53,9 +53,16 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+     
          $request->validated() ;
 
-         $product =  Product::create($request->except("menu"));
+         $path =  $request->file("thumbnail")->store("products");
+
+         $attributes  = $request->except("menu" , "thumbnail");
+
+         $attributes['img'] = $path;
+
+         $product =  Product::create($attributes);
 
          $product->menu()->attach($request->input("menu"));
          

@@ -31,6 +31,8 @@ class ProductRequest extends FormRequest
         return [
             "name" => "required" ,
             
+            "thumbnail" => "required|image|mimes:jpeg,jpg,png,webp" , 
+
             "price" => "required" ,
 
             "menu" =>  ($request->has("menu")) ? "required" : "" ,
