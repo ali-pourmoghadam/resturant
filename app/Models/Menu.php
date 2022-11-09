@@ -23,6 +23,7 @@ class Menu extends Model
     ];
 
 
+
     public function resturant()
     {
        return  $this->belongsTo(Resturant::class);

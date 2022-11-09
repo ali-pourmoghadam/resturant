@@ -40,7 +40,7 @@ class Manager  extends Authenticatable
 
     public function menus()
     {
-        return $this->hasManyThrough(Menu::class , Resturant::class);
+        return $this->hasManyThrough(Menu::class , Resturant::class)->with("product");
     }
 
 }

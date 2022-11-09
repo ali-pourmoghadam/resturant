@@ -195,6 +195,7 @@
 
 
 
+
                     {{-- START-FOODPARTY --}}
 
                     <div >
@@ -259,7 +260,25 @@
                 
                     </div>
 
-                    {{-- END-FOODPARTY-TIEMS --}}
+                    {{-- END-FOODPARTY --}}
+
+
+
+                    {{-- START-SETTING --}}
+
+                    <div >
+
+                        <div class="position-relative  mx-auto w-80  panel-item px-4 py-2 " >
+                                  
+                            <i class="position-absolute mt-1 text-light fs-6 fa-solid fa-pizza-slice"></i>
+    
+                            <a href="/manager/setting" class="text-light fs-6 d-block text-center ">تنظیمات</a>
+                
+                        </div>                
+                    
+                    </div>
+    
+                    {{-- END-SETTING- --}}
 
                     
 

@@ -41,9 +41,7 @@
                     </th>
 
                     <td>
-
-                        <img src="{{asset("storage/{$product->img}")}}" 
-                             style="width:50px; height:50px; cover rounded" alt="">
+                        <img src="{{asset("storage/{$product->img}")}}" style="width:50px; height:50px; cover rounded" alt="">
                     </td>
 
                     <td class="pt-20">{{$product->name}}</td>
@@ -54,7 +52,6 @@
                         </button>
                     </td>
 
-                         
                   {{--START-MODAL-PRODUCT-SHOW--}}
 
                   <div class="modal fade" id="showModal-{{$product->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,7 +100,6 @@
                     </div>
                   </div>
 
-                  
                   {{-- END-MODAL-PRODUCT-SHOW --}}
 
                     <td class="pt-20">

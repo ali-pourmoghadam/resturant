@@ -10,6 +10,7 @@ use App\Models\Scopes\ActiveScop;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class ProductController extends Controller
 {
     /**
@@ -19,14 +20,23 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
-        $products= Product::withoutGlobalScope(ActiveScop::class)->paginate(10);
-
-
+    
         $menus = Auth::guard("manager")->user()
                                         ->menus
                                         ->filter(fn($menu)=> $menu->status == true);
 
+        $products = [];
+
+        $menus->each(function($menu) use(&$products) {
+
+        $menu->product->each(function($product) use(&$products) {
+
+                $products[] = $product;
+
+            });
+
+          });
+            
 
         $foodCategories = FoodCategory::all();                                
 
