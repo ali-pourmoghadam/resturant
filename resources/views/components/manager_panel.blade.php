@@ -9,6 +9,10 @@
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
+    <link href="https://static.neshan.org/sdk/openlayers/5.3.0/ol.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://static.neshan.org/sdk/openlayers/5.3.0/ol.js" type="text/javascript"></script>
+
     @vite(['resources/js/app.js'])
 
 
@@ -268,13 +272,56 @@
 
                     <div >
 
-                        <div class="position-relative  mx-auto w-80  panel-item px-4 py-2 " >
+                        <div class="position-relative  mx-auto w-80  panel-item px-4 py-2 " data-bs-toggle="collapse" href="#collapse-3" role="button" aria-expanded="true" aria-controls="collapse-3">
                                   
-                            <i class="position-absolute mt-1 text-light fs-6 fa-solid fa-pizza-slice"></i>
-    
-                            <a href="/manager/setting" class="text-light fs-6 d-block text-center ">تنظیمات</a>
+                            <i class="position-absolute mt-1 text-light fs-6 fa-solid fa-solid fa-gears"></i>
+
+                            <span class="text-light fs-6 d-block text-center ">تنظیمات</span>
                 
-                        </div>                
+                        </div>      
+                        
+                        
+
+                         {{-- START-FOODPARTY-TIEMS --}}
+
+                         <div id="collapse-3"  class="
+
+                         collapse
+ 
+                         bg-light rounded-3 d-felx
+ 
+                         flex-column panel-item-sub 
+ 
+                         justify-content-center
+ 
+                         align-items-center
+ 
+                         w-75
+ 
+                         mx-auto
+                         
+                         mb-3
+                         " >
+ 
+ 
+                       
+                         <div class="position-relative px-3 py-2 ">
+ 
+                             <i class="fa-solid position-absolute mt-1 fs-6 fa-wand-sparkles"></i>
+ 
+                             <a  href="/manager/setting" class="fs-6  d-block text-center text-dark"> اطلاعات مدیر</a>
+ 
+                         </div>
+ 
+                         <div class="position-relative px-3 py-2 ">
+ 
+                             <i class="fa-solid position-absolute mt-1 fs-6 fa-wand-sparkles"></i>
+ 
+                             <a href="" class="fs-6  d-block text-center text-dark"> اظلاعات رستوران</a>
+ 
+                         </div>
+ 
+                 
                     
                     </div>
     

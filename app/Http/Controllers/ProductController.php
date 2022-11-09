@@ -25,21 +25,9 @@ class ProductController extends Controller
                                         ->menus
                                         ->filter(fn($menu)=> $menu->status == true);
 
-        $products = [];
-
-        $menus->each(function($menu) use(&$products) {
-
-        $menu->product->each(function($product) use(&$products) {
-
-                $products[] = $product;
-
-            });
-
-          });
+        $products = $this->getProducts($menus);
             
-
         $foodCategories = FoodCategory::all();                                
-
 
         return view("manager.product" , compact("products" , "menus" , "foodCategories"));
 
@@ -66,11 +54,9 @@ class ProductController extends Controller
      
          $request->validated() ;
 
-         $path =  $request->file("thumbnail")->store("products");
-
          $attributes  = $request->except("menu" , "thumbnail");
 
-         $attributes['img'] = $path;
+         $attributes['img'] = $request->file("thumbnail")->store("products");
 
          $product =  Product::create($attributes);
 
@@ -98,6 +84,7 @@ class ProductController extends Controller
         return redirect("/manager/product");
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -118,5 +105,23 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect("/manager/product");
+    }
+
+
+    public function getProducts($menus)
+    {
+        $products = [];
+
+        $menus->each(function($menu) use(&$products) {
+
+        $menu->product->each(function($product) use(&$products) {
+
+                $products[] = $product;
+
+            });
+
+          });
+
+        return $products;
     }
 }

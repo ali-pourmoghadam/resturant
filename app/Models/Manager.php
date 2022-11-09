@@ -27,7 +27,14 @@ class Manager  extends Authenticatable
     protected $fillable = 
     [
         "email" , 
-        "password"
+        "password" ,
+        "name" , 
+        "lastname" , 
+        "adress" ,
+        "national_id",
+        "phoneNumber" ,
+        "image" , 
+        "Coordinates"
     ];
     
 

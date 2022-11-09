@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodCategoryController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ManagerSettingController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResturantCategoryController;
@@ -45,9 +46,22 @@ Route::group(['prefix' => 'manager'] , function(){
 
     });
 
+
+
     route::group( ["middleware" => "manager:admin"] , function(){
 
-        Route::get("dashboard" , [ ManagerController::class , "dashboard"]);
+
+       
+        route::group( ["controller" => ManagerController::class ] , function(){
+
+            Route::get("dashboard" ,  "dashboard");
+
+            Route::get("setting" ,     "setting" );
+    
+            Route::post("setting/{id}" ,  "storeSetting");
+    
+
+        });
 
         Route::get("/logout/{gaurd}" ,  [ AuthController::class , "logout"]);
 
