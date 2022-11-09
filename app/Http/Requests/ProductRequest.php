@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProductRequest extends FormRequest
@@ -22,14 +23,17 @@ class ProductRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(Request $request)
     {
+
+    
+
         return [
             "name" => "required" ,
             
             "price" => "required" ,
 
-            "menu" => "required" ,
+            "menu" =>  ($request->has("menu")) ? "required" : "" ,
 
             "food_category_id" => "required" ,
 

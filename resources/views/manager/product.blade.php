@@ -13,9 +13,9 @@
 
                     <th scope="col">شماره ردیف</th>
 
-                    <th scope="col">نام دسته بندی</th>
+                    <th scope="col">نام محصول</th>
 
-                    <th scope="col">وضعیت</th>
+                    <th scope="col">نمایش محصول</th>
 
                     <th scope="col">ویرایش</th>
 
@@ -34,16 +34,70 @@
                   <tr class="text-center">
 
 
-                    <th scope="row">
+                     <th scope="row">
                         {{$loop->iteration}}
                     </th>
 
                     <td>{{$product->name}}</td>
 
                     <td>
+                        <button class="btn btn-table bg-light-green "  data-bs-toggle="modal" data-bs-target="#showModal-{{$product->id}}">
+                            <i class="fa-regular fa-eye  text-light"></i>
+                        </button>
+                    </td>
+
+                         
+                  {{--START-MODAL-PRODUCT-SHOW--}}
+
+                  <div class="modal fade" id="showModal-{{$product->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title w-100 text-center" id="exampleModalLabel"> اصلاعات محصول</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-6" style="border-right: 1px solid">
+
+                                <span class="d-block text-right mt-2">توضیحات :</span>
+                                <p class="px-2 text-center mt-1">
+                                    {{$product->description}}
+                                </p>
+                              
+                            </div>
+
+                            <div class="col-6 text-right p-2">
+
+                                <span class="d-block mx-2 mb-2">قیمت : {{$product->price}}</span>
+
+                                <div class="d-block mx-2 mb-2">
+
+                                   <span class="d-block"> منوها :</span>
+
+                                    @foreach ($product->menu as $menu)
+                                        <span class="d-block mx-5">{{$menu->name}}-</span>
+                                    @endforeach
+
+                                </div>
+
+                                <span class="d-block mx-2 mb-2"> تاریخ ساخت :</span>
+
+                                <span class="d-block mx-5 mb-2"
+                                      style="font-size: 13px; font-weight:bold"> {{$product->created_at}}-</span>
+                            </div>
+
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
                   
-                       
-                          
+                  {{-- END-MODAL-PRODUCT-SHOW --}}
+
                     <td>
                         <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#editModal-{{$product->id}}">
                             <i class="fa-regular fa-pen-to-square text-light"></i>
@@ -70,7 +124,7 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title w-100 text-center" id="exampleModalLabel"> ویرایش غذا</h5>
+                          <h5 class="modal-title w-100 text-center" id="exampleModalLabel"> ویرایش محصول</h5>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
@@ -79,48 +133,51 @@
                             @csrf
                             @method("PUT")
                             <div class="modal-body">
-                              
-                                <div class="mb-3">
+                                
+                                
+                        <div class="mb-3">
 
-                                    <label for="exampleInputEmail1" class="form-label w-100 text-right">نام محصول</label>
-          
-                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                    
-                                  </div>
-          
-          
-                                  <div class="mb-3">
-          
-                                      
-          
-                                  </div> 
-          
-                                  <div class="mb-3">
-          
-                                      <label for="exampleInputEmail1" class="form-label w-100 text-right">انخاب دسته بندی</label>
-          
-                                      <select name="status" class="form-select" aria-label="Default select example">
-                                                    
-                                          <option value="1">فعال</option>
-                                          <option value="0">غیرفعال</option>
-                              
-                                       </select>
-          
-                                  </div> 
-          
-                                  <div class="mb-3">
-          
-                                      <label for="exampleInputEmail1" class="form-label w-100 text-right">افزودن به منو</label>
-          
-                                      <select name="status" class="form-select" aria-label="Default select example">
-                                                    
-                                          <option value="1">فعال</option>
-                                          <option value="0">غیرفعال</option>
-                              
-                                       </select>
-          
-                                  </div> 
-                                  
+                            <label for="exampleInputEmail1" class="form-label w-100 text-right">نام محصول</label>
+  
+                            <input type="text" name="name" value="{{$product->name}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            
+                          </div>
+                          
+  
+                          <div class="mb-3">
+  
+                            <label for="exampleInputEmail1"  class="form-label w-100 text-right">قیمت </label>
+  
+                            <input type="text" name="price" value="{{$product->price}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            
+                          </div>
+  
+  
+  
+  
+                          <div class="mb-3">
+  
+                              <label for="exampleInputEmail1" class="form-label w-100 text-right">انخاب دسته بندی</label>
+  
+                                <select name="food_category_id" class="form-select" aria-label="Default select example">
+                                            
+                                  @foreach ($foodCategories as $category)
+  
+                                  <option value="{{$category->id}}">{{ $category->name }}</option>
+  
+                                  @endforeach     
+                               </select>
+  
+                          </div> 
+  
+  
+                          <div class="mb-3">
+                              <label for="exampleFormControlTextarea1" class="form-label w-100 text-right">توضیحات</label>
+                              <textarea  name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                                    {{$product->description}}
+                              </textarea>
+                          </div>
+                               
                             </div>
 
                             <div class="modal-footer">

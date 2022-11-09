@@ -13,7 +13,7 @@
     
                         <th scope="col">شماره ردیف</th>
     
-                        <th scope="col">نام دسته بندی</th>
+                        <th scope="col">نام منو</th>
     
                         <th scope="col">وضعیت</th>
     
@@ -103,7 +103,9 @@
 
                                             <label for="exampleInputEmail1" class="form-label w-100 text-right"> روز های فعال</label>
                                              @foreach ($menu->for_days as $day)
+
                                                     <span class="mx-1">{{$day}}</span>
+
                                              @endforeach
 
                                         </div>

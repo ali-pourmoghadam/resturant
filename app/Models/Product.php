@@ -21,6 +21,12 @@ class Product extends Model
         "description"
     ];
 
+    protected $with = [
+
+        "menu"
+        
+    ];
+
 
     public function foodCategory()
     {

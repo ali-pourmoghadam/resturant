@@ -71,9 +71,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+
+        $attributes = $request->validated() ;
+
+        Product::where("id" , $id)->update($attributes);
+        
+        return redirect("/manager/product");
     }
 
     /**
@@ -84,6 +89,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $product =  Product::where("id" , $id)->first();
+
+        $product->menu->each(function($menu) use ($product){
+            
+            $menu->product()->detach($product->id);
+
+        });    
+
+        $product->delete();
+
+        return redirect("/manager/product");
     }
 }
