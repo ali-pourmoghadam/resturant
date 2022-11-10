@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ManagerLoginRequest;
 use App\Http\Requests\ResturantCreateRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\City;
 use App\Models\Manager;
 use App\Models\Resturant;
 use App\Models\ResturantCategroy;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -60,7 +62,7 @@ class AuthController extends Controller
     public function managerRegister()
     {
         
-        // !notice :  city and category will loads with ActiveScop
+        // ! Notice :  city  will loads with ActiveScop
 
         $cities = City::all();    
 
@@ -111,6 +113,7 @@ class AuthController extends Controller
     }
 
     
+
     public function managerAuth(ManagerLoginRequest $request)
     {
         
@@ -132,6 +135,25 @@ class AuthController extends Controller
     
 
 
+       /**  USER SECTION AUTH **/
+
+
+       public function userRegister(UserRequest $request)
+       {
+
+            $attributes =  $request->validated();
+
+            $user = User::create($attributes);
+
+            $token = Auth::guard("api")->login($user);
+
+            return response()->json([
+                
+                    "message" => "کاربر با موفقیت ایجاد شد" ,
+                    
+                    "token" => $token 
+            ]);
+       }
 
 
     public function logout(String $guard)

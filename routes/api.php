@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+
+Route::group(["prefix" => "v1" ] , function(){
+
+
+    Route::group( ["controller" =>  UserController::class ] , function(){
+
+
+        Route::get("/city/all", "cities");
+
+        Route::get("/user/all", "index")->middleware("auth:api");
+
+
+    });
+
+
+
+    Route::group(["controller" => AuthController::class] , function(){
+
+        Route::post("/user", "userRegister");
+
+    });
+
+
 });

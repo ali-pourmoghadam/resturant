@@ -14,29 +14,34 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-
             $table->id();
-            
-            $table->string('name');
+
+            $table->string('first_name');
+
+            $table->string('last_name');
 
             $table->string('email')->unique();
 
+            $table->string('city');
+
             $table->string('address' , 255);
 
-            $table->string('phoneNumber' , 20);
+            $table->string('phone_number' , 20);
 
             $table->string('image' , 255)->nullable();
+
+            $table->string('latitude')->nullable();
+
+            $table->string('longitude')->nullable();
             
-            $table->string('Coordinates')->nullable();
-
             $table->boolean('is_active')->default(true);
-
+            
             $table->timestamp('email_verified_at')->nullable();
 
             $table->string('password');
 
             $table->rememberToken();
-            
+
             $table->timestamps();
         });
     }
@@ -48,6 +53,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users_table_v2');
     }
 };
