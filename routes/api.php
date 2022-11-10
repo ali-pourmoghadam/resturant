@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,18 +22,19 @@ use Illuminate\Support\Facades\Route;
 Route::group(["prefix" => "v1" ] , function(){
 
 
-    Route::group( ["controller" =>  UserController::class ] , function(){
-
+    Route::group( ["controller" =>  ApiController::class , "middleware" => "auth:api" ] , function(){
 
         Route::get("/city/all", "cities");
 
-        Route::get("/user/all", "index")->middleware("auth:api");
-        
-        Route::put("/user/address/{id}", "updateGeoLocation")->middleware("auth:api");
+        Route::get("/foodCategory/all", "foodCategory");
 
+        Route::get("/user/all", "users");
+            
+        Route::get("/user/address/all", "adress");
+
+        Route::put("/user/address/{id}", "updateGeoLocation");
 
     });
-
 
 
     Route::group(["controller" => AuthController::class] , function(){

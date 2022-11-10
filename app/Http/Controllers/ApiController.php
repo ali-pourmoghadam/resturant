@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AddressResource;
 use App\Http\Resources\CityResource;
+use App\Http\Resources\FoodCategoryResource;
 use App\Models\City;
+use App\Models\FoodCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Validation\ValidationException;
 
-class UserController extends Controller
+class ApiController extends Controller
 {
+    
 
-
-    public function index()
+    public function users()
     {
         return Cache::rememberForever('user', fn()=> User::all());
     }
@@ -27,6 +29,17 @@ class UserController extends Controller
 
     }
 
+    public function adresses()
+    {
+        return Cache::rememberForever('address', fn()=>  AddressResource::collection(User::all())); 
+    }
+
+    public function foodCategory()
+    {
+        $categories = FoodCategory::with("product")->get() ;
+
+        return FoodCategoryResource::collection($categories);
+    }
 
     public function updateGeoLocation(Request $request , $id)
     {
@@ -36,7 +49,7 @@ class UserController extends Controller
 
         if($requester->id != $id)
         {
-            
+
             return response()->json([
 
                 "msg" => "شما مجاز به انجام این عملیات نیستید" 
@@ -64,5 +77,7 @@ class UserController extends Controller
         ]);
         
     }
+
+
 
 }

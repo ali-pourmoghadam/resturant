@@ -27,8 +27,6 @@ class AuthController extends Controller
         return view('admin.login');
     }
     
-
-
     public function adminAuth()
     {
 
@@ -52,15 +50,10 @@ class AuthController extends Controller
         return redirect("/admin/dashboard");
     }
 
-
-
-
     /**  MANAGER SECTION AUTH **/
 
-
-
-    public function managerRegister()
-    {
+     public function managerRegister()
+     {
         
         // ! Notice :  city  will loads with ActiveScop
 
@@ -69,12 +62,12 @@ class AuthController extends Controller
         $categories = ResturantCategroy::where("status" , 1)->get();    
 
         return  view('manager.register', compact("cities" , "categories"));
-    }
+     }
     
 
 
-    public function managerStore(ResturantCreateRequest $request)
-    {
+      public function managerStore(ResturantCreateRequest $request)
+      {
         
        $attributes = $request->validated();
        
@@ -104,18 +97,18 @@ class AuthController extends Controller
         
 
         return response()->json(['success' => true]);
-    }
+      }
 
 
-    public function managerLogin()
-    {
+      public function managerLogin()
+      {
         return  view('manager.login');
-    }
+      }
 
     
 
-    public function managerAuth(ManagerLoginRequest $request)
-    {
+      public function managerAuth(ManagerLoginRequest $request)
+      {
         
         $attributes = $request->validated();
 
@@ -131,12 +124,10 @@ class AuthController extends Controller
 
         return response()->json(["success" => true]);
 
-    }
+      }
     
 
-
        /**  USER SECTION AUTH **/
-
 
        public function userRegister(UserRequest $request)
        {
@@ -156,59 +147,56 @@ class AuthController extends Controller
        }
 
 
-
-
-
        public function userAuth(Request $request)
        {        
 
-            $request->validate(
-                [
-                    "email" => "required|email" , 
+        $request->validate(
+            [
+                "email" => "required|email" , 
 
-                    "password" => "required"
-                ]
-            );
-            
+                "password" => "required"
+            ]
+        );
+        
 
-            $credentials = $request->only('email', 'password');
-
-
-            $token = Auth::guard("api")->attempt($credentials);
-
-            if (!$token) {
-
-                return response()->json([
-
-                    'status' => 'error',
-
-                    'message' => 'یوزر یا پسوورد اشتباه است',
-
-                ], 401);
-            }
+        $credentials = $request->only('email', 'password');
 
 
-            $user = Auth::guard("api")->user();
-            
+        $token = Auth::guard("api")->attempt($credentials);
+
+        if (!$token) {
 
             return response()->json([
 
-                    'status' => 'خوش  آمدید',
+                'status' => 'error',
 
-                    'authorisation' => [
+                'message' => 'یوزر یا پسوورد اشتباه است',
 
-                        'token' => $token,
+            ], 401);
+        }
 
-                        'type' => 'bearer',
 
-                    ]
-                ]);
+        $user = Auth::guard("api")->user();
+        
+
+        return response()->json([
+
+                'status' => 'خوش  آمدید',
+
+                'authorisation' => [
+
+                    'token' => $token,
+
+                    'type' => 'bearer',
+
+                ]
+            ]);
 
        }
 
 
-    public function logout(String $guard)
-    {
+       public function logout(String $guard)
+       {
 
         FacadesSession::flush();
 
@@ -216,6 +204,6 @@ class AuthController extends Controller
 
         return redirect("/");
 
-    }
+       }
     
 }
