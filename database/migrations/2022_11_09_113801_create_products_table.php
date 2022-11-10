@@ -13,29 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
 
             $table->id();
 
-            $table->string("email")->unique();
+            $table->unsignedBigInteger("food_category_id");
 
             $table->string("name" , 255);
 
-            $table->string("last_name" , 255);
+            $table->text("description");
 
-            $table->string("address" , 255);
+            $table->decimal("price");
 
-            $table->string("image" , 255)->nullable();
-
-            $table->string("phone" , 255);
-
-            $table->unsignedInteger("work_days");
-
-            $table->unsignedInteger("previlage");
-
-            $table->string('password');
-            
             $table->timestamps();
+            
         });
     }
 
@@ -46,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('products');
     }
 };

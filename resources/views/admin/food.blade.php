@@ -97,6 +97,7 @@
                                       <select name="status" class="form-select" aria-label="Default select example">
                                       
                                           <option value="1">فعال</option>
+                                          
                                           <option value="0">غیرفعال</option>
                               
                                         </select>
@@ -243,8 +244,6 @@
         <i class="fa-solid fa-plus"></i>
 
     </div>
-
-
 
       {{-- ADD-FOOD-MODAL --}}
        

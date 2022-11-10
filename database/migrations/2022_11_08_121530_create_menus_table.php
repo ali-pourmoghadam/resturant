@@ -13,29 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
 
             $table->id();
 
-            $table->string("email")->unique();
+            $table->unsignedBigInteger("resturant_id");
 
             $table->string("name" , 255);
 
-            $table->string("last_name" , 255);
+            $table->boolean("status")->default(true);
 
-            $table->string("address" , 255);
-
-            $table->string("image" , 255)->nullable();
-
-            $table->string("phone" , 255);
-
-            $table->unsignedInteger("work_days");
-
-            $table->unsignedInteger("previlage");
-
-            $table->string('password');
+            $table->integer("for_days")->nullable();
             
             $table->timestamps();
+            
         });
     }
 
@@ -46,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('menus');
     }
 };

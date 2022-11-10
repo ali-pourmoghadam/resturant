@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Models\FoodCategory;
+use App\Models\Scopes\ActiveScop;
 use Illuminate\Http\Request;
 
 class FoodCategoryController extends Controller
@@ -21,15 +22,7 @@ class FoodCategoryController extends Controller
         return view('admin.food' , compact("categories"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,27 +41,7 @@ class FoodCategoryController extends Controller
         return redirect("/admin/food");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-    }
 
     /**
      * Update the specified resource in storage.
@@ -81,7 +54,7 @@ class FoodCategoryController extends Controller
     {
 
         $attributes = $request->validated();
-                
+        
         FoodCategory::where("id" , $id)->update($attributes);
 
         return redirect("/admin/food");

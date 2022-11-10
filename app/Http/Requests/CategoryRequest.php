@@ -29,9 +29,9 @@ class CategoryRequest extends FormRequest
   
         return [
             
-                    "name" => "required|string" , 
+                "name" => "required|string" , 
             
-                    "status" => "required|boolean"
+                "status" => "required"
              ];
     
     }
