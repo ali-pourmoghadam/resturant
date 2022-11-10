@@ -26,6 +26,8 @@ Route::group(["prefix" => "v1" ] , function(){
 
         Route::get("/city/all", "cities");
 
+        Route::get("/resturant/all", "resturants");
+
         Route::get("/foodCategory/all", "foodCategory");
 
         Route::get("/user/all", "users");

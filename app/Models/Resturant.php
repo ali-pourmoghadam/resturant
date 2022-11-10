@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Helpers\AppHelpers;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +16,9 @@ class Resturant extends Model
     [
         'menues' ,
 
-        'cities'
+        'cities' ,
+
+        "resturantCategory"
     ];
 
     protected $fillable = 
@@ -27,6 +31,20 @@ class Resturant extends Model
     ];
 
 
+    public function workDays() : Attribute
+    {
+        return Attribute::make(
+
+            get : fn($value) => app(AppHelpers::class)->persianDays($value)
+            
+        );
+    }
+
+
+    public function resturantCategory()
+    {
+        return  $this->belongsTo(ResturantCategroy::class , "rsturant_category");
+    }
 
     public function manager()
     {

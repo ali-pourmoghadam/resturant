@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\AddressResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\FoodCategoryResource;
+use App\Http\Resources\ResturantResource;
 use App\Models\City;
 use App\Models\FoodCategory;
+use App\Models\Resturant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +41,12 @@ class ApiController extends Controller
         $categories = FoodCategory::with("product")->get() ;
 
         return FoodCategoryResource::collection($categories);
+    }
+
+    public function resturants()
+    {
+        return  ResturantResource::collection(Resturant::all());
+
     }
 
     public function updateGeoLocation(Request $request , $id)
