@@ -148,11 +148,62 @@ class AuthController extends Controller
             $token = Auth::guard("api")->login($user);
 
             return response()->json([
-                
+
                     "message" => "کاربر با موفقیت ایجاد شد" ,
                     
                     "token" => $token 
             ]);
+       }
+
+
+
+
+
+       public function userAuth(Request $request)
+       {        
+
+            $request->validate(
+                [
+                    "email" => "required|email" , 
+
+                    "password" => "required"
+                ]
+            );
+            
+
+            $credentials = $request->only('email', 'password');
+
+
+            $token = Auth::guard("api")->attempt($credentials);
+
+            if (!$token) {
+
+                return response()->json([
+
+                    'status' => 'error',
+
+                    'message' => 'یوزر یا پسوورد اشتباه است',
+
+                ], 401);
+            }
+
+
+            $user = Auth::guard("api")->user();
+            
+
+            return response()->json([
+
+                    'status' => 'خوش  آمدید',
+
+                    'authorisation' => [
+
+                        'token' => $token,
+
+                        'type' => 'bearer',
+
+                    ]
+                ]);
+
        }
 
 

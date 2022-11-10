@@ -28,6 +28,8 @@ Route::group(["prefix" => "v1" ] , function(){
         Route::get("/city/all", "cities");
 
         Route::get("/user/all", "index")->middleware("auth:api");
+        
+        Route::put("/user/address/{id}", "updateGeoLocation")->middleware("auth:api");
 
 
     });
@@ -37,6 +39,8 @@ Route::group(["prefix" => "v1" ] , function(){
     Route::group(["controller" => AuthController::class] , function(){
 
         Route::post("/user", "userRegister");
+
+        Route::post("/user/login", "userAuth");
 
     });
 
