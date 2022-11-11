@@ -6,6 +6,7 @@ use App\Http\Resources\AddressResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\FoodCategoryResource;
 use App\Http\Resources\ResturantResource;
+use App\Models\Adress;
 use App\Models\City;
 use App\Models\FoodCategory;
 use App\Models\Resturant;
@@ -31,9 +32,101 @@ class ApiController extends Controller
 
     }
 
-    public function adresses()
+    public function getAddress($id)
     {
-        return Cache::rememberForever('address', fn()=>  AddressResource::collection(User::all())); 
+
+        if(!$this->requesterAuth($id)){
+
+            return response()->json([
+    
+                "msg" => "شما مجاز به انجام این عملیات نیستید" 
+    
+            ] , 401);
+    
+           }
+           
+
+        return Cache::rememberForever('address', fn()=>  AddressResource::collection( Adress::where("user_id" , $id)->get())); 
+    }
+
+    public function insertAddress(Request $request , $id)
+    {
+
+
+       if(!$this->requesterAuth($id)){
+
+        return response()->json([
+
+            "msg" => "شما مجاز به انجام این عملیات نیستید" 
+
+        ] , 401);
+
+       }
+
+
+ 
+        $attributes = $request->validate([
+
+            "title" => "required" ,
+
+            "address" => "required|string" ,
+
+            "latitude" => "required" ,
+
+            "longitude" => "required" 
+
+        ]) ;
+        
+        $attributes["user_id"] = $id;
+
+
+        Adress::create($attributes);
+
+        return response()->json([
+            "msg" => "اطلاعات ثبت شد" 
+        ]);
+        
+     
+    }
+
+    public function updateAddress(Request $request , $id)
+    {
+
+
+        if(!$this->requesterAuth($id)){
+
+            return response()->json([
+    
+                "msg" => "شما مجاز به انجام این عملیات نیستید" 
+    
+            ] , 401);
+    
+           }
+
+       
+
+        $attributes = $request->validate([
+            
+            "title" =>  "required|string" ,
+
+            "address" => "required|string" ,
+
+            "latitude" => "required" ,
+
+            "longitude" => "required" 
+
+        ]) ;
+
+        $attributes["user_id"] = $id ;
+
+        
+        Adress::where("user_id" , $id)->update( $attributes);
+
+
+        return response()->json([
+            "msg" => "اطلاعات با موفقیت اپدیت شد" 
+        ]);
+        
     }
 
     public function foodCategory()
@@ -49,42 +142,17 @@ class ApiController extends Controller
 
     }
 
-    public function updateGeoLocation(Request $request , $id)
+
+    public function requesterAuth($id)
     {
 
         $requester = Auth::guard("api")->user();
 
-
-        if($requester->id != $id)
-        {
-
-            return response()->json([
-
-                "msg" => "شما مجاز به انجام این عملیات نیستید" 
-
-            ] , 401);
-
-        }
-
-        $attributes = $request->validate([
-
-            "address" => "required|string" ,
-
-            "latitude" => "required" ,
-
-            "longtitude" => "required" 
-
-        ]) ;
-
-        
-        User::find($id)->update( $attributes);
-
-
-        return response()->json([
-            "msg" => "اطلاعات با موفقیت اپدیت شد" 
-        ]);
-        
+        return  ($requester->id == $id) ? true : false;
+    
     }
+
+
 
 
 

@@ -31,10 +31,12 @@ Route::group(["prefix" => "v1" ] , function(){
         Route::get("/foodCategory/all", "foodCategory");
 
         Route::get("/user/all", "users");
-            
-        Route::get("/user/address/all", "adress");
 
-        Route::put("/user/address/{id}", "updateGeoLocation");
+        Route::get("/user/address/{id}",  "getAddress");
+
+        Route::post("/user/address/{id}", "insertAddress");
+
+        Route::put("/user/address/{id}",   "updateAddress");
 
     });
 

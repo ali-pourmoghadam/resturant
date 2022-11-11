@@ -86,4 +86,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return Attribute::make( set : fn($value) => bcrypt($value));
     }
+
+
+    public function address()
+    {
+        return $this->hasMany(Adress::class);
+    }
 }
