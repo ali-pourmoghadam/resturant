@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodCategoryController;
+use App\Http\Controllers\FoodPartyController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ManagerSettingController;
 use App\Http\Controllers\MenuController;
@@ -75,6 +76,8 @@ Route::group(['prefix' => 'manager'] , function(){
 });
 
 
+
+
 Route::group([ 'prefix' => 'admin'], function(){
 
 
@@ -86,6 +89,8 @@ Route::group([ 'prefix' => 'admin'], function(){
                 Route::resource('/resturant', ResturantCategoryController::class);
         
                 Route::resource('/food',  FoodCategoryController::class);  
+                
+                Route::resource('/foodParty',  FoodPartyController::class);  
 
             });
 
