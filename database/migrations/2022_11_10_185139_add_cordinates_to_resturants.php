@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('resturants', function (Blueprint $table) {
+
             $table->string("latitude");
+            
             $table->string("longtitude");
+            
         });
     }
 

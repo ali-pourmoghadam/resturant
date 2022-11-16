@@ -149,7 +149,7 @@
 
          
             formData.append("email" , email)
-            formData.append("name" , name)
+            formData.append("first_name" , name)
             formData.append("type" , type)
             formData.append("city" , city)
             formData.append("password" , password)

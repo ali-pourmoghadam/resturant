@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('resturants', function (Blueprint $table) {
 
             $table->dropColumn("open_close_time");
+            
         });
     }
 

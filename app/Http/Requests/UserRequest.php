@@ -35,8 +35,6 @@ class UserRequest extends FormRequest
 
             "city" => "required" ,
 
-            "address" => "required|string" ,
-
             "phone_number" => "required|size:5"
 
          ];
