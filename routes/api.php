@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,38 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+
+Route::group(["prefix" => "v1" ] , function(){
+
+
+    Route::group( ["controller" =>  ApiController::class , "middleware" => "auth:api" ] , function(){
+
+        Route::get("/city/all", "cities");
+
+        Route::get("/resturant/all", "resturants");
+
+        Route::get("/foodCategory/all", "foodCategory");
+
+        Route::get("/user/all", "users");
+
+        Route::get("/user/address/{id}",  "getAddress");
+
+        Route::post("/user/address/{id}", "insertAddress");
+
+        Route::put("/user/address/{id}",   "updateAddress");
+
+    });
+
+
+    Route::group(["controller" => AuthController::class] , function(){
+
+        Route::post("/user", "userRegister");
+
+        Route::post("/user/login", "userAuth");
+
+    });
+
+
 });

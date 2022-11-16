@@ -31,7 +31,7 @@ class ResturantCreateRequest extends FormRequest
 
             'email'=> 'required|email|unique:managers,email',
 
-            'name' => 'required|string|min:2',
+            'first_name' => 'required|string|min:2',
 
             'type' => 'required|string' ,
 

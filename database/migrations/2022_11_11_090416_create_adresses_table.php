@@ -13,18 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('managers', function (Blueprint $table) {
+        Schema::create('adresses', function (Blueprint $table) {
 
-            $table->dropColumn("Coordinates");
+            $table->id();
 
-            $table->dropColumn("lastname");
+            $table->unsignedBigInteger("user_id");
 
-            $table->dropColumn("phoneNumber");
+            $table->string("title" , 255);
 
-            $table->string("last_name");
+            $table->text("address");
 
-            $table->string("phone_number");
-            
+            $table->string("latitude" , 255);
+
+            $table->string("longitude" , 255);
+
+            $table->timestamps();
         });
     }
 
@@ -35,8 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('manager', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('adresses');
     }
 };

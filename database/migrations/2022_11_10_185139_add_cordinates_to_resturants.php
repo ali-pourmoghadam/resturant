@@ -13,17 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('managers', function (Blueprint $table) {
+        Schema::table('resturants', function (Blueprint $table) {
 
-            $table->dropColumn("Coordinates");
-
-            $table->dropColumn("lastname");
-
-            $table->dropColumn("phoneNumber");
-
-            $table->string("last_name");
-
-            $table->string("phone_number");
+            $table->string("latitude");
+            
+            $table->string("longtitude");
             
         });
     }
@@ -35,7 +29,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('manager', function (Blueprint $table) {
+        Schema::table('resturants', function (Blueprint $table) {
             //
         });
     }
