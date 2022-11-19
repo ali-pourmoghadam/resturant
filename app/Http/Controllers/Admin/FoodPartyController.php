@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Actions\FoodPartyInterference;
+use App\Events\FoodPartyEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FoodPartyCreateRequest;
 use App\Models\FoodParty;
@@ -19,7 +20,7 @@ class FoodPartyController extends Controller
      */
     public function index()
     {
-        return view("admin.food_party");
+        return view("admin.food_party" , [ "parties" => FoodParty::paginate()]);
     }
 
  
@@ -34,12 +35,9 @@ class FoodPartyController extends Controller
 
         $res = $dateChecker->execute($request->input("beginDate") , $request->input("endDate"));
 
-        if($res !== true){
+        if($res !== true) return $res;
 
-            return $res;
-
-        }
-        FoodParty::create ([ 
+        $party =  FoodParty::create ([ 
 
             "admin_id" => Auth::guard("admin")->id(),
 
@@ -48,6 +46,8 @@ class FoodPartyController extends Controller
             "end_at" => $request->input("endDate") ,
 
         ]);
+
+        event(new FoodPartyEvent($party));
 
         return response()->json(['success' => true]);
     }
@@ -73,6 +73,8 @@ class FoodPartyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        FoodParty::where("id", $id)->delete();
+        
+        return redirect("/admin/foodParty");
     }
 }

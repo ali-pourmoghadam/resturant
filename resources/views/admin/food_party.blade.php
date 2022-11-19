@@ -1,37 +1,132 @@
 <x-admin_panel>
 
-    <h4 class="d-block text-center mt-4">لیست فود پارتی ها</h4>
+        <h4 class="d-block text-center mt-4">لیست فود پارتی ها</h4>
 
-    <div class="row mt-4">
-        <div class="col-10 mx-auto mt-3">
-
-
-            <table class="table ">
-                <thead>
-
-                  <tr class="text-center">
-
-                    <th scope="col">شماره ردیف</th>
-
-                    <th scope="col">تاریخ برگزاری</th>
-
-                    <th scope="col">وضعیت</th>
-
-                    <th scope="col">ویرایش</th>
-
-                    <th scope="col">حذف</th>
-
-                  </tr>
-
-                </thead>
+        <div class="row mt-4">
+            <div class="col-10 mx-auto mt-3">
 
 
-             
-              </table>
+                <table class="table ">
+                    <thead>
+
+                      <tr class="text-center">
+
+                        <th scope="col">شماره ردیف</th>
+
+                        <th scope="col">تاریخ برگزاری</th>
+
+                        <th scope="col">تاریخ پایان</th>
+
+                        <th scope="col">وضعیت</th>
+
+                        <th scope="col">ویرایش</th>
+
+                        <th scope="col">حذف</th>
+
+                      </tr>
+
+                    </thead>
 
 
+                    
+
+                    <tbody>
+
+                      @foreach ($parties as $party)
+                          
+                      
+                      <tr class="text-center">
+
+
+                          <th scope="row">
+                              {{$loop->iteration}}
+                          </th>
+
+                          <td>{{$party->begin_at}}</td>
+
+                          <td>{{$party->end_at}}</td>
+
+                          <td>
+                        
+                                <span>{{($party->is_active) ? "فعال" : "غیرفعال"}}</span>
+                                
+                          <td>
+
+                              <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#editModal-{{$party->id}}">
+                                  <i class="fa-regular fa-pen-to-square text-light"></i>
+                              </button>
+
+                          </td>
+
+                          <td>
+                              <form method="POST" action="/admin/foodParty/{{$party->id}}">
+                                
+                                @csrf
+                                
+                                @method("DELETE")
+
+                                <button class="btn btn-table bg-light-red ">
+                                    <i class="fa-solid fa-trash  text-light"></i>
+                                </button>
+
+                              </form>
+                          </td>
+
+                        {{--START-MODAL-PARTY--}}
+
+                        <div class="modal fade" id="editModal-{{$party->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title w-100 text-center" id="exampleModalLabel"> ویرایش غذا</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+
+
+                              <form action="/admin/foodParty/{{$party->id}}" method="POST">
+                                  @csrf
+                                  @method("PUT")
+                                  <div class="modal-body">
+                                    
+                                          <div class="mb-3">
+
+                                            <label for="exampleInputEmail1" class="form-label w-100 text-right">وضعیت</label>
+
+                                            <select name="status" class="form-select" aria-label="Default select example">
+                                            
+                                                <option value="1">فعال</option>
+                                                
+                                                <option value="0">غیرفعال</option>
+                                    
+                                              </select>
+
+                                        </div>
+                                  </div>
+
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+                                    <button type="submit" class="btn btn-primary">به روز رسانی</button>
+                                  </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                        {{-- END-MODAL-PARTY --}}
+                      </tr>
+
+                      @endforeach
+
+                    </tbody>
+                  </table>
+
+
+                
+                  </table>
+
+
+            </div>
         </div>
-    </div>
 
 
 
