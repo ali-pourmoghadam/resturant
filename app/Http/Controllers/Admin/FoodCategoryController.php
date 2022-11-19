@@ -34,7 +34,6 @@ class FoodCategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         
-    
         $attributes = $request->validated();
 
         FoodCategory::create($attributes);

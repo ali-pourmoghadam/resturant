@@ -164,7 +164,7 @@
                         
                         if(message.success)
                         {
-                            window.location.replace("/");
+                            window.location.replace("/manager/dashboard");
                         }
                         
                         for(var item in message.errors)

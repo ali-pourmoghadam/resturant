@@ -78,7 +78,7 @@ class AuthController extends Controller
 
             "email" => $attributes['email'] ,
 
-            'password' => bcrypt($attributes['password'])
+            'password' =>$attributes['password']
 
        ]);
 

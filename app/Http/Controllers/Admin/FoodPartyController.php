@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\FoodPartyInterference;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\FoodPartyCreateRequest;
+use App\Models\FoodParty;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FoodPartyController extends Controller
 {
@@ -18,48 +22,36 @@ class FoodPartyController extends Controller
         return view("admin.food_party");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+ 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FoodPartyCreateRequest $request , FoodPartyInterference $dateChecker)
     {
-        //
+
+        $res = $dateChecker->execute($request->input("beginDate") , $request->input("endDate"));
+
+        if($res !== true){
+
+            return $res;
+
+        }
+        FoodParty::create ([ 
+
+            "admin_id" => Auth::guard("admin")->id(),
+
+            "begin_at" => $request->input("beginDate") ,
+
+            "end_at" => $request->input("endDate") ,
+
+        ]);
+
+        return response()->json(['success' => true]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

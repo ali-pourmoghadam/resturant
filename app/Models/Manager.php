@@ -44,6 +44,12 @@ class Manager  extends Authenticatable
     ];
     
 
+    protected function password() : Attribute
+    {
+        return Attribute::make( set : fn($value) => bcrypt($value));
+    }
+
+
 
     public function resturants()
     {

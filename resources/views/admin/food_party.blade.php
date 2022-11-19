@@ -49,56 +49,41 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="text-center w-100" id="exampleModalLabel">ایجاد غذا</h5>
+                  <h5 class="text-center w-100" id="exampleModalLabel"> فود پارتی</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
     
-                <form method="POST" action="/admin/food" >
+                <form method="POST" action="/admin/foodParty" >
     
                   @csrf
+                  
                     <div class="modal-body">
                 
                             <div class="mb-3">
                                 
                               <label for="exampleInputEmail1" class="form-label w-100 text-right">تاریخ آغاز</label>
             
-                              <input type="date" name="name" class="form-control example1" aria-describedby="emailHelp">
+                              <input type="datetime-local" name="beginDate" id="beginDate" class="form-control example1" aria-describedby="emailHelp">
                          
+                              <div id="error-beginDate" class="text-center form-text text-danger"></div>
+
                             </div>
 
                             <div class="mb-3">
 
                               <label for="exampleInputEmail1" class="form-label w-100 text-right">تاریخ پایان</label>
     
-                              <input type="date" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                              <input type="datetime-local" name="endDate" id="endDate" class="form-control" aria-describedby="emailHelp">
                               
+                              <div id="error-endDate" class="text-center form-text text-danger"></div>
+                              <div id="error-logical" class="text-center form-text text-danger"></div>
+
                             </div>
 
-                            <div class="mb-3">
-
-                              <label for="exampleInputEmail1" class="form-label w-100 text-right">ساعت شروع</label>
-    
-                              <input type="time" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                              
-                            </div>
-
-
-                            <div class="mb-3">
-
-                              <label for="exampleInputEmail1" class="form-label w-100 text-right">ساعت پایان</label>
-    
-                              <input type="time" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                              
-                            </div>
-    
-                 
-                          
-             
-                     
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
-                      <button type="submit" class="btn btn-primary">اضفه کردن</button>
+                      <button  onclick="createParty()" type="button" class="btn btn-primary">اضفه کردن</button>
                     </div>
     
     
@@ -108,7 +93,62 @@
               </div>
             </div>
          </div>
+
+
+         <script>
+
+
+          function createParty(){
+  
+              var beginDate = document.querySelector("#beginDate").value
+  
+              var naendDateme = document.querySelector("#endDate").value
+
+              var xhr = new XMLHttpRequest();
+  
+              var formData = new FormData()
+  
+              formData.append("beginDate" ,  beginDate)
+              formData.append("endDate" ,    naendDateme)
+              formData.append("_token" , ' {{ csrf_token() }}')
+             
+              xhr.onreadystatechange = function() {
+  
+                      if (this.readyState == 4 ) 
+                       {
+           
+                          message = JSON.parse(this.responseText)
+                    
+
+                          if(message.success)
+                          {
+                              window.location.replace("/admin/foodParty");
+                          }
+                        
+                          for(var item in message.errors)
+                          {
+                              
+                              document.querySelector("#error-"+item).innerHTML =  message.errors[item]
+                          
+                          }
+                    
+                        }
+  
+                  }
+                  
+  
+               xhr.open('POST', '/admin/foodParty', true);
+  
+               xhr.setRequestHeader('Accept', 'application/json');
+                  
+               xhr.send(formData);
+  
+  
+          }
+  
+      </script>
     
           {{-- END-Food_PARTY-MODAL --}}
+          
 
 </x-admin_panel>
