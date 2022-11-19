@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\ResturantCategroy;
+use App\Models\FoodCategory;
 use App\Models\Scopes\ActiveScop;
 use Illuminate\Http\Request;
 
-class ResturantCategoryController extends Controller
+class FoodCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +17,12 @@ class ResturantCategoryController extends Controller
      */
     public function index()
     {
-        $categories = ResturantCategroy::paginate(10);
+    
+        $categories = FoodCategory::paginate(10);
 
-        return view("admin.resturant" , compact("categories"));
+        return view('admin.food' , compact("categories"));
     }
+
 
 
     /**
@@ -30,11 +33,13 @@ class ResturantCategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+        
+    
         $attributes = $request->validated();
 
-        ResturantCategroy::create($attributes);
+        FoodCategory::create($attributes);
 
-        return redirect("/admin/resturant");
+        return redirect("/admin/food");
     }
 
 
@@ -48,11 +53,13 @@ class ResturantCategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        $attributes = $request->validated();
-                
-        ResturantCategroy::where("id" , $id)->update($attributes);
 
-        return redirect("/admin/resturant");
+        $attributes = $request->validated();
+        
+        FoodCategory::where("id" , $id)->update($attributes);
+
+        return redirect("/admin/food");
+
     }
 
     /**
@@ -63,9 +70,12 @@ class ResturantCategoryController extends Controller
      */
     public function destroy($id)
     {
-        
-        ResturantCategroy::where("id" , $id)->delete();
 
-        return redirect("/admin/resturant");
+        FoodCategory::where("id" , $id)->delete();
+
+        return redirect("/admin/food");
+
     }
+
+
 }

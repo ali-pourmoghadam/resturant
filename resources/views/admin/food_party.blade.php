@@ -61,14 +61,9 @@
                             <div class="mb-3">
                                 
                               <label for="exampleInputEmail1" class="form-label w-100 text-right">تاریخ آغاز</label>
-    
-                              <input type="date" name="name" class="form-control begen" id="exampleInputEmail1" aria-describedby="emailHelp">
-                              
-                              <script>
-
-                                document.querySelector(".begen").pDatepicker()
-
-                              </script>
+            
+                              <input type="date" name="name" class="form-control example1" aria-describedby="emailHelp">
+                         
                             </div>
 
                             <div class="mb-3">

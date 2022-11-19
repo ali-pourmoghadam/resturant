@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Models\FoodCategory;
+use App\Models\ResturantCategroy;
 use App\Models\Scopes\ActiveScop;
 use Illuminate\Http\Request;
 
-class FoodCategoryController extends Controller
+class ResturantCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +17,10 @@ class FoodCategoryController extends Controller
      */
     public function index()
     {
-    
-        $categories = FoodCategory::paginate(10);
+        $categories = ResturantCategroy::paginate(10);
 
-        return view('admin.food' , compact("categories"));
+        return view("admin.resturant" , compact("categories"));
     }
-
 
 
     /**
@@ -32,13 +31,11 @@ class FoodCategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        
-    
         $attributes = $request->validated();
 
-        FoodCategory::create($attributes);
+        ResturantCategroy::create($attributes);
 
-        return redirect("/admin/food");
+        return redirect("/admin/resturant");
     }
 
 
@@ -49,16 +46,14 @@ class FoodCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function update(CategoryRequest $request, $id)
     {
-
         $attributes = $request->validated();
-        
-        FoodCategory::where("id" , $id)->update($attributes);
+                
+        ResturantCategroy::where("id" , $id)->update($attributes);
 
-        return redirect("/admin/food");
-
+        return redirect("/admin/resturant");
     }
 
     /**
@@ -69,12 +64,9 @@ class FoodCategoryController extends Controller
      */
     public function destroy($id)
     {
+        
+        ResturantCategroy::where("id" , $id)->delete();
 
-        FoodCategory::where("id" , $id)->delete();
-
-        return redirect("/admin/food");
-
+        return redirect("/admin/resturant");
     }
-
-
 }
