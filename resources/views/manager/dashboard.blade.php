@@ -4,13 +4,12 @@
 
         @foreach ($notifications as $notif)
             
-            <x-success_message>
+ 
 
-                    شروع فرود پارتی از :{{$notif->data['begin']}}
+                    {{-- شروع فرود پارتی از :{{$notif['begin']}}
                     <br>
-                    پایان فرود پارتی در :{{$notif->data['end']}}
-            
-            </x-success_message>
+                    پایان فرود پارتی در :{{$notif['end']}} --}}
+       
             
         @endforeach
 

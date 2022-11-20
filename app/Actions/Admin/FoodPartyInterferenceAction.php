@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Actions;
+namespace App\Actions\Admin;
 
-use App\Helpers\AppHelpers;
+
 use App\Models\FoodParty;
 use Carbon\Carbon;
 
-class FoodPartyInterference {
+class FoodPartyInterferenceAction {
 
     public function execute(string $startTime ,string $endTime)
     {

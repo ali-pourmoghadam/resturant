@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Actions\Manager\ManagerNotifcationAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ManagerSettingRequest;
 use App\Models\Manager;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+
+
 
 class ManagerController extends Controller
 {
-    public function dashboard()
+    public function dashboard(ManagerNotifcationAction $notifications)
     {
-        $notifications = Auth::guard("manager")->user()->resturants[0]->unreadNotifications;
         
+        $notifications = $notifications->execute();
         return view("manager.dashboard" , compact("notifications"));
 
     }

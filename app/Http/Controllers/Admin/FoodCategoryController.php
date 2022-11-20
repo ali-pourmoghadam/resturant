@@ -70,7 +70,7 @@ class FoodCategoryController extends Controller
     public function destroy($id)
     {
 
-        FoodCategory::where("id" , $id)->delete();
+        FoodCategory::destroy($id);
 
         return redirect("/admin/food");
 

@@ -65,7 +65,7 @@ class ResturantCategoryController extends Controller
     public function destroy($id)
     {
         
-        ResturantCategroy::where("id" , $id)->delete();
+        ResturantCategroy::destroy($id);
 
         return redirect("/admin/resturant");
     }

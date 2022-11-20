@@ -10,6 +10,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Auth;
 
 class FoodPartyEvent
 {
@@ -23,9 +24,18 @@ class FoodPartyEvent
      *
      * @return void
      */
-    public function __construct(FoodParty $party)
+    public function __construct(array $attr)
     {
-        $this->party = $party;
+
+        $this->party =  FoodParty::create ([ 
+
+            "admin_id" => Auth::guard("admin")->id(),
+
+            "begin_at" => $attr["beginDate"] ,
+
+            "end_at" => $attr["endDate"] ,
+
+        ]);
     }
 
     /**

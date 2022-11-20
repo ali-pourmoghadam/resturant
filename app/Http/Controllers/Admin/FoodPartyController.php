@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\FoodPartyInterference;
+use App\Actions\Admin\FoodPartyInterferenceAction;
 use App\Events\FoodPartyEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FoodPartyCreateRequest;
@@ -30,24 +30,14 @@ class FoodPartyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(FoodPartyCreateRequest $request , FoodPartyInterference $dateChecker)
+    public function store(FoodPartyCreateRequest $request , FoodPartyInterferenceAction $dateChecker)
     {
 
         $res = $dateChecker->execute($request->input("beginDate") , $request->input("endDate"));
 
         if($res !== true) return $res;
 
-        $party =  FoodParty::create ([ 
-
-            "admin_id" => Auth::guard("admin")->id(),
-
-            "begin_at" => $request->input("beginDate") ,
-
-            "end_at" => $request->input("endDate") ,
-
-        ]);
-
-        event(new FoodPartyEvent($party));
+        event(new FoodPartyEvent($request->except("_token")));
 
         return response()->json(['success' => true]);
     }
@@ -73,7 +63,7 @@ class FoodPartyController extends Controller
      */
     public function destroy($id)
     {
-        FoodParty::where("id", $id)->delete();
+        FoodParty::destroy($id);
         
         return redirect("/admin/foodParty");
     }
