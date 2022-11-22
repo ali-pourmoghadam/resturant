@@ -56,6 +56,7 @@ class FoodPartyNotification extends Notification
     public function toArray($notifiable)
     {
         return [
+            "id" => $this->id ,
             "begin" => $this->party->begin_at,
             "end" => $this->party->end_at
         ];

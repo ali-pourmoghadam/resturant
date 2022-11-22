@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use App\Helpers\AppHelpers;
+use App\Http\Controllers\Manager\ManagerController;
+use App\Services\Contracts\NotificationsContract;
+use App\Services\Manager\ManagerNotificationService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,7 +18,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        
+        // Bind application helper as singleton class
+        
+        $this->app->singleton( AppHelpers::class , function ($app) {
+
+             return new AppHelpers();
+    
+        });
+
+        // Bind notificationMnager as manager notification system
+
+         $this->app->when(ManagerController::class)
+                  ->needs(NotificationsContract::class)
+                  ->give(function(){
+                        return new ManagerNotificationService;
+                        });
+
+        
+       
     }
 
     /**
@@ -25,13 +47,5 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         
-        // Create Just One Inctance of Object
-        
-
-        $this->app->singleton( AppHelpers::class , function ($app) {
-
-            return new AppHelpers();
-
-        });
     }
 }

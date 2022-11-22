@@ -2,42 +2,86 @@
 
 namespace App\Services\Manager;
 
+use App\Services\Contracts\NotificationsContract;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 
-class ManagerNotificationService {
+class ManagerNotificationService implements NotificationsContract{
 
 
-    public static function  foodPartyNotifs()
+  private array $notifications = [];
+
+  
+   public function registerNotification()
+   {
+
+      $this->notifications = [
+
+         "foodParty" => $this->foodPartyNotifs() 
+
+      ];
+
+   }
+
+
+   public function unreadNotifications()
+   {
+
+
+      return Auth::guard("manager")
+                   ->user()
+                   ->resturants[0]
+                   ->unreadNotifications;
+   }
+
+
+
+   
+   public function getNotifications()
+   {
+         return $this->notifications;
+   }
+
+    
+   
+   public function count()
+   {
+       return $this->unreadNotifications()->count();
+   }
+
+    
+    public function markRead($id)
     {
-        $result = [];
+      
+      $this->unreadNotifications()->filter(fn($notif)=> $notif->id == $id)
+                                  ->markAsRead();                           
 
-        $notifications = self::getUnreadAll();
-
-        foreach ($notifications as $notif)
-        {
-              $result[] = [
-
-                "begin" =>  Carbon::parse($notif->data['begin']) ,
-
-                "end" =>    Carbon::parse($notif->data['end']) 
-              ];
-        }       
-        
-        return $result;
-                   
     }
 
 
+   public function foodPartyNotifs()
+   {
+       $result = [];
 
-    public static function getUnreadAll()
-    {
-       return Auth::guard("manager")
-                    ->user()
-                    ->resturants[0]
-                    ->unreadNotifications;
-    }
+       $notifications = $this->unreadNotifications();
 
+       foreach ($notifications as $notif)
+       {
+             $result[] = [
+
+               "id" =>  $notif->data['id'] ,
+
+               "begin" =>  Carbon::parse($notif->data['begin']) ,
+
+               "end" =>    Carbon::parse($notif->data['end']) 
+             ];
+       }       
+       
+       return $result;
+                  
+   }
+
+
+  
 }

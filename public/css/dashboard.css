@@ -38,6 +38,7 @@
 }
 
 
+
 .admin-header {
 
     height: 50px;
@@ -106,4 +107,23 @@
     font-size: 13px !important;
     padding-top: 0px !important;
     border-radius: 17px !important;
+}
+
+.bell-count{
+    width: 19px;
+    height: 19px;
+    background: rgb(241, 64, 64);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    padding: 3px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+}
+
+.modal-backdrop{
+    width: 0px !important;
+    height: 0px !important;
 }

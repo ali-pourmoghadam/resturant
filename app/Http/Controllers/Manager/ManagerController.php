@@ -2,22 +2,45 @@
 
 namespace App\Http\Controllers\Manager;
 
-use App\Actions\Manager\ManagerNotifcationAction;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ManagerSettingRequest;
 use App\Models\Manager;
+use App\Services\Contracts\NotificationsContract;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 
 class ManagerController extends Controller
 {
-    public function dashboard(ManagerNotifcationAction $notifications)
-    {
-        
-        $notifications = $notifications->execute();
-        return view("manager.dashboard" , compact("notifications"));
 
+    public function __construct(NotificationsContract $notification)
+    {
+        $this->Notification  =  $notification ;
+    }
+   
+
+
+    public function dashboard()
+    {
+    
+        $this->Notification->registerNotification();
+
+        $countNotifs =   $this->Notification->count();
+ 
+        $notifications = $this->Notification->getNotifications();
+
+        return view("manager.dashboard" , compact("notifications" , "countNotifs"));
+
+    }
+
+
+    public function markNotifications($id)
+    {
+        $this->Notification->markRead($id);
+
+        return response()->json(['success' => true]);
     }
 
 

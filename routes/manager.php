@@ -31,6 +31,8 @@ route::group( ["middleware" => "manager:admin"] , function(){
 
         Route::get("dashboard" ,  "dashboard");
 
+        Route::post("markNotifications/{id}" ,  "markNotifications");
+
         Route::get("setting" ,     "setting" );
 
         Route::post("setting/{id}" ,  "storeSetting");
