@@ -1,18 +1,46 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manager;
 
+
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ManagerSettingRequest;
 use App\Models\Manager;
+use App\Services\Contracts\NotificationsContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+
+
 
 class ManagerController extends Controller
 {
+
+    public function __construct(NotificationsContract $notification)
+    {
+        $this->Notification  =  $notification ;
+    }
+   
+
+
     public function dashboard()
     {
-        return view("manager.dashboard");
+    
+        $this->Notification->registerNotification();
+
+        $countNotifs =   $this->Notification->count();
+ 
+        $notifications = $this->Notification->getNotifications();
+
+        return view("manager.dashboard" , compact("notifications" , "countNotifs"));
+
+    }
+
+
+    public function markNotifications($id)
+    {
+        $this->Notification->markRead($id);
+
+        return response()->json(['success' => true]);
     }
 
 

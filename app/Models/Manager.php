@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class Manager  extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory ;
 
     protected $guard = 'manager';
 
@@ -43,6 +44,12 @@ class Manager  extends Authenticatable
         "image" 
     ];
     
+
+    protected function password() : Attribute
+    {
+        return Attribute::make( set : fn($value) => bcrypt($value));
+    }
+
 
 
     public function resturants()

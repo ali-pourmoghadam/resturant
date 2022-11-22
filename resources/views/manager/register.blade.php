@@ -33,7 +33,7 @@
 
                                 <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp">
                                 
-                                <div id="error-name" class="text-center form-text text-danger"></div>
+                                <div id="error-first_name" class="text-center form-text text-danger"></div>
                             </div>
                             <div class="mb-1 ">
 
@@ -164,7 +164,7 @@
                         
                         if(message.success)
                         {
-                            window.location.replace("/");
+                            window.location.replace("/manager/dashboard");
                         }
                         
                         for(var item in message.errors)

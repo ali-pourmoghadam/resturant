@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manager;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\FoodCategory;
 use App\Models\Menu;
@@ -54,8 +55,6 @@ class ProductController extends Controller
          
          return redirect("/manager/product");
     }
-
-   
 
     /**
      * Update the specified resource in storage.

@@ -10,5 +10,12 @@ class Admin extends Authenticatable
 {
     use HasFactory , HasApiTokens;
 
+    
     protected $guard = 'admin';
+
+
+    public function foodParty()
+    {
+        return $this->hasMany(FoodParty::class);
+    }
 }

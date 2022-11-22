@@ -11,7 +11,6 @@
 
     @vite(['resources/js/app.js'])
 
-
     <title>پنل ادمین</title>
     
 </head>
@@ -235,7 +234,7 @@
 
                             <i class="fa-solid position-absolute mt-1 fs-6 fa-wand-sparkles"></i>
 
-                            <a href="" class="fs-6  d-block text-center text-dark">مدیریت فودپارتی</a>
+                            <a href="/admin/foodParty" class="fs-6  d-block text-center text-dark">مدیریت فودپارتی</a>
 
                         </div>
 

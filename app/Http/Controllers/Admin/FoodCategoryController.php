@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\FoodCategory;
 use App\Models\Scopes\ActiveScop;
@@ -33,7 +34,6 @@ class FoodCategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         
-    
         $attributes = $request->validated();
 
         FoodCategory::create($attributes);
@@ -70,7 +70,7 @@ class FoodCategoryController extends Controller
     public function destroy($id)
     {
 
-        FoodCategory::where("id" , $id)->delete();
+        FoodCategory::destroy($id);
 
         return redirect("/admin/food");
 

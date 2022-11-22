@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\ResturantCategroy;
 use App\Models\Scopes\ActiveScop;
@@ -45,7 +46,7 @@ class ResturantCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function update(CategoryRequest $request, $id)
     {
         $attributes = $request->validated();
@@ -64,7 +65,7 @@ class ResturantCategoryController extends Controller
     public function destroy($id)
     {
         
-        ResturantCategroy::where("id" , $id)->delete();
+        ResturantCategroy::destroy($id);
 
         return redirect("/admin/resturant");
     }

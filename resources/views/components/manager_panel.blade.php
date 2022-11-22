@@ -46,13 +46,7 @@
 
                                style="right:17px; top:18px"></i>
 
-                            <div class="position-absolute" style="right:21px; top:16px">
-
-                                <i class="fa-regular fs-5 fa-bell  position-absolute"
-
-                                style="right:27px; top:3px"></i>
-
-                            </div>
+                        
 
                             <div class="position-absolute" style="right:21px; top:16px">
                               
@@ -340,6 +334,7 @@
                
     </div>
    
+ 
     
 </body>
 </html>

@@ -6,10 +6,11 @@ use App\Helpers\AppHelpers;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Resturant extends Model
 {
-    use HasFactory;
+    use HasFactory , Notifiable;
 
     
     protected $with = 
@@ -61,6 +62,12 @@ class Resturant extends Model
     public function cities()
     {
         return $this->belongsTo(City::class , "city_id");
+    }
+
+
+    public function scopeActive($query)
+    {
+        $query->where("is_active" , true);
     }
     
 

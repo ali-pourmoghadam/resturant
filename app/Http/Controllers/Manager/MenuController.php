@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Manager;
 
 use App\Helpers\AppHelpers;
+use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,7 +92,7 @@ class MenuController extends Controller
     public function destroy($id)
     {
 
-        Menu::where("id" , $id)->delete();
+        Menu::destroy($id);
 
         return redirect("/manager/menu");
 

@@ -114,5 +114,18 @@ class AppHelpers{
 
 
 
+    /**
+     * response to json , :))
+     *
+     * @param  string  $msg
+     * 
+     * @return response
+     */
+
+     public function jsonRes(string $msg)
+     {
+        return response()->json(['data' => $msg]);
+     }
+
 
 }

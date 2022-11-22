@@ -15,7 +15,11 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            '~fa': path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free/scss')
+            '~fa': path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free/scss') ,
+
+            '~persian': path.resolve(__dirname, 'node_modules/persian-date/dist/') 
+
+          
         }
     }
 });

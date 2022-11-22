@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ManagerLoginRequest;
 use App\Http\Requests\ResturantCreateRequest;
 use App\Http\Requests\UserRequest;
@@ -77,7 +78,7 @@ class AuthController extends Controller
 
             "email" => $attributes['email'] ,
 
-            'password' => bcrypt($attributes['password'])
+            'password' =>$attributes['password']
 
        ]);
 
