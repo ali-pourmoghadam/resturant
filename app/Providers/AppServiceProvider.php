@@ -21,10 +21,10 @@ class AppServiceProvider extends ServiceProvider
         
         // Bind application helper as singleton class
         
-        $this->app->singleton( AppHelpers::class , function ($app) {
+        $this->app->singleton( AppHelpers::class , function () {
 
-             return new AppHelpers();
-    
+                return new AppHelpers();
+
         });
 
         // Bind notificationMnager as manager notification system
@@ -45,7 +45,6 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        
+    {   
     }
 }

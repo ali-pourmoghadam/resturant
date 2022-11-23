@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ApiController;
-use App\Http\Controllers\AuthController;
+
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Api\v1\AddressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,21 +23,36 @@ use Illuminate\Support\Facades\Route;
 Route::group(["prefix" => "v1" ] , function(){
 
 
-    Route::group( ["controller" =>  ApiController::class , "middleware" => "auth:api" ] , function(){
+    Route::group( ["middleware" => "auth:api" ] , function(){
 
-        Route::get("/city/all", "cities");
 
-        Route::get("/resturant/all", "resturants");
+        // Route::get("/city", "cities");
 
-        Route::get("/foodCategory/all", "foodCategory");
+     
 
-        Route::get("/user/all", "users");
+        // Route::get("/foodCategory", "foodCategory");
 
-        Route::get("/user/address/{id}",  "getAddress");
 
-        Route::post("/user/address/{id}", "insertAddress");
+        // Route::group(["prefix" => "resturant"] , function(){
 
-        Route::put("/user/address/{id}",   "updateAddress");
+
+        //     Route::get("/", "resturants");
+
+        // });
+
+
+        Route::group(["prefix" => "user"] , function(){
+
+
+            // Route::get("/", "users");
+
+          
+
+            Route::resource("address", AddressController::class);
+            
+        });
+
+ 
 
     });
 

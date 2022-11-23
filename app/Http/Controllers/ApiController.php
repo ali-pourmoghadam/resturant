@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppHelpers;
 use App\Http\Resources\AddressResource;
 use App\Http\Resources\CityResource;
 use App\Http\Resources\FoodCategoryResource;
@@ -9,6 +10,7 @@ use App\Http\Resources\ResturantResource;
 use App\Models\Adress;
 use App\Models\City;
 use App\Models\FoodCategory;
+use App\Models\Menu;
 use App\Models\Resturant;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,139 +21,133 @@ class ApiController extends Controller
 {
     
 
-    public function users()
-    {
-        return Cache::rememberForever('user', fn()=> User::all());
-    }
+    // public function users()
+    // {
+    //     return Cache::rememberForever('user', fn()=> User::all());
+    // }
 
 
-    public function cities()
-    {
+    // public function cities()
+    // {
 
-         return Cache::rememberForever('city', fn()=>  CityResource::collection(City::all()));
+    //      return Cache::rememberForever('city', fn()=>  CityResource::collection(City::all()));
 
-    }
+    // }
 
-    public function getAddress($id)
-    {
+    // public function getAddress($id)
+    // {
 
-        if(!$this->requesterAuth($id)){
+    //     if(!$this->requesterAuth($id)){
 
-            return response()->json([
+    //         return response()->json([
     
-                "msg" => "شما مجاز به انجام این عملیات نیستید" 
+    //             "msg" => "you're not authroize for this operation!" 
     
-            ] , 401);
+    //         ] , 401);
     
-           }
+    //        }
            
 
-        return Cache::rememberForever('address', fn()=>  AddressResource::collection( Adress::where("user_id" , $id)->get())); 
-    }
+    //     return Cache::rememberForever('address', fn()=>  AddressResource::collection( Adress::where("user_id" , $id)->get())); 
+    // }
 
-    public function insertAddress(Request $request , $id)
-    {
+    // public function insertAddress(Request $request , $id)
+    // {
 
 
-       if(!$this->requesterAuth($id)){
+    //    if(!$this->requesterAuth($id)){
 
-        return response()->json([
+    //     return response()->json([
 
-            "msg" => "شما مجاز به انجام این عملیات نیستید" 
+    //         "msg" => "شما مجاز به انجام این عملیات نیستید" 
 
-        ] , 401);
+    //     ] , 401);
 
-       }
+    //    }
 
 
  
-        $attributes = $request->validate([
+        // $attributes = $request->validate([
 
-            "title" => "required" ,
+        //     "title" => "required" ,
 
-            "address" => "required|string" ,
+        //     "address" => "required|string" ,
 
-            "latitude" => "required" ,
+        //     "latitude" => "required" ,
 
-            "longitude" => "required" 
+        //     "longitude" => "required" 
 
-        ]) ;
+        // ]) ;
         
-        $attributes["user_id"] = $id;
+    //     $attributes["user_id"] = $id;
 
 
-        Adress::create($attributes);
+    //     Adress::create($attributes);
 
-        return response()->json([
-            "msg" => "اطلاعات ثبت شد" 
-        ]);
+    //     return response()->json([
+    //         "msg" => "اطلاعات ثبت شد" 
+    //     ]);
         
      
-    }
+    // }
 
-    public function updateAddress(Request $request , $id)
-    {
+    // public function updateAddress(Request $request , $id)
+    // {
 
 
-        if(!$this->requesterAuth($id)){
+    //     if(!$this->requesterAuth($id)){
 
-            return response()->json([
+    //         return response()->json([
     
-                "msg" => "شما مجاز به انجام این عملیات نیستید" 
+    //             "msg" => "شما مجاز به انجام این عملیات نیستید" 
     
-            ] , 401);
+    //         ] , 401);
     
-           }
+    //        }
 
        
 
-        $attributes = $request->validate([
+    //     $attributes = $request->validate([
             
-            "title" =>  "required|string" ,
+    //         "title" =>  "required|string" ,
 
-            "address" => "required|string" ,
+    //         "address" => "required|string" ,
 
-            "latitude" => "required" ,
+    //         "latitude" => "required" ,
 
-            "longitude" => "required" 
+    //         "longitude" => "required" 
 
-        ]) ;
+    //     ]) ;
 
-        $attributes["user_id"] = $id ;
+    //     $attributes["user_id"] = $id ;
 
         
-        Adress::where("user_id" , $id)->update( $attributes);
+    //     Adress::where("user_id" , $id)->update( $attributes);
 
 
-        return response()->json([
-            "msg" => "اطلاعات با موفقیت اپدیت شد" 
-        ]);
+    //     return response()->json([
+    //         "msg" => "اطلاعات با موفقیت اپدیت شد" 
+    //     ]);
         
-    }
+    // }
 
-    public function foodCategory()
-    {
-        $categories = FoodCategory::with("product")->get() ;
+    // public function foodCategory()
+    // {
+    //     $categories = FoodCategory::with("product")->get() ;
 
-        return FoodCategoryResource::collection($categories);
-    }
+    //     return FoodCategoryResource::collection($categories);
+    // }
 
-    public function resturants()
-    {
-        return  ResturantResource::collection(Resturant::all());
+    // public function resturants()
+    // {
+       
+    //     return  ResturantResource::collection(Resturant::all());
 
-    }
+
+    // }
 
 
-    public function requesterAuth($id)
-    {
-
-        $requester = Auth::guard("api")->user();
-
-        return  ($requester->id == $id) ? true : false;
-    
-    }
-
+   
 
 
 

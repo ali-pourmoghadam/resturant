@@ -39,12 +39,13 @@ class Resturant extends Model
             get : fn($value) => app(AppHelpers::class)->persianDays($value)
             
         );
+
     }
 
 
     public function resturantCategory()
     {
-        return  $this->belongsTo(ResturantCategroy::class , "rsturant_category");
+        return  $this->belongsTo(ResturantCategroy::class , "resturant_category");
     }
 
     public function manager()
