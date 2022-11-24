@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class AddressUpsertRequest extends FormRequest
+class CartUpsertRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,18 @@ class AddressUpsertRequest extends FormRequest
     public function rules()
     {
         return [
-
-            "title" => "required" ,
-
-            "address" => "required|string" ,
-
-            "latitude" => "required" ,
-
-            "longitude" => "required" 
-
+            "items" => "required"
         ];
+    }
+
+
+
+    public function messages()
+    {
+        return [
+
+            'required' => 'items cant be empty' ,
+            
+            ];
     }
 }

@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\v1\AddressController;
+use App\Http\Controllers\Api\v1\CartController;
 use App\Http\Controllers\Api\v1\ResturantController;
 use App\Http\Controllers\Api\v1\UserController;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group( ["middleware" => "auth:api" ] , function(){
+    
 
   
         Route::group(["controller" => UserController::class], function(){
@@ -20,6 +22,12 @@ Route::group( ["middleware" => "auth:api" ] , function(){
         
             Route::get("/city", "cities");
             
+        });
+
+        Route::group(["controller" => CartController::class], function(){
+
+            Route::post("/addCart", "addToCart");
+    
         });
 
 
