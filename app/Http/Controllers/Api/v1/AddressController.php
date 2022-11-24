@@ -2,38 +2,43 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressUpsertRequest;
 use App\Http\Resources\AddressResource;
 use App\Models\Address;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AddressController extends Controller
 {
+
+
+    public function __construct(AppHelpers $helper)
+    {
+        $this->helper =  $helper;
+    }
+
+
+
    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AddressUpsertRequest $request , $id)
+    public function store(AddressUpsertRequest $request)
     {
-  
-        $attributes = $request->all() ;
-
-        $attributes["user_id"] = $id ;
+        
+        $attributes = array_merge($request->all() , ["user_id" => Auth::id()] );
 
         Address::create($attributes);
 
-        return response()->json([
-
-            "msg" => "ifnormation registered successfully" 
-
-        ]);
+        return $this->helper->jsonResponse("ifnormation registered successfully");
     }
 
     /**
@@ -44,8 +49,7 @@ class AddressController extends Controller
      */
     public function show(User $user)
     {
-        
-        $this->authorize("view" ,[ Address::class , $user->id]);
+        $this->authorize("accessAdress" ,[ Address::class , $user->id]);
 
         return AddressResource::collection($user->address); 
     }
@@ -59,20 +63,17 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AddressUpsertRequest $request, $id)
+    public function update(AddressUpsertRequest $request , $address)
     {
+    
+        $this->authorize("accessAdress" ,[ Address::class ,  $address->user_id]);
 
-        $attributes = $request->all() ;
+        $attributes = array_merge($request->all() , ["user_id" => Auth::id()] );
 
-        $attributes["user_id"] = $id ;
+        $address->update($attributes);
         
-        Address::find($id)->update( $attributes);
+        return $this->helper->jsonResponse("information updated successfully");
 
-        return response()->json([
-
-            "msg" => "ifnormation updated successfully" 
-
-        ]);
     }
 
     /**
@@ -81,8 +82,13 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($address)
     {
-        //
+        $this->authorize("accessAdress" ,[ Address::class ,  $address->user_id]);
+
+        Address::destroy($address->id);
+
+        return $this->helper->jsonResponse("information deleted successfully");
+
     }
 }

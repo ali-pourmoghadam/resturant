@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Address;
+use App\Models\Resturant;
 use App\Models\User;
 use Exception;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -37,29 +39,36 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
 
             Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+                ->prefix('api/v1/user/')
+                ->group(base_path('routes/api/v1//user.php'));
 
 
             Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+                ->group(base_path('routes/web/web.php'));
 
 
             Route::middleware('web')
                 ->prefix("admin")
-                ->group(base_path('routes/admin.php'));
+                ->group(base_path('routes/web/admin.php'));
 
 
             Route::middleware('web')
                 ->prefix("manager")
-                ->group(base_path('routes/manager.php'));
+                ->group(base_path('routes/web/manager.php'));
                 
         });
 
     
-        Route::bind('address', function(int $id){
+        Route::bind('address', function(int $id ){
 
-            return User::find($id) ?? false;
+            return (Route::current()->methods[0] == "GET")? User::find($id) : Address::find($id) ;
+
+        });
+
+        
+        Route::bind('resturant', function(int $id ){
+
+            return Resturant::find($id) ?? false ;
 
         });
  

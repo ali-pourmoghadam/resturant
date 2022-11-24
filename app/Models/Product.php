@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\ActiveScop;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,7 +26,9 @@ class Product extends Model
 
     protected $with = [
 
-        "menu"
+        "menu" , 
+
+        "foodCategory"
 
     ];
 

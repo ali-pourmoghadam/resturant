@@ -14,9 +14,9 @@ class AddressPolicy
     use HandlesAuthorization;
 
     
-    public function view(User $user , $reciveId)
+    public function accessAdress(User $user , $reciveId)
     {
-
+        
        return ($reciveId == $user->id) ? true : false;
 
     }

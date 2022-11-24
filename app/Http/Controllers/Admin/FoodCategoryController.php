@@ -55,7 +55,7 @@ class FoodCategoryController extends Controller
 
         $attributes = $request->validated();
         
-        FoodCategory::where("id" , $id)->update($attributes);
+        FoodCategory::find($id)->update($attributes);
 
         return redirect("/admin/food");
 

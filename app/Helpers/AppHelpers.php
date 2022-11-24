@@ -124,9 +124,9 @@ class AppHelpers{
      * @return response
      */
 
-     public function jsonRes(string $msg)
+     public function jsonResponse(string $msg)
      {
-        return response()->json(['data' => $msg]);
+        return response()->json(['msg' => $msg]);
      }
 
 
