@@ -43,5 +43,11 @@ class Product extends Model
     {
         return $this->belongsToMany(Menu::class);
     }
+
+
+    public function order()
+    {
+        return $this->belongsTo(Product::class);
+    }
     
 }
