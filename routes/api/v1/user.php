@@ -27,6 +27,8 @@ Route::group( ["middleware" => "auth:api" ] , function(){
         Route::group(["controller" => CartController::class], function(){
 
             Route::post("/addCart", "addToCart");
+
+            Route::get("/getCart", "getCart");
     
         });
 
