@@ -2,42 +2,55 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Actions\User\CardAddCacheAction;
+
+use App\Actions\User\CardDeleteCacheAction;
 use App\Actions\User\CardGetCacheAction;
 use App\Actions\User\ProductExistsAction;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CartUpsertRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\CartRequest;
+use App\Services\User\CartService;
+
 
 class CartController extends Controller
 {
-
-    public function __construct(AppHelpers $helper)
+    public function __construct(AppHelpers $helper, CartService $cart)
     {
         $this->helper = $helper;
+
+        $this->cartService = $cart;
     }
     
 
-    public function addToCart(CartUpsertRequest $request , ProductExistsAction $productExists ,CardAddCacheAction $cacheAction)
+    public function addToCart(CartRequest $request )
     {
 
         $attributes = $request->validated();
         
-        abort_if(! $productExists->execute($attributes) , 404);
-        
-        $res = $cacheAction->execute($attributes['items']);
+        abort_if(! $this->cartService->productsExist($attributes) , 404);
+    
+        $this->cartService->writeCacheCart($attributes['items']);
 
         return $this->helper->jsonResponse("items added successfully");
     
     }
 
 
-    public function getCart(CardGetCacheAction $cacheAction)
+    public function getCart()
+    {
+        return $this->helper->jsonResponse($this->cartService->readCacheAll()); 
+    }
+
+
+    public function delCart(CartRequest $request )
     {
 
-        return $this->helper->jsonResponse($cacheAction->execute()); 
+        $attributes = $request->validated();
+        
+        abort_if(! $this->cartService->productsExist($attributes) , 404);
+
+        $msg =  $this->cartService->deleteCacheCart($attributes["items"]);
+
+        return $this->helper->jsonResponse($msg);
     }
 }
