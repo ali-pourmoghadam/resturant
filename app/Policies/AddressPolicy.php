@@ -16,9 +16,7 @@ class AddressPolicy
     
     public function accessAdress(User $user , $reciveId)
     {
-        
        return ($reciveId == $user->id) ? true : false;
-
     }
 
   

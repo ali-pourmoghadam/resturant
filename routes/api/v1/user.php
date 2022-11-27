@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\v1\AddressController;
 use App\Http\Controllers\Api\v1\CartController;
+use App\Http\Controllers\Api\v1\OrderController;
 use App\Http\Controllers\Api\v1\ResturantController;
 use App\Http\Controllers\Api\v1\UserController;
 use Illuminate\Http\Request;
@@ -41,6 +42,7 @@ Route::group( ["middleware" => "auth:api" ] , function(){
 
         Route::get("{resturant}/food", [ ResturantController::class , "food"]);
         
+        Route::post("/cart/pay",  [OrderController::class , "orderPayment"]);
 });
 
 

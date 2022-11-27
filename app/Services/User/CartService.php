@@ -33,8 +33,6 @@ class CartService{
 
               return [
 
-                "id" => $key , 
-
                 "resturant" => new ResturantCardResource(Resturant::find($key)) ,
 
                 "foods" => $foods

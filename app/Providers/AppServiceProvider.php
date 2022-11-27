@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Services\Contracts\NotificationsContract;
+use App\Services\Contracts\PaymentContract;
 use App\Services\Manager\ManagerNotificationService;
+use App\Services\User\BankPaymentService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +26,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton( AppHelpers::class , function () {
 
                 return new AppHelpers();
+
+        });
+
+         // Bind BankPaymentService as Default Payment Service
+        
+        $this->app->bind( PaymentContract::class , function () {
+
+                return new BankPaymentService();
 
         });
 
