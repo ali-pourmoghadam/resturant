@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Actions\User\CardCahceAction;
+use App\Actions\User\CardAddCacheAction;
+use App\Actions\User\CardGetCacheAction;
 use App\Actions\User\ProductExistsAction;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class CartController extends Controller
     }
     
 
-    public function addToCart(CartUpsertRequest $request , ProductExistsAction $productExists ,CardCahceAction $cacheAction)
+    public function addToCart(CartUpsertRequest $request , ProductExistsAction $productExists ,CardAddCacheAction $cacheAction)
     {
 
         $attributes = $request->validated();
@@ -34,8 +35,9 @@ class CartController extends Controller
     }
 
 
-    public function getCart()
+    public function getCart(CardGetCacheAction $cacheAction)
     {
-        echo Cache::get("card#".Auth::id());
+
+        return $this->helper->jsonResponse($cacheAction->execute()); 
     }
 }

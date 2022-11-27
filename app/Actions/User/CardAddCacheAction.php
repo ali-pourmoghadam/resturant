@@ -7,7 +7,7 @@ use App\Models\Resturant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
-class CardCahceAction {
+class CardAddCacheAction {
 
     public function execute(string $items)
     {

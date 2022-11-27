@@ -28,7 +28,7 @@ class Product extends Model
 
         "menu" , 
 
-        "foodCategory"
+        "foodCategory" 
 
     ];
 
@@ -49,5 +49,6 @@ class Product extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
     
 }
