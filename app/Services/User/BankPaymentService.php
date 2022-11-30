@@ -41,12 +41,12 @@ class BankPaymentService implements PaymentContract {
 
     }
 
+  // send trancaction id to bank api and get details 
 
+  
     public function getTransaction(Transaction $transaction)
     {
         
-        // send trancaction id to bank api and get details 
-
         return true;
     }
 }

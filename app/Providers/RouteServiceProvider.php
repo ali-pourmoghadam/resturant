@@ -61,7 +61,7 @@ class RouteServiceProvider extends ServiceProvider
     
         Route::bind('address', function(int $id ){
 
-            return (Route::current()->methods[0] == "GET")? User::find($id) : Address::find($id) ;
+            return (Route::current()->methods[0] == "GET") ? User::find($id) : Address::find($id) ;
 
         });
 

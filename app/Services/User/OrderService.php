@@ -59,9 +59,53 @@ class OrderService {
     public function orderRegister($orderId , $transactionId)
     {
      
-       return $this->paymentService->setTranaction($orderId , $transactionId);
+       $result = $this->paymentService->setTranaction($orderId , $transactionId);
+
+       if(!$result) return false;
+
+       $this->productResgister($orderId);
+
+       $this->cartService->deleteCacheAll();
+       
+       return true;
+
+       
+    }
+
+
+    public function productResgister($orderId)
+    {
+
+      $cart = $this->cartService->readCacheAll();
+
+      $order = Order::find($orderId);
+
+      $products = [];
+
+      $cart->each(function($item) use($orderId , &$products){
+
+          foreach($item['foods'] as $food)
+             {
+
+              $products[$food["id"]] = [
+
+                "quantity" =>$food["count"] ,
+
+                "price" => $food["price"] , 
+
+                "status" => 0
+              ];
+            
+             }
+        
+       });
+
+
+       $order->product()->attach($products);
 
     }
+
+
 
 
     public function orderReadAll()

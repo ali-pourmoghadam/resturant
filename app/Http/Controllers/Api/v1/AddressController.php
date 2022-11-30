@@ -8,11 +8,8 @@ use App\Http\Requests\AddressUpsertRequest;
 use App\Http\Resources\AddressResource;
 use App\Models\Address;
 use App\Models\User;
-use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 
 class AddressController extends Controller
 {
@@ -33,7 +30,6 @@ class AddressController extends Controller
      */
     public function store(AddressUpsertRequest $request)
     {
-        
         $attributes = array_merge($request->all() , ["user_id" => Auth::id()] );
 
         Address::create($attributes);

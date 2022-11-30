@@ -29,6 +29,8 @@ class CartService{
 
       $cache = $this->readCache();
 
+      if(empty($cache[1])) return false;
+
        return $this->readFoodByResturant($cache[0] , $cache[1])->map(function($foods , $key){
 
               return [
@@ -113,6 +115,11 @@ class CartService{
        return "deleted successfully";
     }
 
+
+    public function deleteCacheAll()
+    {
+        return Cache::forget("cart#".Auth::id());
+    }
 
   
     private function readFoodByResturant(Collection $products , array $items)
