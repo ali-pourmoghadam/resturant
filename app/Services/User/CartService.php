@@ -56,9 +56,7 @@ class CartService{
         
         return Cache::put($key , array_fill_keys($items , 1) , now()->addDay()) ;
         
-
         $cacheItems = Cache::get($key);
-
 
         foreach($items as $item)
         {
@@ -159,6 +157,15 @@ class CartService{
 
         return count($items) == $data->count() ?? false; 
     }
+
+
+    
+    public function cartExist(int $id)
+    {
+        return Cache::has("cart#".$id)  ;
+    }
+
+
 
 
     public function checkForDelete(array $items , $cache)

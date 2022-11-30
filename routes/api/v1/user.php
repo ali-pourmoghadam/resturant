@@ -36,13 +36,26 @@ Route::group( ["middleware" => "auth:api" ] , function(){
         });
 
 
+        
+        Route::group(["controller" => OrderController::class] , function(){
+
+            Route::post("/cart/pay",  "payment");
+
+            Route::get("/cart/order/{order_id}/{transaction_id}",  "register");
+        
+        });
+
+
         Route::resource("address", AddressController::class);
 
         Route::resource("resturant", ResturantController::class);
 
         Route::get("{resturant}/food", [ ResturantController::class , "food"]);
+
+
         
-        Route::post("/cart/pay",  [OrderController::class , "orderPayment"]);
+        
+       
 });
 
 
@@ -52,4 +65,11 @@ Route::group(["controller" => AuthController::class] , function(){
 
     Route::post("/login", "userAuth");
 
+
+
 });
+
+
+
+
+
