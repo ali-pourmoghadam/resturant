@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class Resturant extends Model
 {
@@ -71,5 +72,18 @@ class Resturant extends Model
         $query->where("is_active" , true);
     }
     
+
+    public function allProducts()
+    {
+        return DB::table("products")
+                    ->whereIn("id",function($query){
+
+                        $query->select("product_id")->from("menus")
+                              ->join("menu_product" , "menu_product.menu_id" , "menus.id")
+                              ->where("resturant_id", $this->id);
+
+          });          
+    }
+
 
 }

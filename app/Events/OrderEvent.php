@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Order;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -13,15 +14,17 @@ use Illuminate\Queue\SerializesModels;
 class OrderEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    
+    public Order $order;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($orderId)
     {
-        //
+        $this->order = Order::find($orderId);
     }
 
     /**

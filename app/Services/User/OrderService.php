@@ -82,7 +82,7 @@ class OrderService {
 
       $products = [];
 
-      $cart->each(function($item) use($orderId , &$products){
+      $cart->each(function($item , $key) use($orderId , &$products){
 
           foreach($item['foods'] as $food)
              {
@@ -92,6 +92,8 @@ class OrderService {
                 "quantity" =>$food["count"] ,
 
                 "price" => $food["price"] , 
+
+                "resturant_id" => $key,
 
                 "status" => 0
               ];

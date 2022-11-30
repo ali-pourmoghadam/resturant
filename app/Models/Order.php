@@ -33,7 +33,8 @@ class Order extends Model
 
     public function product()
     {
-        return $this->belongsToMany(Product::class)->withTimestamps();;
+        return $this->belongsToMany(Product::class)->withTimestamps()
+                                                   ->withPivot(['resturant_id']);
     }
 
     public function transaction()

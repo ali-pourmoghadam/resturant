@@ -113,7 +113,7 @@ class CartService{
        Cache::put("cart#".Auth::id() , $cache[1]);
 
        return "deleted successfully";
-    }
+    } 
 
 
     public function deleteCacheAll()

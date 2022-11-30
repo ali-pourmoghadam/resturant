@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Events\OrderEvent;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -36,9 +37,11 @@ class OrderController extends Controller
    
         $result = $this->orderService->orderRegister($orderId , $transactionId);
 
-        $msg = ($result) ? "order Registerd successully" : "operation faild call with support";
+        if(!$result) return $this->helper->jsonResponse( "operation faild call with support");
 
-        return $this->helper->jsonResponse($msg);
+        event(new OrderEvent($orderId));
+
+        return $this->helper->jsonResponse( "order Registerd successully" );
 
     }
 
