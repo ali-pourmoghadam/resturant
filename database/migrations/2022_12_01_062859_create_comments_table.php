@@ -21,10 +21,6 @@ return new class extends Migration
 
             $table->unsignedBigInteger("reply_to")->default(0);
 
-            $table->integer("commentable_id");
-
-            $table->string("commentable_type");
-
             $table->string("message");
 
             $table->integer("score");

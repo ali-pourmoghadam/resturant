@@ -15,7 +15,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return (Auth::guard("api")->id() || Auth::guard("manager")->id()) ? true : false;
+        return (Auth::guard("api")->id()) ? true : false;
     }
 
     /**
@@ -31,7 +31,7 @@ class CommentRequest extends FormRequest
 
             "order_id" => "required" ,
 
-            "score" => ["integer" ,  Rule::when(!is_null(Auth::guard("api")->id())  , ["required"])] ,
+            "score" => "required|integer" ,
 
             "reply_to" => "integer"
         ];

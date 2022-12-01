@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Events\UserComment;
+use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+
+    public function __construct(AppHelpers $appHelpers)
+    {
+        $this->helper  = $appHelpers;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +24,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+       
     }
 
     /**
@@ -40,6 +49,11 @@ class CommentController extends Controller
 
         $this->authorize("canComment" , [Order::class , $attributes["order_id"]]);
 
+        $comment = Comment::create($attributes);
+        
+        event(new UserComment($comment));
+
+        return $this->helper->jsonResponse("comment added successfully");
     }
 
     /**

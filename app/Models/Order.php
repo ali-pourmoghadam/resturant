@@ -41,5 +41,11 @@ class Order extends Model
     {
         return $this->hasMany(Transaction::class);
     }
+
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
     
 }

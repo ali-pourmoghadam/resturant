@@ -9,5 +9,20 @@ class Comment extends Model
 {
     use HasFactory;
 
-    
+
+    protected   $fillable =[
+        "order_id" ,
+
+        "message" ,
+
+        "score"
+    ];
+
+
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
 }
