@@ -47,12 +47,12 @@ class AppHelpers{
             return false;
         }
 
- 
         
         foreach(Config::get("const.binaryDays") as $day=>$value)
         {
             if($binaryValue <= $value){
 
+        
                 $index = ($binaryValue < $value) ? $el-1 : $el ;
 
                 $bigsetDay = array_keys(Config::get("const.binaryDays"))[$index];
@@ -82,6 +82,7 @@ class AppHelpers{
             $el++;
         }   
 
+      
 
         ($binaryValue == 0) ?:  $this->decodeBinaryDays( $binaryValue , $finalDays); 
         
@@ -103,12 +104,13 @@ class AppHelpers{
         $persianDaysAll  = Config::get("const.persianDays");
 
         $this->decodeBinaryDays($value , $finalDays);
-
+      
         foreach($finalDays as $key=>$day)
         {
             $finalDays[$key] =  $persianDaysAll[$day];
         }
-        
+    
+       
         return $finalDays;
     }
 
@@ -122,10 +124,11 @@ class AppHelpers{
      * @return response
      */
 
-     public function jsonRes(string $msg)
+     public function jsonResponse($msg)
      {
-        return response()->json(['data' => $msg]);
+        return response()->json(['msg' => $msg]);
      }
 
 
 }
+

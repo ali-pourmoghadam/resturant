@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
-class Adress extends Model
+class Address extends Model
 {
+   
     use HasFactory;
 
     protected $fillable = [
@@ -27,4 +30,6 @@ class Adress extends Model
     {
         return $this->belongsTo(User::class);
     }
+ 
+
 }

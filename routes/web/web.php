@@ -1,12 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\FoodPartyController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ResturantCategoryController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
