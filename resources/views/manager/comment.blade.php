@@ -2,7 +2,7 @@
 <x-manager_panel>
 
 
-    <h4 class="d-block text-center mt-4"> جدول دسته بندی منوها</h4>
+    <h4 class="d-block text-center mt-4"> جدول  مدیریت نظرات </h4>
     
     <div class="row mt-4">
         <div class="col-10 mx-auto mt-3">
