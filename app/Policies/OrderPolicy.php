@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
@@ -14,5 +15,12 @@ class OrderPolicy
     public function userAction()
     {
         return Auth::id() ?? false;
+    }
+
+
+    public function canComment( $orderClass, $order_id)
+    {
+        
+        return (Order::find($order_id)->user_id == Auth::guard("api")->id()) ? true : false;
     }
 }
