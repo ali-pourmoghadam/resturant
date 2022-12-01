@@ -12,13 +12,26 @@ class ManagerNotificationService implements NotificationsContract{
 
   private array $notifications = [];
 
+  private const FOODPART_TYPE  = "App\Notifications\FoodPartyNotification";
+
+  private const COMMENT_TYPE  = "App\Notifications\CommentNotification";
+
+  private const ORDER_TYPE  = "App\Notifications\OrderNotification";
   
+
+
+
    public function registerNotification()
    {
 
       $this->notifications = [
 
-         "foodParty" => $this->foodPartyNotifs() 
+         "foodParty" => $this->foodPartyNotifs()  ,
+
+         "order" => $this->orderNotifs() ,
+
+         "comment" => $this->commentsNotifs() ,
+
 
       ];
 
@@ -64,7 +77,8 @@ class ManagerNotificationService implements NotificationsContract{
    {
        $result = [];
 
-       $notifications = $this->unreadNotifications();
+       $notifications = $this->filterNotifs(self::FOODPART_TYPE);
+
 
        foreach ($notifications as $notif)
        {
@@ -83,5 +97,56 @@ class ManagerNotificationService implements NotificationsContract{
    }
 
 
-  
+  public function commentsNotifs()
+  {
+
+       $notifications = $this->filterNotifs(self::COMMENT_TYPE);
+
+       $data = [ "id" ,  "sender"];
+       
+       return $this->ReaderNotifs($notifications , $data);
+   
+  }
+
+
+  public function orderNotifs()
+  {
+
+       $notifications = $this->filterNotifs(self::ORDER_TYPE);
+
+       $data = ["id"];
+       
+       return $this->ReaderNotifs($notifications , $data);
+   
+  }
+
+
+
+  private function filterNotifs($type){
+
+   return  $this->unreadNotifications()->filter(function($notif)use($type){
+
+         return $notif->type == $type;
+   });
+
+  }
+
+
+  private function ReaderNotifs($notifications , $data = []){
+
+    $result = [];
+
+    $notifications->each(function($notif) use(&$result , $data){
+
+         foreach($data as $item){
+
+            $result[$notif->id][$item] =  $notif->data[$item] ;
+         }
+         
+      });
+    
+    return $result;
+  }
+
+ 
 }

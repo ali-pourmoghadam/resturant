@@ -24,6 +24,7 @@
      
     <x-modal class="d-flex flex-column" idx="notif" title="پیغام ها">
         
+
         <div class="d-flex flex-column">
             
             @empty(!$notifications["foodParty"])
@@ -43,8 +44,54 @@
                 
             @endempty
          
-        </div>
-    
+         </div>
+
+
+
+        <div class="d-flex flex-column">
+            
+            @empty(!$notifications["order"])
+
+            <h5 class="d-block text-right px-2">: سفارش </h5>
+            
+            @foreach ($notifications["order"] as $notif)
+            
+                    <div class="px-4 text-center mt-3 position-relative" style="width:100%;">
+
+                        <button  onclick="mark('{{$notif['id']}}')" class="btn-close mx-2" style="font-size: 10px"></button> درخواست سفارش , پنل خود را چک کنید
+
+                    </div>
+
+        
+                @endforeach
+                
+            @endempty
+         
+         </div>
+
+        <div class="d-flex flex-column">
+            
+            @empty(!$notifications["comment"])
+
+            <h5 class="d-block text-right px-2">: نظرات </h5>
+            
+            @foreach ($notifications["comment"] as $notif)
+            
+                    <div class="px-4 text-center mt-3 position-relative" style="width:100%;">
+
+                        <button  onclick="mark('{{$notif['id']}}')" class="btn-close mx-2" style="font-size: 10px"></button>    نظر خود را ثبت کرده {{$notif['sender']}}
+
+                    </div>
+
+        
+                @endforeach
+                
+            @endempty
+         
+         </div>
+
+
+
 
         <script>
 

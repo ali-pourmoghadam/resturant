@@ -193,6 +193,63 @@
                     {{-- END-CATEGORY --}}
 
 
+                    {{-- START-COMMENT --}}
+
+                    <div>
+
+
+
+                        <div class="position-relative mx-auto w-80 panel-item px-4 py-2 " data-bs-toggle="collapse" href="#collapse-5" role="button" aria-expanded="false" aria-controls="collapse-5">
+                        
+                            <i class="position-absolute mt-1  text-light fs-6  fa-regular fa-comments"></i>
+
+
+                            <span class="text-light fs-6 d-block text-center  ">مدیرت نظرات</span>
+
+                        </div>
+
+                        {{-- START-CATEGORY-TIEMS --}}
+
+                        <div id="collapse-5"  class="
+
+                                        collapse        
+
+                                        bg-light rounded-3 d-felx
+
+                                        flex-column panel-item-sub 
+
+                                        justify-content-center
+
+                                        align-items-center
+
+                                        w-75
+
+                                        mx-auto
+                                        
+                                        mb-3
+                                        " >
+
+
+                                    <div class="position-relative px-3 py-2 ">
+
+
+                                        <a href="/admin/comment/deletes" class="fs-6  d-block text-center text-dark">  در خواست  های حذف </a>
+
+                                    </div>
+
+                                    
+
+                                
+                        </div>
+
+                        {{-- END-CATEGORY-TIEMS --}}
+
+
+                    </div>
+
+                    {{-- END-COMMENT --}}
+
+
 
                     {{-- START-FOODPARTY --}}
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CommentsManagementController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FoodCategoryController;
@@ -19,6 +20,17 @@ Route::group( ["middleware" => "admin:manager"] , function(){
     Route::resource('/food',  FoodCategoryController::class);  
     
     Route::resource('/foodParty',  FoodPartyController::class);  
+
+
+    Route::group((["controller" => CommentsManagementController::class] ) ,function(){
+
+        Route::get("/comment/deletes" , "showDeleteRequests");
+
+        Route::delete("/comment/deletes/force/{Comment}" , "forceDeleteRequests");
+
+        Route::post("/comment/deletes/restore/{Comment}" , "restoreDeleteRequests");
+
+    });
 
 });
 

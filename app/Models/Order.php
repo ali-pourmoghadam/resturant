@@ -21,7 +21,9 @@ class Order extends Model
 
     protected $with = [
 
-        "product"
+        "product" ,
+
+        "user"
         
     ];
 
@@ -40,6 +42,12 @@ class Order extends Model
     public function transaction()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
     
 }

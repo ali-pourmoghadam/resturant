@@ -67,18 +67,25 @@ class Resturant extends Model
     }
 
 
+    public function comment()
+    {
+        return $this->hasManyThrough(Comment::class , OrderProduct::class , null , "order_id" , null , "order_id");
+    }
+    
+
     public function scopeActive($query)
     {
         $query->where("is_active" , true);
     }
-    
+
 
     public function allProducts()
     {
-        return DB::table("products")
-                    ->whereIn("id",function($query){
+        
+        return DB::table("products")->whereIn("id",function($query){
 
-                        $query->select("product_id")->from("menus")
+                        $query->select("product_id")
+                              ->from("menus")
                               ->join("menu_product" , "menu_product.menu_id" , "menus.id")
                               ->where("resturant_id", $this->id);
 

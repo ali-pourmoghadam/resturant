@@ -2,13 +2,14 @@
 
 namespace App\Notifications;
 
-use App\Models\Order;
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderNotification extends Notification
+class CommentNotification extends Notification
 {
     use Queueable;
 
@@ -17,11 +18,9 @@ class OrderNotification extends Notification
      *
      * @return void
      */
-    public function __construct(Order $order)
-    {   
-   
-        $this->order = $order;
-
+    public function __construct(Comment $comment)
+    {
+        $this->comment = $comment;
     }
 
     /**
@@ -57,13 +56,13 @@ class OrderNotification extends Notification
      */
     public function toArray($notifiable)
     {
-
         return [
 
-            "id" => $this->id ,
-            
-            "order_id"=> $this->order->id
+            "id" => $this->id , 
 
+            "sender" => User::find( $this->comment->order->user_id)->email ,
+            
+            "message" => $this->comment->message
         ];
     }
 }

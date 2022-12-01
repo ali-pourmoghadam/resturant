@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Address;
+use App\Models\Comment;
 use App\Models\Resturant;
 use App\Models\User;
 use Exception;
@@ -69,6 +70,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('resturant', function(int $id ){
 
             return Resturant::find($id) ?? false ;
+
+        });
+
+        Route::bind('Comment', function ($id) {
+
+            return Comment::withTrashed()->find($id);
 
         });
  

@@ -49,6 +49,7 @@ class ManagerController extends Controller
         
         return view("manager.setting" ,  ["id" =>  Auth::guard("manager")->id()]);
     }
+    
 
     public function storeSetting(ManagerSettingRequest $request ,$id)
     {

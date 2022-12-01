@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Api\v1\AddressController;
 use App\Http\Controllers\Api\v1\CartController;
+use App\Http\Controllers\Api\v1\CommentController;
 use App\Http\Controllers\Api\v1\OrderController;
 use App\Http\Controllers\Api\v1\ResturantController;
 use App\Http\Controllers\Api\v1\UserController;
@@ -45,6 +46,8 @@ Route::group( ["middleware" => "auth:api" ] , function(){
         
         });
 
+
+        Route::resource("comments", CommentController::class);
 
         Route::resource("address", AddressController::class);
 

@@ -17,6 +17,5 @@ class ResturantCategroy extends Model
         'status'
     ];
 
-
  
 }
