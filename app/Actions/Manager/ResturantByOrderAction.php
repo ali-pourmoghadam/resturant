@@ -13,9 +13,11 @@ class ResturantByOrderAction {
 
             $event->order->product->each(function($prdouct) use(&$resturants){
 
-            $resturants[] =  $prdouct->pivot->resturant_id;
+            $resturants[] =  Resturant::find($prdouct->pivot->resturant_id);
+
             });
 
-            return Resturant::whereIn("id" , $resturants)->get();
+
+            return $resturants;
     }
 }

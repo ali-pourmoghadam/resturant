@@ -28,7 +28,7 @@ class ResturantCommentNotification
     public function handle(UserComment $event)
     {
         $resturants = $this->action->execute($event->comment);
-
+        
         Notification::send($resturants , new CommentNotification($event->comment));
     }
 }

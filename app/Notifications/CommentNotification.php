@@ -58,6 +58,8 @@ class CommentNotification extends Notification
     {
         return [
 
+            "id" => $this->id , 
+
             "sender" => User::find( $this->comment->order->user_id)->email ,
             
             "message" => $this->comment->message

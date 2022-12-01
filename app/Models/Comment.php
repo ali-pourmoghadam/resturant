@@ -11,6 +11,7 @@ class Comment extends Model
 
 
     protected   $fillable =[
+        
         "order_id" ,
 
         "message" ,

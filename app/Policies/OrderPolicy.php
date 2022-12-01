@@ -20,7 +20,7 @@ class OrderPolicy
 
     public function canComment( $orderClass, $order_id)
     {
-        
-        return (Order::find($order_id)->user_id == Auth::guard("api")->id()) ? true : false;
+
+        return (Order::findOrFail($order_id)->user_id == Auth::guard("api")->id()) ? true : false;
     }
 }
