@@ -15,7 +15,6 @@ class AppHelpers{
 
     public function encodeBinaryDays(array $days)
     {
-        // dd(Config::get("const.binaryDays"));
 
         $res = 0 ;
 

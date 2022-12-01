@@ -262,6 +262,26 @@
 
 
 
+                    {{-- START-COMMENT --}}
+
+                    <div >
+
+                        
+                        <div class="position-relative  mx-auto w-80 panel-item px-4 py-2 ">
+
+
+                            <i class="position-absolute mt-1  text-light fs-6  fa-regular fa-comment"></i>
+                        
+                            <a href="/manager/comment"  class="text-light fs-6 d-block text-center  ">نظرات</a >
+                            
+                        </div>
+                        
+                    
+                    </div>
+    
+                    {{-- END-COMMENT- --}}
+
+
                     {{-- START-SETTING --}}
 
                     <div >

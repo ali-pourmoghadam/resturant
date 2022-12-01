@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Manager\ManagerCommentController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Manager\MenuController;
 use App\Http\Controllers\Manager\ProductController;
@@ -27,6 +28,7 @@ Route::group( ["controller" =>  AuthController::class , "middleware" => "guest:m
 
 route::group( ["middleware" => "manager:admin"] , function(){
 
+
     route::group( ["controller" => ManagerController::class ] , function(){
 
         Route::get("dashboard" ,  "dashboard");
@@ -45,6 +47,8 @@ route::group( ["middleware" => "manager:admin"] , function(){
     Route::resource("/menu" ,  MenuController::class);
 
     Route::resource("/product" ,  ProductController::class);
+
+    Route::resource("/comment" ,  ManagerCommentController::class);
 
 
 });

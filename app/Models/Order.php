@@ -21,7 +21,9 @@ class Order extends Model
 
     protected $with = [
 
-        "product"
+        "product" ,
+
+        "user"
         
     ];
 
