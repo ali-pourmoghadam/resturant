@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Manager\ManagerCommentController;
+use App\Http\Controllers\Manager\ManagerCommentResponseController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Manager\MenuController;
 use App\Http\Controllers\Manager\ProductController;
@@ -41,6 +42,16 @@ route::group( ["middleware" => "manager:admin"] , function(){
 
 
     });
+
+
+    route::group( ["controller" => ManagerCommentResponseController::class ] , function(){
+
+        Route::delete("comment/user/delete/{comment}" ,  "destroy");
+
+        Route::post("comment/user/confirm/{comment}" ,  "confirm");
+
+    });
+
 
     Route::get("/logout/{gaurd}" ,  [ AuthController::class , "logout"]);
 

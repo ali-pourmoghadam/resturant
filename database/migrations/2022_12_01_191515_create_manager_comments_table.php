@@ -13,22 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('manager_comments', function (Blueprint $table) {
 
             $table->id();
 
-            $table->unsignedBigInteger("order_id");
-
-            $table->unsignedBigInteger("reply_to")->default(0);
+            $table->unsignedBigInteger("comment_id");
 
             $table->string("message");
 
-            $table->integer("score");
-
-            $table->integer("status")->default(0);
+            $table->boolean("status")->default(1);
 
             $table->softDeletes();
-         
+
             $table->timestamps();
         });
     }
@@ -40,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('manager_comments');
     }
 };

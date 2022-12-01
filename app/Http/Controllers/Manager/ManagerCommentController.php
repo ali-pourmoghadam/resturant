@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Manager;
 
 use App\Actions\Manager\ResturantComments;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ManagerCommentRequest;
+use App\Models\Comment;
+use App\Models\ManagerComment;
 use Illuminate\Http\Request;
 
 
@@ -16,19 +19,11 @@ class ManagerCommentController extends Controller
      */
     public function index(ResturantComments $comments)
     {
+        $comments = $comments->execute();
 
-        return view("manager.comment" , ["comments" => $comments->execute()]);
+        return view("manager.comment" ,  compact("comments"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,9 +31,13 @@ class ManagerCommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ManagerCommentRequest $request)
     {
-        //
+        $attributes = $request->validated();
+
+        ManagerComment::create($attributes);
+
+        return redirect("manager/comment");
     }
 
     /**
@@ -83,6 +82,10 @@ class ManagerCommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ManagerComment::destroy($id);
+
+        return redirect("manager/comment");
     }
+
+
 }
