@@ -14,7 +14,9 @@ class OrderProduct extends Model
 
     protected $with = [
 
-        "resturant"
+        "resturant" , 
+
+        "order"
 
     ];
 
