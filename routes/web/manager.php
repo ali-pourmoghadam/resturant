@@ -4,8 +4,10 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Manager\ManagerCommentController;
 use App\Http\Controllers\Manager\ManagerCommentResponseController;
 use App\Http\Controllers\Manager\ManagerController;
+use App\Http\Controllers\Manager\ManagerOrderController;
 use App\Http\Controllers\Manager\MenuController;
 use App\Http\Controllers\Manager\ProductController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,6 +51,18 @@ route::group( ["middleware" => "manager:admin"] , function(){
         Route::delete("comment/user/delete/{comment}" ,  "destroy");
 
         Route::post("comment/user/confirm/{comment}" ,  "confirm");
+
+    });
+
+
+
+    route::group( ["controller" => ManagerOrderController::class ] , function(){
+
+        Route::get("order" ,  "orders");
+
+        Route::put("order/status/{id}" ,  "orderStatusUpdate");
+
+
 
     });
 

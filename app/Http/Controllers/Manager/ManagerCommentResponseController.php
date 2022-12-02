@@ -21,8 +21,6 @@ class ManagerCommentResponseController extends Controller
 
     public function confirm(Comment $comment){
 
-   
-
         $comment->update(["status" => 2]);
 
         return redirect("manager/comment");
