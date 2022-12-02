@@ -97,4 +97,9 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Order::class);
     }
+
+    public function fullName() : Attribute
+    {
+        return Attribute::make( get : fn() => $this->first_name." ".$this->last_name);
+    }
 }
