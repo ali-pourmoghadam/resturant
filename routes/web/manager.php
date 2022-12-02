@@ -5,6 +5,7 @@ use App\Http\Controllers\Manager\ManagerCommentController;
 use App\Http\Controllers\Manager\ManagerCommentResponseController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\Manager\ManagerOrderController;
+use App\Http\Controllers\Manager\ManagerOrderReportController;
 use App\Http\Controllers\Manager\MenuController;
 use App\Http\Controllers\Manager\ProductController;
 
@@ -62,7 +63,12 @@ route::group( ["middleware" => "manager:admin"] , function(){
 
         Route::put("order/status/{id}" ,  "orderStatusUpdate");
 
+    });
 
+
+    route::group( ["controller" => ManagerOrderReportController::class ] , function(){
+
+        Route::get("report" ,  "reportAll");
 
     });
 

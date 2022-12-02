@@ -262,7 +262,7 @@
 
 
 
-                    {{-- START-COMMENT --}}
+                    {{-- START-ORDER --}}
 
                     <div >
 
@@ -279,7 +279,28 @@
                     
                     </div>
     
-                    {{-- END-COMMENT- --}}
+                    {{-- END-ORDER- --}}
+
+
+                    {{-- START-REPORT --}}
+
+                    <div >
+  
+                        <div class="position-relative  mx-auto w-80 panel-item px-4 py-2 ">
+
+
+                            <i class="position-absolute mt-1  text-light fs-6  fa-regular fa-clipboard"></i>
+
+                        
+                            <a href="/manager/report"  class="text-light fs-6 d-block text-center  ">گزارشات</a >
+                            
+                        </div>
+                        
+                    
+                    </div>
+    
+                    {{-- END-REPORT- --}}
+
 
                     {{-- START-COMMENT --}}
 
