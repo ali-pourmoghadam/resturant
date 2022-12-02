@@ -60,6 +60,8 @@ route::group( ["middleware" => "manager:admin"] , function(){
 
         Route::get("order" ,  "orders");
 
+        Route::put("order/status/{id}" ,  "orderStatusUpdate");
+
 
 
     });

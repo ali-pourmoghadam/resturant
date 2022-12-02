@@ -64,7 +64,7 @@
                            
                             <ul style="list-style: none" class="text-right">
 
-                                <li> {{"order#".$order->product->id}} : کد سفارش</li>
+                                <li> {{"order#".$order->id}} : کد سفارش</li>
 
                                 <li>   نام محصول : {{$order->product->name}}</li>
 
@@ -73,6 +73,7 @@
                                 <li>    قیمت واحد : {{$order->product->price}}</li>
 
                                 <li>    قیمت کل : {{$order->price}}</li>
+
                             </ul>
 
                             <br>
@@ -97,15 +98,42 @@
 
                     <td>
                         
-                      <form method="POST" action="comment/user/confirm/{{$order->id}}">
-                        
-                        @csrf
+                        <button class="btn btn-table bg-light-green " data-bs-toggle="modal" data-bs-target="#updateModal-{{$order->id}}">
 
-                        <button class="btn btn-table bg-light-green ">
                             <i class="fa-regular fa-pen-to-square text-light"></i>
+
                         </button>
 
-                      </form>
+
+                        <x-modal idx="updateModal-{{$order->id}}" title="به روز رسانی وضعیت">
+
+                            <form method="POST" action="order/status/{{$order->id}}">
+
+                                @method("PUT")
+
+                                @csrf
+
+                                <div class="form-group mt-2">
+
+                                  <label for="exampleInputEmail1" class="mt-2 d-block text-right">وضعیت ها</label>
+
+                                  <select name="status" class="form-select mt-2" aria-label="Default select example">
+
+                                    @foreach ($status as $key=>$value)
+                                        
+                                    <option value="{{$key}}">{{$value}}</option>
+
+                                    @endforeach
+                            
+
+                                  </select>
+
+                                 
+                                </div>
+                       
+                                <button type="submit" class="btn btn-primary d-block mx-auto mt-4">به روز رسانی</button>
+                              </form>
+                        </x-modal>
 
                     </td>
 
