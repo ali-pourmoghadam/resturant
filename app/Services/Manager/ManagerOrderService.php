@@ -19,7 +19,7 @@ class ManagerOrderService{
     public function orderActives()
     {
         return OrderProduct::where("resturant_id" , $this->resturant->id)
-                            ->where("status"  , 0)
+                            ->whereIn("status"  , [0,1,2])
                             ->get();
     }
 
