@@ -13,14 +13,14 @@
 
         <div style="width:300px; right:50px; top:0px;" class="position-absolute">
 
-            <form method="post" action="">
+            <form method="post" action="/manager/report/filter">
 
-         
+                 @csrf
                  <button class="btn ">
                     اعمال
                  </button>
 
-                <select style="width:100px; border-radius:10px; height:23px; border:none;" class="text-center" aria-label="Default select example">
+                <select name="orderNumber" style="width:100px; border-radius:10px; height:23px; border:none;" class="text-center" aria-label="Default select example">
                     <option  value="0">هفتگی</option>
                     <option value="1">ماهانه</option>
                   </select>
