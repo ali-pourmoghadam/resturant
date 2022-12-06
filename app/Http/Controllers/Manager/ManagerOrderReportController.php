@@ -11,20 +11,18 @@ class ManagerOrderReportController extends Controller
 {
 
 
-    public function reportAll(ManagerReportService $report)
+    public function reportAll(ReportOrderFilterRequest $request ,ManagerReportService $report)
     {
-        $orders = $report->reportCompletedOrders();
-
-        return view("manager.report" , compact("orders"));
-    }
-
-
-    public function orderBy(ReportOrderFilterRequest $request , ManagerReportService $report)
-    {
+  
+        $orders =   ($request->has('orderNumber')) ?
         
-        $orders = $report->reportFilterOrder($request->all()["orderNumber"]);
+        $report->reportFilterOrder($request->input('orderNumber')) :  $report->reportCompletedOrders() ;
 
+        $income = $report->reportIncomeOrder();
 
-        return view("manager.report" , compact("orders"));
+        $count  = $report->reportCoutnOrder();
+
+        return view("manager.report" , compact("orders" , "income" , "count"));
     }
+
 }

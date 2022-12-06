@@ -1,7 +1,48 @@
 <x-Manager_panel>
 
+       
+    <div class="row mt-4 mb-4">
 
+
+        <div class="col-3 gb-dark mr-2">    
+
+            <div class="statistic-card p-2 d-flex flex-row  align-items-center justify-content-start">
+
+                <div class="flex-1 statistic-card-shape bg-light-blue">
+                    <i class="fa-solid fa-bowl-food text-light mt-3 "style="font-size:25px"></i>
+                 
+                </div>
+
+                <div class="flex w-75">
+                    <span class="d-block text-center fs-5 txt-gray">تعداد کل سفارش ها</span>
+                    <span class="d-block text-center fs-6 mt-2 txt-gray">{{$count}}</span>
+                </div>
+
+            </div>
+            
+        </div>
+        <div class="col-3 gb-dark mr-2">    
+
+            <div class="statistic-card p-2 d-flex flex-row  align-items-center justify-content-start">
+
+                <div class="flex-1 statistic-card-shape bg-light-green">
+                    <i class="fa-solid fa-mountain-city text-light mt-3 "style="font-size:25px"></i>
+                </div>
+
+                <div class="flex w-75">
+                    <span class="d-block text-center fs-5 txt-gray">درامد کل</span>
+                    <span class="d-block text-center fs-6 mt-2 txt-gray">{{$income}} تومان</span>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
     
+
+
+ 
     <div class="d-block  position-relative mt-4 mb-4"> 
         
 
@@ -13,7 +54,7 @@
 
         <div style="width:300px; right:50px; top:0px;" class="position-absolute">
 
-            <form method="post" action="/manager/report/filter">
+            <form method="GET" action="/manager/report">
 
                  @csrf
                  <button class="btn ">
@@ -121,4 +162,5 @@
     </div>
 
 
+    
 </x-Manager_panel>

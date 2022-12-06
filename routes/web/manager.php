@@ -69,9 +69,7 @@ route::group( ["middleware" => "manager:admin"] , function(){
     route::group( ["controller" => ManagerOrderReportController::class ] , function(){
 
         Route::get("report" ,  "reportAll");
-
-        Route::post("report/filter" ,  "orderBy");
-
+        
     });
 
 
