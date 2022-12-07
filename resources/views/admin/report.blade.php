@@ -5,15 +5,15 @@
 
 
         <h4 class="text-center">
-              گزارش سفارشات انجام شده 
+              گزارش سفارشات   
         </h4>
 
 
         <div style="width:300px; right:50px; top:0px;" class="position-absolute">
 
-            <form method="GET" action="/manager/report">
+            <form method="GET" action="/admin/report/order">
 
-                 @csrf
+         
                  <button class="btn ">
                     اعمال
                  </button>
@@ -34,7 +34,7 @@
         <div class="col-10 mx-auto mt-4">
 
 
-            {{-- <table class="table mt-4">
+             <table class="table mt-4">
                 <thead>
 
                   <tr class="text-center">
@@ -47,13 +47,9 @@
 
                     <th scope="col">تاریخ ثبت سفارش</th>
 
-                    <th scope="col">نام محصول</th>
+                    <th scope="col">سفارش دهنده</th>
 
-                    <th scope="col">تعداد</th>
-
-                    <th scope="col">قیمت واحد</th>
-
-                    <th scope="col">قیمت کل</th>
+                    <th scope="col"> جزییات </th>
 
                   </tr>
 
@@ -77,7 +73,7 @@
                     </td>
 
                     <td>
-                      {{$order->order->transaction[0]->transaction_id}}
+                      {{$order->transaction[0]->transaction_id}}
                     </td>
                           
                     <td>
@@ -86,19 +82,45 @@
 
 
                     <td>
-                        {{$order->product->name}}
+                        {{$order->user->fullName}}
                     </td>
 
-                    <td>
-                        {{$order->quantity}}
-                    </td>
 
                     <td>
-                        {{$order->product->price}}
-                    </td>
+                        <button class="btn btn-table bg-light-blue "  data-bs-toggle="modal" data-bs-target="#detailModal-{{$order->id}}">
+                            <i class="fa-regular fa-pen-to-square text-light"></i>
+                        </button>
+                        
 
-                    <td>
-                        {{$order->price}}
+                        <x-modal title="جزییات" idx="detailModal-{{$order->id}}">
+
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">نام محصول</th>
+                                    <th scope="col">تعداد</th>
+                                    <th scope="col">رستوران</th>
+                                    <th scope="col">قیمت </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach ($order->product as $product)
+                                    
+                                    <tr>
+                                      <th scope="row">{{$product->name}}</th>
+  
+                                      <td>{{ $product->pivot->quantity}}</td>
+  
+                                      <td>{{ $product->menu[0]->resturant->name}}</td>
+  
+                                      <td>{{ $product->pivot->price}}</td>
+                                    </tr>
+
+                                    @endforeach
+                              </table>
+
+                        </x-modal>
                     </td>
 
                     
@@ -112,7 +134,7 @@
                 </tbody>
 
 
-              </table> --}}
+              </table> 
 
 
         </div>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminReportService {
 
+    public CONST ORDERBY = [ "week" => 0 , "month" =>1]; 
 
 
     public function countUsers()
@@ -34,9 +35,14 @@ class AdminReportService {
 
     public function countOrders()
     {
-        return Order::all()->count();
+        return $this->orders()->count();
     }
 
+
+    public function orders()
+    {
+        return Order::all();
+    }
 
 
     public function bestSellers($limit)
@@ -62,6 +68,20 @@ class AdminReportService {
         return $result;
 
     }
+
+
+        
+    public function orderFilter($orderNumber)
+    {
+
+        $orderBy = ($orderNumber == self::ORDERBY["week"]) ? "subWeek" : "subMonth";
+           
+        return  Order::whereBetween('created_at', [Carbon::now()->$orderBy()->format("Y-m-d H:i:s"), Carbon::now()])->get();
+
+    }
+
+
+   
   
 
 }

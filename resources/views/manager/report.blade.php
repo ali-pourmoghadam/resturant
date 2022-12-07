@@ -56,7 +56,6 @@
 
             <form method="GET" action="/manager/report">
 
-                 @csrf
                  <button class="btn ">
                     اعمال
                  </button>

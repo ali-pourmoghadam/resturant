@@ -33,9 +33,11 @@ class ManagerReportService{
 
         $orderBy = ($orderNumber == self::ORDERBY["week"]) ? "subWeek" : "subMonth";
            
+    
         return  $this->getOrders()
                      ->whereBetween('created_at', [Carbon::now()->$orderBy()->format("Y-m-d H:i:s"), Carbon::now()])
                      ->get();
+
     }
 
 
