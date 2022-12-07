@@ -14,7 +14,7 @@ class CommentsManagementController extends Controller
     {
         $comments = $comments->execute();
 
-        return view("admin.commentDeleteRequest" , compact("comments"));
+        return view("admin.comment_delete_request" , compact("comments"));
     }
 
     public function forceDeleteRequests(Comment $comment)

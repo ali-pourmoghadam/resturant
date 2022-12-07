@@ -17,6 +17,7 @@ class CommentController extends Controller
         $this->helper  = $appHelpers;
     }
 
+
     /**
      * Store a newly created resource in storage.
      *

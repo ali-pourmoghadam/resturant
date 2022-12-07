@@ -40,6 +40,12 @@ class OrderProduct extends Model
     }
 
 
+    public function scopeResturant($qeury , $id){
+
+        return $qeury->where("resturant_id" ,$id);
+        
+    }
+
     protected  function status() : Attribute
     {
         return Attribute::make(

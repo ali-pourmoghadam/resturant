@@ -250,6 +250,60 @@
                     {{-- END-COMMENT --}}
 
 
+                    
+                    {{-- START-REPORT --}}
+
+                    <div >
+
+                        <div class="position-relative  mx-auto w-80  panel-item px-4 py-2 " data-bs-toggle="collapse" href="#collapse-6" role="button" aria-expanded="true" aria-controls="collapse-6">
+                        
+                            
+                            <i class="position-absolute mt-1  text-light fs-6  fa-regular fa-clipboard"></i>
+
+                            <span class="text-light fs-6 d-block text-center ">گزارشات</span>
+            
+                        </div>
+
+
+                            {{-- START-REPORT-TIEMS --}}
+
+                            <div id="collapse-6"  class="
+
+                            collapse
+
+                            bg-light rounded-3 d-felx
+
+                            flex-column panel-item-sub 
+
+                            justify-content-center
+
+                            align-items-center
+
+                            w-75
+
+                            mx-auto
+                            
+                            mb-3
+                            " >
+
+
+                            <div class="position-relative px-3 py-2 ">
+
+                                <i class="fa-solid position-absolute mt-1 fs-6 fa-wand-sparkles"></i>
+
+                                <a href="/admin/report/order" class="fs-6  d-block text-center text-dark"> سفارشات</a>
+
+                            </div>
+
+                            </div>
+                            
+                        {{-- END-REPORT-TIEMS --}}
+                
+                    </div>
+        
+                    {{-- END-REPORT- --}}
+
+
 
                     {{-- START-FOODPARTY --}}
 

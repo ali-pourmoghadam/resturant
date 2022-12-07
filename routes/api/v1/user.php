@@ -26,13 +26,13 @@ Route::group( ["middleware" => "auth:api" ] , function(){
             
         });
 
-        Route::group(["controller" => CartController::class], function(){
+        Route::group(["controller" => CartController::class , "prefix" => "cart"], function(){
 
-            Route::post("/addCart", "addToCart");
+            Route::post("/", "addToCart");
 
-            Route::get("/getCart", "getCart");
+            Route::get("/", "getCart");
 
-            Route::delete("/delCart", "delCart");
+            Route::delete("/", "delCart");
     
         });
 

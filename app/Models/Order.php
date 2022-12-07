@@ -36,7 +36,7 @@ class Order extends Model
     public function product()
     {
         return $this->belongsToMany(Product::class)->withTimestamps()
-                                                   ->withPivot(['resturant_id']);
+                                                   ->withPivot(['resturant_id' , 'quantity' , 'price']);
     }
 
     public function transaction()
@@ -49,5 +49,6 @@ class Order extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    
+ 
+
 }
