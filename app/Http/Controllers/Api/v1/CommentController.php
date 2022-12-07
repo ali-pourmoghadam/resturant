@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Actions\User\CommentGetAction;
 use App\Events\UserComment;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\GetCommentRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -15,6 +17,15 @@ class CommentController extends Controller
     public function __construct(AppHelpers $appHelpers)
     {
         $this->helper  = $appHelpers;
+    }
+
+
+    public function index(GetCommentRequest $request , CommentGetAction $commentAction)
+    {
+      $attribute = $request->all();
+
+     return $commentAction->execute($attribute);
+    
     }
 
 
