@@ -47,21 +47,21 @@ route::group( ["middleware" => "manager:admin"] , function(){
     });
 
 
-    route::group( ["controller" => ManagerCommentResponseController::class ] , function(){
+    route::group( ["controller" => ManagerCommentResponseController::class , "prefix" => "comment" ] , function(){
 
-        Route::delete("comment/user/delete/{comment}" ,  "destroy");
+        Route::delete("/user/delete/{comment}" ,  "destroy");
 
-        Route::post("comment/user/confirm/{comment}" ,  "confirm");
+        Route::post("/user/confirm/{comment}" ,  "confirm");
 
     });
 
 
 
-    route::group( ["controller" => ManagerOrderController::class ] , function(){
+    route::group( ["controller" => ManagerOrderController::class , "prefix" => "order" ] , function(){
 
-        Route::get("order" ,  "orders");
+        Route::get("/" ,  "orders");
 
-        Route::put("order/status/{id}" ,  "orderStatusUpdate");
+        Route::put("/status/{id}" ,  "orderStatusUpdate");
 
     });
 

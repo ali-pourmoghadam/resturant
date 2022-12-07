@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FoodCategoryController;
 use App\Http\Controllers\Admin\FoodPartyController;
+use App\Http\Controllers\Admin\OrderReportController;
 use App\Http\Controllers\Admin\ResturantCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,15 +23,25 @@ Route::group( ["middleware" => "admin:manager"] , function(){
     Route::resource('/foodParty',  FoodPartyController::class);  
 
 
-    Route::group((["controller" => CommentsManagementController::class] ) ,function(){
+    Route::group((["controller" => CommentsManagementController::class , "prefix" => "comment"] ) ,function(){
 
-        Route::get("/comment/deletes" , "showDeleteRequests");
+        Route::get("/deletes" , "showDeleteRequests");
 
-        Route::delete("/comment/deletes/force/{Comment}" , "forceDeleteRequests");
+        Route::delete("/deletes/force/{Comment}" , "forceDeleteRequests");
 
-        Route::post("/comment/deletes/restore/{Comment}" , "restoreDeleteRequests");
+        Route::post("/deletes/restore/{Comment}" , "restoreDeleteRequests");
 
     });
+
+
+
+    Route::group((["controller" => OrderReportController::class , "prefix" => "report"] ) ,function(){
+
+        Route::get("/order" , "reportAll");
+
+    });
+
+    
 
 });
 
