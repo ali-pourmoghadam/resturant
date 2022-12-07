@@ -52,8 +52,21 @@ Route::group( ["middleware" => "auth:api" ] , function(){
         Route::resource("address", AddressController::class);
 
         Route::resource("resturant", ResturantController::class);
+        
+        
+        Route::group(["controller" => ResturantController::class , "prefix" => 'resturant'] , function(){
+            
 
-        Route::get("{resturant}/food", [ ResturantController::class , "food"]);
+            Route::get("{resturant}/food",  "food");
+
+            Route::post("/near",  "nearBy");
+        
+        });
+
+
+       
+
+  
 
 
         
