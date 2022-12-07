@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ManagerSettingRequest extends FormRequest
+class ResturantNearRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class ManagerSettingRequest extends FormRequest
      */
     public function authorize()
     {
-        return (Auth::guard("manager")->user()) ? true : false;
+        return ( Auth::guard("api")->id()) ? true  : false;
     }
 
     /**
@@ -26,21 +26,23 @@ class ManagerSettingRequest extends FormRequest
     {
         return [
 
-            "email" => "required|email" , 
+            "latitude" => "required" ,
 
-            "name" => "required|string|min:2" , 
+            "longitude" => "required" ,
 
-            "last_name" => "required|string",
-
-            "address" => "required|string" ,
-
-            "national_id" => "required|size:5" ,
-
-            "phone_number" => "required|size:5" ,
-
-            "thumbnail" => "required|image|mimes:jpg,jpeg,png,webp"
+            "area" => "required" ,
 
         ];
     }
 
+
+    
+    public function messages(){
+
+        return [
+
+            'required' => ":attribute is required !"
+            
+        ];
+    }
 }
