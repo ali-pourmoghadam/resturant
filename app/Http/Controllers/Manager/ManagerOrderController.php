@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Events\OrderUpdateEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderStatusRequest;
 use App\Models\OrderProduct;
@@ -30,7 +31,11 @@ class ManagerOrderController extends Controller
         
         $attribute = $request->validated();
 
-        OrderProduct::where("id" , $id)->update(["status" => $attribute["status"]]);
+        $order = OrderProduct::find($id);
+
+        $order->update(["status" => $attribute["status"]]);
+
+        event(new OrderUpdateEvent($order));
 
         return redirect("/manager/order");
         

@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Events\FoodPartyEvent;
 use App\Events\OrderEvent;
+use App\Events\OrderUpdateEvent;
 use App\Events\UserComment;
 use App\Listeners\ResturantCommentNotification;
 use App\Listeners\ResturantOrderNotification;
 use App\Listeners\ResturantPartyNotification;
+use App\Listeners\UserOrderUpdateListiner;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -33,8 +35,13 @@ class EventServiceProvider extends ServiceProvider
         OrderEvent::class => [
             ResturantOrderNotification::class
         ],
+
         UserComment::class => [
             ResturantCommentNotification::class
+        ],
+
+        OrderUpdateEvent::class => [
+            UserOrderUpdateListiner::class
         ]
 
     ];
