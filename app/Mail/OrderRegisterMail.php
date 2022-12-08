@@ -10,9 +10,11 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OrderRegisterMail extends Mailable
+class OrderRegisterMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+
+    public Order $order;
 
     /**
      * Create a new message instance.
@@ -21,7 +23,8 @@ class OrderRegisterMail extends Mailable
      */
     public function __construct(Order $order)
     {
-        $this->order = $order;
+            $this->order = $order;
+
     }
 
     /**
@@ -32,7 +35,7 @@ class OrderRegisterMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Order Registeration ',
+            subject: 'Order Registeration',
         );
     }
 
@@ -43,14 +46,12 @@ class OrderRegisterMail extends Mailable
      */
     public function content()
     {
+
         return new Content(
-            
-            markdown: 'emails.orders.Register',
+            markdown: 'emails.orders.register',
 
             with : [
-
                 "order" => $this->order
-
             ]
         );
     }

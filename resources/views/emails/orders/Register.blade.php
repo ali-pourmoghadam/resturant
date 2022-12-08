@@ -1,6 +1,6 @@
 <x-mail::message>
 
-order with id {{$order->id}} regsiterd successfully!
+order with id {{$order->id}} registered
 
 <x-mail::button :url="''">
 Button Text

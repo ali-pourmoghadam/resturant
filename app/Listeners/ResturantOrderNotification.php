@@ -7,8 +7,6 @@ use App\Events\OrderEvent;
 use App\Mail\OrderRegisterMail;
 use App\Models\Resturant;
 use App\Notifications\OrderNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
