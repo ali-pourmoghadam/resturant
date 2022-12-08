@@ -14,11 +14,17 @@ class OrderProduct extends Model
 
     protected $table  = "order_product";
 
+    protected $fillable = [
+
+        "status"
+
+    ];
+
     protected $with = [
 
         "resturant" , 
 
-        "order"
+        "order" , 
 
     ];
 

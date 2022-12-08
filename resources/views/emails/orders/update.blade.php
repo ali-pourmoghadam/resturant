@@ -1,7 +1,12 @@
 <x-mail::message>
+# Introduction
 
 <p class="text-center">
-    order with id {{$order->id}} registered
+
+    your order status :
+    
+    {{$order->status}}
+    
 </p>
 
 <x-mail::button :url="''">
