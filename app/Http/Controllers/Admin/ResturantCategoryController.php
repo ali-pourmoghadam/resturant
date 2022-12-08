@@ -49,8 +49,9 @@ class ResturantCategoryController extends Controller
      */ 
     public function update(CategoryRequest $request, $id)
     {
+        
         $attributes = $request->validated();
-                
+
         ResturantCategroy::find($id)->update($attributes);
 
         return redirect("/admin/resturant");

@@ -60,7 +60,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
     
-        Route::bind('address', function(int $id ){
+        Route::bind('address', function( int $id ){
 
             return (Route::current()->methods[0] == "GET") ? User::find($id) : Address::find($id) ;
 
@@ -68,6 +68,12 @@ class RouteServiceProvider extends ServiceProvider
 
         
         Route::bind('resturant', function(int $id ){
+
+            if(request()->route()->getPrefix() != "api/v1/user/resturant"){
+
+                return $id;
+
+            }
 
             return Resturant::find($id) ?? false ;
 
