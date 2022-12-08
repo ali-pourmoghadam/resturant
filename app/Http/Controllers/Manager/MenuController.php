@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Actions\Manager\BinaryDaysAction;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
@@ -33,10 +34,10 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , AppHelpers $helper)
+    public function store(Request $request , AppHelpers $helper ,BinaryDaysAction $binary)
     {
 
-        $binaryDays = $this->binaryDays($request , $helper);
+        $binaryDays = $binary->execute($request , $helper);
 
         // untill now  the manager allowd just have one resturant but this will be change later , so chose first index resturant
 
@@ -63,10 +64,10 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id  ,  AppHelpers $helper)
+    public function update(Request $request, $id  ,  AppHelpers $helper , BinaryDaysAction $binary)
     {
         
-       $binaryDays = $this->binaryDays($request , $helper);
+        $binaryDays = $binary->execute($request , $helper);
 
        $attributes = $request->validate([
 
@@ -100,11 +101,5 @@ class MenuController extends Controller
     
 
 
-    public function binaryDays($request , $helper)
-    {
-        $days  = $request->except('_token' , "name" , "status" , "_method");
-        
-        return $helper->encodeBinaryDays($days);
-    }
 
 }

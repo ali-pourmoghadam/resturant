@@ -26,12 +26,11 @@ class ProductRequest extends FormRequest
     public function rules(Request $request)
     {
 
-    
 
         return [
             "name" => "required" ,
             
-            "thumbnail" => "required|image|mimes:jpeg,jpg,png,webp" , 
+            "thumbnail" => "image|mimes:jpeg,jpg,png,webp" , 
 
             "price" => "required" ,
 

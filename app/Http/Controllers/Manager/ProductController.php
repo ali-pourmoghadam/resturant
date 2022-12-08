@@ -68,6 +68,7 @@ class ProductController extends Controller
 
         $attributes = $request->validated() ;
 
+
         Product::where("id" , $id)->update($attributes);
         
         return redirect("/manager/product");
