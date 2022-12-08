@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Actions\Manager\MenuAction;
+use App\Actions\Manager\ProductAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\FoodCategory;
@@ -19,14 +21,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(MenuAction $menus ,ProductAction $product)
     {
     
-        $menus = Auth::guard("manager")->user()
-                                        ->menus
-                                        ->filter(fn($menu)=> $menu->status == true);
+        $menus = $menus->execute();
 
-        $products = $this->getProducts($menus);
+        $products = $product->execute($menus);
             
         $foodCategories = FoodCategory::all();                                
 
@@ -42,9 +42,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-     
-         $request->validated() ;
-
+    
          $attributes  = $request->except("menu" , "thumbnail");
 
          $attributes['img'] = $request->file("thumbnail")->store("products");
@@ -68,8 +66,7 @@ class ProductController extends Controller
 
         $attributes = $request->validated() ;
 
-
-        Product::where("id" , $id)->update($attributes);
+        Product::find($id)->update($attributes);
         
         return redirect("/manager/product");
     }
@@ -84,7 +81,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
 
-        $product =  Product::where("id" , $id)->first();
+        $product =  Product::find($id);
 
         $product->menu->each(function($menu) use ($product){
             
@@ -97,21 +94,4 @@ class ProductController extends Controller
         return redirect("/manager/product");
     }
 
-
-    public function getProducts($menus)
-    {
-        $products = [];
-
-        $menus->each(function($menu) use(&$products) {
-
-        $menu->product->each(function($product) use(&$products) {
-
-                $products[] = $product;
-
-            });
-
-          });
-
-        return $products;
-    }
 }
