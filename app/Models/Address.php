@@ -22,7 +22,9 @@ class Address extends Model
 
         'latitude' ,
         
-        'longitude'
+        'longitude' ,
+
+        "is_active"
 
     ];
 

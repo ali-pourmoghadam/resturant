@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Actions\User\ActiveAddressAction;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressUpsertRequest;
@@ -59,10 +60,12 @@ class AddressController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AddressUpsertRequest $request , $address)
+    public function update(AddressUpsertRequest $request , ActiveAddressAction $activeAddress , $address)
     {
-    
+
         $this->authorize("accessAdress" ,[ Address::class ,  $address->user_id]);
+        
+        $activeAddress->execute($request , $address);
 
         $attributes = array_merge($request->all() , ["user_id" => Auth::id()] );
 
