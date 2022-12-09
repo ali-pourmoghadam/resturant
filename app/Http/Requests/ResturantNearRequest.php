@@ -26,11 +26,7 @@ class ResturantNearRequest extends FormRequest
     {
         return [
 
-            "latitude" => "required" ,
-
-            "longitude" => "required" ,
-
-            "area" => "required" ,
+            "area" => "required" 
 
         ];
     }

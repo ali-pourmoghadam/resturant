@@ -55,7 +55,7 @@ class ResturantController extends Controller
         
         $attribute  = $request->validated();
 
-        $resturants =  $resturantsAction->execute( $attribute["latitude"] ,  $attribute["longitude"] , 0.5);
+        $resturants =  $resturantsAction->execute( 0.5);
 
         return $helper->jsonResponse(ResturantResource::collection($resturants));
     }
