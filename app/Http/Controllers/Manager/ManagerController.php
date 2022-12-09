@@ -54,13 +54,12 @@ class ManagerController extends Controller
     public function storeSetting(ManagerSettingRequest $request ,$id)
     {
 
-        $request->validated();
 
         $attributes =  $request->except("thumbnail" ,"_token" , "_method");
 
         $attributes['image'] = $request->file("thumbnail")->store("resturant");
         
-        Manager::where("id" , $id)->update($attributes);
+        Manager::find($id)->update($attributes);
         
         return redirect("/manager/setting");
 

@@ -8,7 +8,7 @@ use App\Http\Controllers\Manager\ManagerOrderController;
 use App\Http\Controllers\Manager\ManagerOrderReportController;
 use App\Http\Controllers\Manager\MenuController;
 use App\Http\Controllers\Manager\ProductController;
-
+use App\Http\Controllers\Manager\ResturantInfoController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -78,6 +78,8 @@ route::group( ["middleware" => "manager:admin"] , function(){
     Route::resource("/menu" ,  MenuController::class);
 
     Route::resource("/product" ,  ProductController::class);
+
+    Route::resource("/resturant/info" ,  ResturantInfoController::class);
 
     Route::resource("/comment" ,  ManagerCommentController::class);
 

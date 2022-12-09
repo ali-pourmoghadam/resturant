@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    
 
     <link href="https://static.neshan.org/sdk/openlayers/5.3.0/ol.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
@@ -371,7 +372,7 @@
  
                              <i class="fa-solid position-absolute mt-1 fs-6 fa-wand-sparkles"></i>
  
-                             <a href="" class="fs-6  d-block text-center text-dark"> اظلاعات رستوران</a>
+                             <a href="/manager/resturant/info" class="fs-6  d-block text-center text-dark"> اطلاعات رستوران</a>
  
                          </div>
  

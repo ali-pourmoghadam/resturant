@@ -29,7 +29,19 @@ class Resturant extends Model
 
         "city_id" ,
 
-        "rsturant_category"
+        "rsturant_category" ,
+        
+        "latitude" ,
+
+        "longtitude" ,
+
+        "phone_number" ,
+
+        "work_days" ,
+
+        "image" ,
+
+        "address"
     ];
 
 
@@ -72,11 +84,16 @@ class Resturant extends Model
         return $this->hasManyThrough(Comment::class , OrderProduct::class , null , "order_id" , null , "order_id");
     }
     
+    public function workHours()
+    {
+      return $this->hasOne(WorkHours::class);
+    }
 
     public function scopeActive($query)
     {
         $query->where("is_active" , true);
     }
+
 
 
     public function allProducts()

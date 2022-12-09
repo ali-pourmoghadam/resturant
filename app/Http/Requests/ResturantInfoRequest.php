@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class AdminOrderFilterRequest extends FormRequest
+class ResturantInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class AdminOrderFilterRequest extends FormRequest
      */
     public function authorize()
     {
-        return (Auth::guard("admin")->user()) ? true : false;
+        return (Auth::guard("manager")->id()) ? true : false;
     }
 
     /**
@@ -24,6 +24,18 @@ class AdminOrderFilterRequest extends FormRequest
      */
     public function rules()
     {
-        return [];
+
+        return [
+            
+            "latitude" => "required" ,
+
+            "longtitude" => "required" ,
+
+            "thumbnail" => "image|mimes:jpg,jpeg,png,webp" ,
+
+            "phone_number" => "required" , 
+
+            "address" => "required"
+        ];
     }
 }
