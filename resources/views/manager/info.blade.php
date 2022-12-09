@@ -1,4 +1,5 @@
 <x-manager_panel>
+    
 
 <form action="/manager/resturant/info/{{$resturant->id}}" method="POST" enctype="multipart/form-data">
 
@@ -32,7 +33,7 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class=" d-block mx-2 text-right"> عرض حغرافیایی</label>
     
-                       <input type="text" name="latitude" class="form-control mt-1 text-center" id="lat" aria-describedby="emailHelp" >
+                       <input type="text" name="latitude" value="{{$resturant->latitude}}"  placeholder="{{$resturant->latitude}}" class="form-control mt-1 text-center" id="lat" aria-describedby="emailHelp" >
     
                        @error('lat')
                             <div class="text-danger text-center mt-2">{{ $message }}</div>
@@ -45,7 +46,7 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="d-block mx-2 text-right">طول جغرافیایی</label>
 
-                    <input type="text" name="longtitude" class="form-control mt-1 text-center" id="long" aria-describedby="emailHelp" >
+                    <input type="text" name="longtitude" value="{{$resturant->longtitude}}"  placeholder="{{$resturant->longtitude}}" class="form-control mt-1 text-center" id="long" aria-describedby="emailHelp" >
 
                     @error('long')
                     <p class="text-danger text-center mt-2">{{ $message }}</p>
@@ -72,7 +73,7 @@
             
             <label for="exampleInputEmail1" class=" d-block mx-2 text-right"> :  شماره تماس</label>
             
-            <input type="text" name="phone_number" class="form-control mt-1 text-right" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            <input type="text" name="phone_number"  value="{{$resturant->phone_number}}"  placeholder="{{$resturant->phone_number}}"  class="form-control mt-1 text-right" id="exampleInputEmail1" aria-describedby="emailHelp" >
 
             @error('phone_number')
             <p class="text-danger text-center mt-2">{{ $message }}</p>
@@ -85,7 +86,7 @@
 
             <label for="exampleInputEmail1" class=" d-block mx-2 text-right"> :  ادرس</label>
 
-            <input type="text" name="address" class="form-control mt-1 text-right" id="exampleInputEmail1" aria-describedby="emailHelp" >
+            <input type="text" name="address"   value="{{$resturant->address}}"  placeholder="{{$resturant->address}}"   class="form-control mt-1 text-right" id="exampleInputEmail1" aria-describedby="emailHelp" >
 
             @error('address')
             <p class="text-danger text-center mt-2">{{ $message }}</p>
@@ -110,7 +111,8 @@
                 شنبه
                 </label>
 
-               <x-time day="saturday"></x-time>
+                
+               <x-time :workHours=$workHours  day="saturday"></x-time>
 
 
             </div>
@@ -121,7 +123,7 @@
             یکشنبه
                 </label>
 
-                <x-time day="sunday"></x-time>
+                <x-time :workHours=$workHours day="sunday"></x-time>
 
             </div>
             <div class="form-check mx-1">
@@ -130,7 +132,7 @@
             دوشنبه
                 </label>
 
-                <x-time day="monday"></x-time>
+                <x-time :workHours=$workHours day="monday"></x-time>
 
             </div>
             <div class="form-check mx-1">
@@ -139,7 +141,7 @@
             سه شنبه
                 </label>
 
-                <x-time day="tuesday"></x-time>
+                <x-time :workHours=$workHours day="tuesday"></x-time>
             </div>
             <div class="form-check mx-1">
                 <input name="day[wen]" class="form-check-input" type="checkbox" value="8" id="flexCheck" >
@@ -147,7 +149,7 @@
             چهار شنبه
                 </label>
 
-                <x-time day="wedensday"></x-time>
+                <x-time :workHours=$workHours day="wednesday"></x-time>
 
             </div>
             <div  class="form-check mx-1">
@@ -156,7 +158,7 @@
             پنج شنبه
                 </label>
 
-                <x-time day="thursday"></x-time>
+                <x-time :workHours=$workHours day="thursday"></x-time>
 
             </div>
             <div  class="form-check mx-1">
@@ -165,7 +167,7 @@
             جمعه
                 </label>
 
-                <x-time day="friday"></x-time>
+                <x-time :workHours=$workHours day="friday"></x-time>
             </div>
 
 

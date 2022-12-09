@@ -9,11 +9,12 @@ class WorkHours extends Model
 {
     use HasFactory;
 
-    protected $gaurd = [];
+    protected $guarded  = [];
 
 
     public function resturant()
     {
         return $this->belongsTo(Resturant::class);
     }
+
 }

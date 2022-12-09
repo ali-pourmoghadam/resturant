@@ -6,11 +6,14 @@ namespace App\Http\Controllers\Manager;
 use App\Actions\Manager\ActiveResturantAction;
 use App\Actions\Manager\BinaryDaysAction;
 use App\Actions\Manager\HoursCheckAction;
+use App\Actions\Manager\HoursGetAction;
+use App\Actions\Manager\HoursInsertAction;
 use App\Helpers\AppHelpers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResturantInfoRequest;
 use App\Models\Resturant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class ResturantInfoController extends Controller
 {
@@ -21,11 +24,14 @@ class ResturantInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(ActiveResturantAction $resturant)
+    public function index(ActiveResturantAction $resturant, HoursGetAction $hoursAction)
     {
         $resturant = $resturant->execute();
 
-        return view("manager.info", compact("resturant"));
+        $workHours = $hoursAction->execute($resturant);
+
+
+        return view("manager.info", compact("resturant" , "workHours"));
     }
 
   
@@ -37,11 +43,12 @@ class ResturantInfoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ResturantInfoRequest $request, $id ,AppHelpers $helper , HoursCheckAction $hourCheck)
+    public function update(ResturantInfoRequest $request, $id ,AppHelpers $helper , HoursCheckAction $hourCheck , HoursInsertAction $hoursAction)
     {
         $attributes = $request->validated();
 
         $attributes['work_days'] = $helper->encodeBinaryDays($request->input("day"));
+
 
         if($request->file("thumbnail"))
         {
@@ -50,12 +57,16 @@ class ResturantInfoController extends Controller
             $attributes['image'] = $request->file("thumbnail")->store("resturant");
         }
 
-        // $hourCheck = $hourCheck->execute($request->input("begin") , $request->input("end"));
+        $hourCheck = $hourCheck->execute($request->input("begin") , $request->input("end"));
         
-        // if(!empty($hourCheck)) return back()->with( ["hours" => $hourCheck]);
+        if(!empty($hourCheck)) return back()->with( ["hours" => $hourCheck]);
 
 
-        Resturant::find($id)->update($attributes);
+        $resturant = Resturant::find($id);
+        
+        $resturant->update($attributes);
+
+        $hoursAction->execute($resturant , [$attributes["begin"] , $attributes["end"]]);
 
         return back();
 

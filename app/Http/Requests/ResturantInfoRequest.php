@@ -35,7 +35,11 @@ class ResturantInfoRequest extends FormRequest
 
             "phone_number" => "required" , 
 
-            "address" => "required"
+            "address" => "required" ,
+
+            "begin" => "required" , 
+
+            "end" => "required"
         ];
     }
 }
