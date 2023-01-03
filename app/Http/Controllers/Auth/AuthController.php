@@ -11,6 +11,7 @@ use App\Models\Manager;
 use App\Models\Resturant;
 use App\Models\ResturantCategroy;
 use App\Models\User;
+use App\Models\WorkHours;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -80,9 +81,9 @@ class AuthController extends Controller
 
             'password' =>$attributes['password']
 
-       ]);
+        ]);
 
-       Resturant::create([
+       $resturant = Resturant::create([
 
             "manager_id" => $manager->id ,
 
@@ -90,10 +91,12 @@ class AuthController extends Controller
 
             "rsturant_category" => $attributes['type']
 
-       ]);
+        ]);
 
 
+        WorkHours::create(["resturant_id" => $resturant->id]);
 
+        
         Auth::guard("manager")->login($manager);
         
 
@@ -141,7 +144,7 @@ class AuthController extends Controller
 
             return response()->json([
 
-                    "message" => "کاربر با موفقیت ایجاد شد" ,
+                    "message" => "user created successfully" ,
                     
                     "token" => $token 
             ]);
@@ -171,7 +174,7 @@ class AuthController extends Controller
 
                 'status' => 'error',
 
-                'message' => 'یوزر یا پسوورد اشتباه است',
+                'message' => 'username or password is wrong',
 
             ], 401);
         }
@@ -182,7 +185,7 @@ class AuthController extends Controller
 
         return response()->json([
 
-                'status' => 'خوش  آمدید',
+                'message' => 'welcome',
 
                 'authorisation' => [
 

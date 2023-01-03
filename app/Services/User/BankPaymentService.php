@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
 class BankPaymentService implements PaymentContract {
 
 
-    // call bank payment api and sends payment link to user
+
 
 
     public function pay($orderId , $price)

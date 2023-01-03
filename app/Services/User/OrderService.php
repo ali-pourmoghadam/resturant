@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class OrderService {
 
 
-    public function __construct(PaymentContract $paymentService ,CartService $cartService)
+    public function __construct(PaymentContract $paymentService , CartService $cartService)
     {
         $this->paymentService = $paymentService;
 

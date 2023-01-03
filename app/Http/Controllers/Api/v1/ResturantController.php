@@ -50,12 +50,15 @@ class ResturantController extends Controller
 
     }
 
-    public function nearBy(ResturantNearRequest $request, AppHelpers $helper ,ResturantNearAction $resturantsAction)
+    public function nearBy(AppHelpers $helper ,ResturantNearAction $resturantsAction)
     {
-        
-        $attribute  = $request->validated();
-
+    
         $resturants =  $resturantsAction->execute( 0.5);
+
+        if(!$resturants) 
+        {
+            return $helper->jsonResponse("you haven't active address yet !");
+        }
 
         return $helper->jsonResponse(ResturantResource::collection($resturants));
     }
