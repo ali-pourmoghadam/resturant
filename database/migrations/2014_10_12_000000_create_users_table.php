@@ -21,8 +21,6 @@ return new class extends Migration
 
             $table->string('email')->unique();
 
-            $table->string('address' , 255);
-
             $table->string('phoneNumber' , 20);
 
             $table->string('image' , 255)->nullable();
