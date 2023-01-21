@@ -4,6 +4,19 @@
 
 -this project its just **portfolio** 
 
+# For Runing Follow This Instructions :
+
+1. copy .env file and setup database
+2. composer install
+3. npm install
+4. php artisan key:generate
+5. php artisan migrate
+6 php artisan db:seed
+7. php artisan storage:link
+8. php artisan serve
+9. npm run dev
+
+
 ## resturant devied in two section :
 
 1. ssg 
@@ -78,5 +91,5 @@ sample :
 ![Screenshot (312)](https://user-images.githubusercontent.com/110903442/209545265-c902c46b-fa5c-4c2a-9400-adbc7a598002.png)
 ![Screenshot (311)](https://user-images.githubusercontent.com/110903442/209545291-7891b08b-a9ac-4611-94d1-ec0eb3c526e3.png)
 ![Screenshot (310)](https://user-images.githubusercontent.com/110903442/209545429-3794c4bb-6d9c-4906-8cf4-5789b62d45d0.png)
-![Screenshot (318)](https://user-images.githubusercontent.com/110903442/209545479-9ec15bf3-1f71-4203-b2cc-05fccbcce5eb.png)
+
 
