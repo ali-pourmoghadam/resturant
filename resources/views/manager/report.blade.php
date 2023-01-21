@@ -1,4 +1,4 @@
-<x-Manager_panel>
+<x-manager_panel>
 
        
     <div class="row mt-4 mb-4">
@@ -162,4 +162,4 @@
 
 
     
-</x-Manager_panel>
+</x-manager_panel>
