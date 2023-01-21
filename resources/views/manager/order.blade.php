@@ -1,4 +1,4 @@
-<x-Manager_panel>
+<x-manager_panel>
 
 
     
@@ -154,5 +154,4 @@
         </div>
     </div>
 
-
-</x-Manager_panel>
+</x-manager_panel>
