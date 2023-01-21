@@ -24,8 +24,6 @@ return new class extends Migration
 
             $table->string('city');
 
-            $table->string('address' , 255);
-
             $table->string('phone_number' , 20);
 
             $table->string('image' , 255)->nullable();

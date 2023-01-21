@@ -21,6 +21,8 @@ return new class extends Migration
 
             $table->unsignedBigInteger("product_id");
 
+            $table->unsignedBigInteger("resturant_id");
+            
             $table->integer("quantity");
 
             $table->integer("status");
