@@ -22,9 +22,7 @@ class UserFactory extends Factory
 
             'last_name' => fake()->name(),
 
-            'city' => 2,
-
-            'address' => fake()->address(),
+            'city' => 2 ,
 
             'phone_number' => fake()->unique()->phoneNumber(),
 
